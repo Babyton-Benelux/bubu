@@ -1,6 +1,6 @@
 /* BuBu service worker: app werkt offline, updates komen vanzelf binnen.
    Verhoog VERSION bij elke grote wijziging. */
-const VERSION = 'bubu-v34';
+const VERSION = 'bubu-v35';
 const SHELL = ['./', 'index.html', 'manifest.webmanifest',
   'img/logo.png', 'img/hero.png', 'img/icon-192.png',
   'img/m-rood.png', 'img/m-blauw.png', 'img/m-geel.png', 'img/m-groen.png', 'img/m-oranje.png', 'img/m-roze.png'];

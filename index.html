@@ -503,6 +503,16 @@ header{margin-bottom:22px}
 .ytl b{font:800 18px 'Nunito Sans',sans-serif}
 .ytl small{font:600 13px 'Nunito Sans',sans-serif;color:rgba(7,53,107,.75)}
 #moreFilms{font-size:18px!important}
+
+/* logo alleen bovenaan, Bubu vast onderaan */
+header h1{justify-content:center;margin:0}
+header .logo{height:52px;width:auto}
+.bubudock{position:fixed;left:50%;bottom:max(10px,env(safe-area-inset-bottom));z-index:50;transform:translateX(-50%) rotate(-2deg);display:flex;align-items:center;gap:6px;padding:6px 18px 6px 10px;background:#fff;border:3px solid #07356B;border-radius:44px 36px 46px 34px/40px 46px 34px 44px;box-shadow:3px 4px 0 #07356B;font:800 24px 'Nunito Sans',sans-serif;color:#07356B;pointer-events:none}
+.bubudock img{height:40px;width:auto;animation:dockFlap 2.4s ease-in-out infinite}
+@keyframes dockFlap{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-4px) rotate(-4deg)}}
+body{padding-bottom:84px}
+body.brushing .bubudock{display:none}
+@media(prefers-reduced-motion:reduce){.bubudock img{animation:none}}
 </style>
 </head>
 <body>
@@ -518,6 +528,7 @@ header{margin-bottom:22px}
   <div class="who-list" id="whoList"></div>
   <button class="btn ghost" id="whoEdit"></button>
 </div>
+<div class="bubudock" aria-hidden="true"><img src="img/m-rood.png" alt=""><span>BuBu</span></div>
 <div class="wrap">
 <svg class="doodles" viewBox="0 0 400 150" preserveAspectRatio="none" aria-hidden="true">
  <path d="M372 8 q-8 14 4 22 q12 8 0 22 q-10 12 4 22" fill="none" stroke="#F6DED6" stroke-width="6" stroke-linecap="round"/>
@@ -526,7 +537,7 @@ header{margin-bottom:22px}
  <circle cx="352" cy="128" r="5" fill="#F9F4D1"/><circle cx="366" cy="118" r="3" fill="#EEE9F7"/>
 </svg>
 <header>
-  <h1><img class="logo" src="img/logo.png" alt="Babyton Natural Care"><span class="appname play"><img src="img/m-rood.png" alt="">BuBu</span></h1>
+  <h1><img class="logo" src="img/logo.png" alt="Babyton Natural Care"></h1>
 </header>
 <div class="kidbar" id="kids"></div>
 <div class="tabs" role="tablist">
@@ -756,7 +767,7 @@ const TABS=['poetsen','stickers','seizoen','tandjes'];
 function show(n){TABS.forEach(x=>{$('t-'+x).setAttribute('aria-selected',x===n);$('v-'+x).hidden=x!==n});try{history.replaceState(null,'','#'+n)}catch(e){}if(n==='tandjes'){renderAdvice();requestAnimationFrame(spitBelowFold)}requestAnimationFrame(fitFirst)}
 /* eerste scherm vullen: poetsknoppen in het midden, kalender ruim, rest pas na scrollen */
 function fitFirst(){
-  const H=window.innerHeight,top=el=>el.getBoundingClientRect().top+window.scrollY;
+  const H=window.innerHeight-78,top=el=>el.getBoundingClientRect().top+window.scrollY;
   if(!$('v-poetsen').hidden){const p=document.querySelector('#v-poetsen>section.pick');if(p){p.style.minHeight='';p.style.minHeight=Math.max(300,H-top(p)-8)+'px'}}
   if(!$('v-stickers').hidden){const c=$('cal');c.style.removeProperty('--dh');
     const days=c.querySelectorAll('.day'),rows=Math.ceil(days.length/7),dn=c.querySelector('.dn'),dnh=dn?dn.offsetHeight:20;
