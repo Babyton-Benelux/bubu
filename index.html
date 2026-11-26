@@ -839,12 +839,12 @@ const view=(f,n)=>`<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slic
 /* YouTube per leeftijd: vul hier per optie de afspeellijst-ID in (bv. de uploads-lijst van een kanaal: UC… wordt UU…) */
 const YT=['UUtf9cFBJkHVAf2qMqF01xYg','UUBC4RQhCJWhM91DD9tY8Kcw','UUM88mtSE0zRTn5ae4EbYcuw','UUNnEOqN2qcxeSQzBimv7h7Q','UUS7H8U-n5mINVJjJsaRtGHg'];
 const YTN=['Hey Bear Sensory','Bumba NL','Pingu','Shaun the Sheep & Friends','Shaun the Sheep'];
-let ytOn=store.get('bt-yt',{});
+let ytOn={}; /* YouTube alleen via de YouTube-knop, niet bewaren */
 const ytIcon='<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="5" fill="currentColor"/><path d="M10 8.5v7l6-3.5z" fill="#fff"/></svg>';
 let showAll=false;
 function films(){
   const kid=KIDS.length>0;$('moreFilms').hidden=!kid;$('moreFilms').textContent=showAll?t('fewerFilms'):t('moreFilmsT');
-  $('films').innerHTML=FILMS.map((f,i)=>(kid&&!showAll&&i!==film)?'':`<div class="filmrow"><button class="film" aria-pressed="${i===film}" data-i="${i}"><span class="sw">${view(f,3)}</span><span><b>${f[L][0]}</b><small>${f[L][1]} · ${f[L][2]}</small></span></button><button class="ytsw" data-y="${i}" aria-pressed="${!!ytOn[i]}" aria-label="YouTube ${f[L][0]}">${ytIcon}<span class="ytl"><b>${ytOn[i]?t('ytOn'):t('ytOff')}</b><small>${f[L][1].split(' · ')[0]}</small></span></button></div>`).join('');
+  $('films').innerHTML=FILMS.map((f,i)=>(kid&&!showAll&&i!==film)?'':`<div class="filmrow"><button class="film" aria-pressed="${i===film}" data-i="${i}"><span class="sw">${view(f,3)}</span><span><b>${f[L][0]}</b><small>${f[L][1]} · ${f[L][2]}</small></span></button><button class="ytsw" data-y="${i}"  aria-label="YouTube ${f[L][0]}">${ytIcon}<span class="ytl"><b>${t('ytOff')}</b><small>${f[L][1].split(' · ')[0]}</small></span></button></div>`).join('');
   $('films').querySelectorAll('.sw *').forEach(e=>e.style.animation='none');
 }
 let shownN=-1;
@@ -855,7 +855,7 @@ function drawFilm(force){
       :`<div class="ytposter">${ytIcon.replace('width="16" height="16"','width="56" height="56"')}<b>${id?YTN[film]:t('ytMissing')}</b>${id?`<span style="font-size:15px">${t('ytPoster')}</span>`:''}</div>`;shownN=-1;return}
   const f=FILMS[film],done=TOTAL-left,n=f.count?(left<=0?10:Math.floor(done/6)%10+1):0;if(force||(f.count&&n!==shownN)){$('film').innerHTML=view(f,n);shownN=n}}
 $('moreFilms').addEventListener('click',()=>{showAll=!showAll;films()});
-$('films').addEventListener('click',e=>{const y=e.target.closest('.ytsw');if(y){const i=+y.dataset.y;ytOn[i]=!ytOn[i];store.set('bt-yt',ytOn);film=i;keepFilm();films();drawFilm(true);if(tick){stopMusic();startMusic()}return}const b=e.target.closest('.film');if(!b)return;film=+b.dataset.i;keepFilm();showAll=false;films();renderKids();drawFilm(true);if(tick){stopMusic();startMusic()}else{left=TOTAL;$('go').click()}});
+$('films').addEventListener('click',e=>{const y=e.target.closest('.ytsw');if(y){const i=+y.dataset.y;ytOn={[i]:true};film=i;showAll=false;films();drawFilm(true);if(!tick){left=TOTAL;$('go').click()}return}const b=e.target.closest('.film');if(!b)return;ytOn={};film=+b.dataset.i;keepFilm();showAll=false;films();renderKids();drawFilm(true);if(tick){stopMusic();startMusic()}else{left=TOTAL;$('go').click()}});
 $('stClose').addEventListener('click',()=>$('reset').click());
 
 /* muziek */
@@ -902,9 +902,9 @@ $('go').addEventListener('click',()=>{
   tick=setInterval(()=>{left--;if(left<=0){stop();chime(true);exitFull();award()}else if((TOTAL-left)%30===0)chime(false);paint()},1000);
   startMusic();$('scr').classList.remove('paused');if(useYT())drawFilm(true);paint();
 });
-$('reset').addEventListener('click',()=>{$('winm').hidden=true;stop();exitFull();idx=0;beatAcc=0;left=TOTAL;zoneMsg=null;drawFilm(true);paint()});
+$('reset').addEventListener('click',()=>{$('winm').hidden=true;stop();exitFull();ytOn={};idx=0;beatAcc=0;left=TOTAL;zoneMsg=null;drawFilm(true);paint()});
 
-$('winOk').addEventListener('click',()=>{$('winm').hidden=true;left=TOTAL;zoneMsg=null;idx=0;beatAcc=0;drawFilm(true);paint();window.scrollTo({top:0,behavior:'smooth'})});
+$('winOk').addEventListener('click',()=>{$('winm').hidden=true;ytOn={};left=TOTAL;zoneMsg=null;idx=0;beatAcc=0;drawFilm(true);paint();window.scrollTo({top:0,behavior:'smooth'})});
 /* stickerkalender */
 const dk=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 const today=new Date();today.setHours(0,0,0,0);
