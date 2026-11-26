@@ -306,6 +306,18 @@ section h2{transform:rotate(-1deg)}
 .locform input{flex:1;font:16px 'Nunito Sans',sans-serif;min-height:46px;border-radius:14px;border:2px solid var(--line);background:var(--bg);color:var(--ink);padding:0 12px}
 .locres{display:grid;gap:6px}
 .locres button{text-align:left;border:2px solid var(--line);background:var(--bg);color:var(--ink);border-radius:14px;min-height:44px;padding:6px 12px;font:400 15px 'Nunito Sans',sans-serif;cursor:pointer}
+
+/* poetsen op volledig scherm */
+body.brushing{overflow:hidden}
+body.brushing #stage{position:fixed;inset:0;z-index:80;margin:0;border-radius:0;transform:none;box-shadow:none;display:flex;flex-direction:column;justify-content:center;gap:16px;padding:max(18px,env(safe-area-inset-top)) 18px max(18px,env(safe-area-inset-bottom))}
+body.brushing #stage .scr{aspect-ratio:auto;flex:1;max-height:64vh;min-height:40vh}
+body.brushing #stage .time{font-size:clamp(48px,14vw,72px)}
+body.brushing #stage .zone{font-size:20px}
+body.brushing .peek{display:none}
+#winm{z-index:90}
+.winsheet{justify-items:center;text-align:center;background:#F9F4D1}
+.winsheet img{width:180px;max-width:55vw;height:auto;box-shadow:none;border-radius:0;animation:pop .6s ease-out both;transform:rotate(-4deg)}
+.winsheet h3{font-size:30px;padding:0}
 </style>
 </head>
 <body>
@@ -331,7 +343,7 @@ section h2{transform:rotate(-1deg)}
 
 <div class="view" id="v-poetsen">
   <div class="stage" id="stage">
-    <div class="scr paused" id="scr"><div class="zchip" id="zchip"></div><div id="film"></div><div class="win" id="win" hidden><img id="winimg" alt=""><span id="wintxt"></span><small id="winq"></small></div></div>
+    <div class="scr paused" id="scr"><div class="zchip" id="zchip"></div><div id="film"></div></div>
     <div class="bar" aria-hidden="true"><span id="fill"></span><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i></div>
     <div class="row"><div class="time" id="time">2:00</div><div class="zone" id="zone"></div></div>
     <div class="ctl">
@@ -416,6 +428,13 @@ section h2{transform:rotate(-1deg)}
   <div class="ctl"><button class="btn ghost" id="kmAdd"></button><button class="btn" id="kmOk"></button></div>
   <p class="fine" id="kmP"></p>
 </div></div>
+<div class="modal" id="winm" hidden role="dialog" aria-modal="true" aria-labelledby="wintxt"><div class="sheet winsheet">
+  <img id="winimg" alt="">
+  <h3 id="wintxt" class="play"></h3>
+  <p id="winq"></p>
+  <p class="fine" id="winsub"></p>
+  <button class="btn" id="winOk" data-i="winOk"></button>
+</div></div>
 <div class="modal" id="share" hidden role="dialog" aria-modal="true" aria-labelledby="shTitle"><div class="sheet">
   <button class="x" id="shx" aria-label="Sluiten">&times;</button>
   <h3 id="shTitle"></h3><p id="shMsg"></p>
@@ -450,7 +469,7 @@ let L=store.get('bt-lang','nl');if(!['nl','fr'].includes(L))L='nl';
 const T={
 nl:{tabBrush:'Poetsen',tabStickers:'Stickers',tabTeeth:'Tandjes',tabSeason:'Weer',restart:'Opnieuw',start:'Start',pause:'Pauze',resume:'Verder',paused:'Gepauzeerd',
  idle:'Kies muziek of een filmpje en poets mee',brushing:' poetsen',zones:['Boven links','Boven rechts','Onder links','Onder rechts'],
- chooseFilm:'Kies muziek of een filmpje',moreFilmsT:'Iets anders kiezen',fewerFilms:'Toon alleen mijn keuze',ytOn:'YouTube aan',ytOff:'YouTube',ytPoster:'YouTube start samen met de timer',ytMissing:'Nog geen YouTube-kanaal gekozen voor deze leeftijd',ytNote:'In deze preview kan YouTube niet spelen. In de live versie op je eigen domein wel.',calTitle:'Stickerkalender',got:'Je hebt {n} verdiend!',calLegend:'Kleurrijk monster: ochtend én avond gepoetst. Bleek monster: één keer gepoetst.',days:['ma','di','wo','do','vr','za','zo'],locale:'nl-BE',
+ winOk:'Super!',chooseFilm:'Kies muziek of een filmpje',moreFilmsT:'Iets anders kiezen',fewerFilms:'Toon alleen mijn keuze',ytOn:'YouTube aan',ytOff:'YouTube',ytPoster:'YouTube start samen met de timer',ytMissing:'Nog geen YouTube-kanaal gekozen voor deze leeftijd',ytNote:'In deze preview kan YouTube niet spelen. In de live versie op je eigen domein wel.',calTitle:'Stickerkalender',got:'Je hebt {n} verdiend!',calLegend:'Kleurrijk monster: ochtend én avond gepoetst. Bleek monster: één keer gepoetst.',days:['ma','di','wo','do','vr','za','zo'],locale:'nl-BE',
  of:'stickers van',fullDays:'volle dagen (2×)',streak:'langste reeks dagen',demo:'Voorbeeldstickers voor de demo. Echte stickers komen alleen na 2 minuten poetsen.',clear:'Demo wissen',
  done:'Super! {s}sticker verdiend.',had:'Goed gepoetst! De {s}sticker had je vandaag al.',morning:'ochtend',evening:'avond',Morning:'Ochtend',Evening:'Avond',
  pasteTitle:'Welke tandpasta past?',pasteRef:'Dat hangt af van de tandjes die er al zijn en of je kindje al kan spuwen. Vul de tandjeskaart in, dan krijg je het juiste advies.',toTeeth:'Naar de tandjeskaart',seeOral:'Bekijk mondverzorging',
@@ -490,7 +509,7 @@ wxNow:'Vandaag in <b>{p}</b>: {t}°, wind {w} km/u, UV {u}',wxSet:'Toon het echt
  note:'Prototype. Stickers verdien je alleen met de volledige 2 minuten poetsen. Producten, links en advies nog te valideren door Babyton. Geen medisch advies.'},
 fr:{tabBrush:'Brossage',tabStickers:'Stickers',tabTeeth:'Dents',tabSeason:'Météo',restart:'Recommencer',start:'Démarrer',pause:'Pause',resume:'Reprendre',paused:'En pause',
  idle:'Choisissez une musique ou une animation et brossez',brushing:'',zones:['En haut à gauche','En haut à droite','En bas à gauche','En bas à droite'],
- chooseFilm:'Choisissez une musique ou une animation',moreFilmsT:'Choisir autre chose',fewerFilms:'Afficher seulement mon choix',ytOn:'YouTube activé',ytOff:'YouTube',ytPoster:'YouTube démarre avec le minuteur',ytMissing:'Pas encore de chaîne YouTube choisie pour cet âge',ytNote:'Dans cet aperçu, YouTube ne peut pas être lu. Dans la version en ligne, oui.',calTitle:'Calendrier d’autocollants',got:'Tu as gagné {n} !',calLegend:'Monstre en couleur : brossage matin et soir. Monstre pâle : un seul brossage.',days:['lu','ma','me','je','ve','sa','di'],locale:'fr-BE',
+ winOk:'Super !',chooseFilm:'Choisissez une musique ou une animation',moreFilmsT:'Choisir autre chose',fewerFilms:'Afficher seulement mon choix',ytOn:'YouTube activé',ytOff:'YouTube',ytPoster:'YouTube démarre avec le minuteur',ytMissing:'Pas encore de chaîne YouTube choisie pour cet âge',ytNote:'Dans cet aperçu, YouTube ne peut pas être lu. Dans la version en ligne, oui.',calTitle:'Calendrier d’autocollants',got:'Tu as gagné {n} !',calLegend:'Monstre en couleur : brossage matin et soir. Monstre pâle : un seul brossage.',days:['lu','ma','me','je','ve','sa','di'],locale:'fr-BE',
  of:'autocollants sur',fullDays:'jours complets (2×)',streak:'plus longue série (jours)',demo:'Autocollants d’exemple pour la démo. Les vrais ne s’obtiennent qu’après 2 minutes de brossage.',clear:'Effacer la démo',
  done:'Bravo ! Autocollant du {s} gagné.',had:'Bien brossé ! L’autocollant du {s} est déjà gagné aujourd’hui.',morning:'matin',evening:'soir',Morning:'matin',Evening:'soir',
  pasteTitle:'Quel dentifrice choisir ?',pasteRef:'Cela dépend des dents déjà sorties et du fait que votre enfant sache cracher ou non. Remplissez la carte des dents pour recevoir le bon conseil.',toTeeth:'Vers la carte des dents',seeOral:'Voir l’hygiène bucco-dentaire',
@@ -635,16 +654,19 @@ function paint(){
   $('go').textContent=tick?t('pause'):(left<TOTAL&&left>0?t('resume'):t('start'));
   drawFilm(false);
 }
+function enterFull(){document.body.classList.add('brushing');try{const d=document.documentElement;if(d.requestFullscreen&&!document.fullscreenElement)d.requestFullscreen({navigationUI:'hide'}).catch(()=>{})}catch(e){}}
+function exitFull(){document.body.classList.remove('brushing');try{if(document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen().catch(()=>{})}catch(e){}}
 function stop(){clearInterval(tick);tick=null;stopMusic();$('scr').classList.add('paused');if(useYT())drawFilm(true)}
 $('go').addEventListener('click',()=>{
   if(tick){stop();zoneMsg=t('paused');paint();return}
   if(left<=0){left=TOTAL;drawFilm(true)}
-  zoneMsg=null;$('win').hidden=true;initAudio();
-  tick=setInterval(()=>{left--;if(left<=0){stop();chime(true);award()}else if((TOTAL-left)%30===0)chime(false);paint()},1000);
+  zoneMsg=null;$('winm').hidden=true;initAudio();enterFull();
+  tick=setInterval(()=>{left--;if(left<=0){stop();chime(true);exitFull();award()}else if((TOTAL-left)%30===0)chime(false);paint()},1000);
   startMusic();$('scr').classList.remove('paused');if(useYT())drawFilm(true);paint();
 });
-$('reset').addEventListener('click',()=>{$('win').hidden=true;stop();idx=0;beatAcc=0;left=TOTAL;zoneMsg=null;drawFilm(true);paint()});
+$('reset').addEventListener('click',()=>{$('winm').hidden=true;stop();exitFull();idx=0;beatAcc=0;left=TOTAL;zoneMsg=null;drawFilm(true);paint()});
 
+$('winOk').addEventListener('click',()=>{$('winm').hidden=true;left=TOTAL;zoneMsg=null;idx=0;beatAcc=0;drawFilm(true);paint();window.scrollTo({top:0,behavior:'smooth'})});
 /* stickerkalender */
 const dk=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 const today=new Date();today.setHours(0,0,0,0);
@@ -654,11 +676,11 @@ const save=()=>store.set('bt-cal',cal);
 let vy=today.getFullYear(),vm=today.getMonth();
 function award(){
   const k=dk(today),slot=new Date().getHours()<14?'o':'a',cur=cal.d[k]||'',nm=slot==='o'?t('morning'):t('evening');
-  const mo=monOf(today);$('winimg').src='img/m-'+mo.f+'.png';$('winimg').alt=mo.n;$('winq').textContent=mo[L];$('win').hidden=false;
-  if(cur.includes(slot)){zoneMsg=t('had',{s:nm});$('wintxt').textContent=t('got',{n:mo.n});return}
+  const mo=monOf(today);$('winimg').src='img/m-'+mo.f+'.png';$('winimg').alt=mo.n;$('winq').textContent=mo[L];$('winm').hidden=false;
+  if(cur.includes(slot)){zoneMsg=t('had',{s:nm});$('wintxt').textContent=t('got',{n:mo.n});$('winsub').textContent=zoneMsg;return}
   cal.d[k]=cur+slot;save();vy=today.getFullYear();vm=today.getMonth();renderCal();
   const mk=k.slice(0,7);cal.shared=cal.shared||{};if(monthFull(today.getFullYear(),today.getMonth())&&!cal.shared[mk]){cal.shared[mk]=1;save();setTimeout(()=>openShare('month',today.getFullYear(),today.getMonth()),1800)}
-  zoneMsg=t('done',{s:L==='nl'?(slot==='o'?t('Morning'):t('Evening')):nm});$('wintxt').textContent=t('got',{n:mo.n});
+  zoneMsg=t('done',{s:L==='nl'?(slot==='o'?t('Morning'):t('Evening')):nm});$('wintxt').textContent=t('got',{n:mo.n});$('winsub').textContent=zoneMsg;
 }
 const MONS=[
  {f:'rood',n:'Bubu',nl:'Bubu is altijd vrolijk. Mag jouw glimlach net zo zijn!',fr:'Bubu est toujours joyeux. Que ton sourire le soit aussi !'},
@@ -915,7 +937,7 @@ function switchKid(id){
   cal=store.get('bt-cal',null);if(!cal)cal=seedCal(id===KIDS[0].id);
   teeth=store.get('bt-teeth',{});spit=store.get('bt-spit',null);selT=null;lastPhase=null;
   film=pickFilm();
-  vy=today.getFullYear();vm=today.getMonth();$('win').hidden=true;zoneMsg=null;
+  vy=today.getFullYear();vm=today.getMonth();$('winm').hidden=true;zoneMsg=null;
   applyLang();
 }
 let draft=[];
