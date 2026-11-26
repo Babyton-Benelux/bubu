@@ -484,7 +484,7 @@ nl:{tabBrush:'Poetsen',tabStickers:'Stickers',tabTeeth:'Tandjes',tabSeason:'Weer
  p1t:'De eerste tandjes zijn er: tijd om te poetsen',p1:'Poets twee keer per dag met een zacht babytandenborsteltje. Begin met de fluoridevrije tandpasta met HAP en xylitol, die past zolang je kindje nog niet kan spuwen.',p1l:'Bekijk de fluoridevrije tandpasta',
  p2t:'Je kindje kan spuwen: tijd voor Kids 2+',p2:'Nu je kindje na het poetsen kan uitspuwen, is het moment om over te stappen naar Kids 2+ met 1000 ppm fluoride.',p2l:'Bekijk Kids 2+',
  p3t:'Proficiat, een volledig melkgebit!',p3:'Alle 20 melktandjes zijn er. Blijf twee keer per dag poetsen, zo blijven ze gezond tot de grote tanden komen.',
- tempo:'Elk kind heeft zijn eigen tempo. De leeftijden en volgorde zijn een indicatie, geen norm (bron: American Dental Association). Bij vragen: tandarts of consultatiebureau.',
+ tempo:'Elk kind heeft zijn eigen tempo. De leeftijden en volgorde zijn een indicatie, geen norm Volgens het Ivoren Kruis (NL) en Kind en Gezin (BE) komt het eerste tandje meestal tussen 6 en 9 maanden en is het melkgebit rond 2,5 jaar compleet. Bij vragen: tandarts of consultatiebureau.',
  mailTitle:'Stuur mijn tandjeskaart naar mijn mail',mailIntro:'Je krijgt een overzicht van de doorgekomen tandjes met hun datum. Handig als back-up als je van gsm wisselt.',
  mailLabel:'Je e-mailadres',newsOpt:'Ja, ik wil ook de Babyton-nieuwsbrief ontvangen (niet verplicht)',mailBtn:'Stuur mijn tandjeskaart',
  privacy:'We bewaren geen naam of andere gegevens van je kindje. De tandjeskaart staat alleen op deze gsm.',badMail:'Vul een geldig e-mailadres in.',noTeeth:'Vink eerst minstens één tandje aan.',
@@ -524,7 +524,7 @@ fr:{tabBrush:'Brossage',tabStickers:'Stickers',tabTeeth:'Dents',tabSeason:'Mét�
  p1t:'Les premières dents sont là : place au brossage',p1:'Brossez deux fois par jour avec une brosse à dents bébé souple. Commencez avec le dentifrice sans fluor à l’HAP et au xylitol, adapté tant que votre enfant ne sait pas encore cracher.',p1l:'Voir le dentifrice sans fluor',
  p2t:'Votre enfant sait cracher : place à Kids 2+',p2:'Maintenant que votre enfant recrache après le brossage, c’est le moment de passer à Kids 2+ avec 1000 ppm de fluor.',p2l:'Voir Kids 2+',
  p3t:'Félicitations, toutes les dents de lait !',p3:'Les 20 dents de lait sont là. Continuez à brosser deux fois par jour pour les garder en bonne santé jusqu’aux dents définitives.',
- tempo:'Chaque enfant a son propre rythme. Les âges et l’ordre sont indicatifs, pas une norme (source : American Dental Association). Pour toute question : dentiste ou consultation ONE.',
+ tempo:'Chaque enfant a son propre rythme. Les âges et l’ordre sont indicatifs, pas une norme Selon l’Ivoren Kruis (NL) et Kind en Gezin (BE), la première dent sort généralement entre 6 et 9 mois et toutes les dents de lait sont là vers 2 ans et demi. Pour toute question : dentiste ou consultation ONE.',
  mailTitle:'Envoyer ma carte des dents par e-mail',mailIntro:'Vous recevez un aperçu des dents sorties avec leur date. Pratique comme sauvegarde si vous changez de téléphone.',
  mailLabel:'Votre adresse e-mail',newsOpt:'Oui, je souhaite aussi recevoir la newsletter Babyton (facultatif)',mailBtn:'Envoyer ma carte des dents',
  privacy:'Nous ne conservons ni le nom ni d’autres données de votre enfant. La carte des dents reste uniquement sur ce téléphone.',badMail:'Indiquez une adresse e-mail valide.',noTeeth:'Cochez d’abord au moins une dent.',
@@ -723,7 +723,8 @@ $('toTeeth').addEventListener('click',()=>{show('tandjes');window.scrollTo(0,0)}
 
 /* ===== tandjeskaart ===== */
 /* type 0 centraal,1 lateraal,2 hoektand,3 eerste kies,4 tweede kies; ADA-leeftijden in maanden; volgorde = paar 1..10 */
-const ERUPT={U:[[8,12,2],[9,13,3],[16,22,7],[13,19,5],[25,33,10]],L:[[6,10,1],[10,16,4],[17,23,8],[14,18,6],[23,31,9]]};
+/* indicatief; begin en einde volgens Ivoren Kruis/Kind en Gezin: eerste tandje 6–9 mnd, laatste melkkies 24–30 mnd */
+const ERUPT={U:[[8,12,2],[9,13,3],[16,22,7],[13,19,5],[24,30,10]],L:[[6,9,1],[10,16,4],[17,23,8],[14,18,6],[24,30,9]]};
 const W=[26,24,26,32,34];
 /* van links naar rechts op het scherm = van rechts naar links bij het kind */
 const UP=[[55,4],[54,3],[53,2],[52,1],[51,0],[61,0],[62,1],[63,2],[64,3],[65,4]];
