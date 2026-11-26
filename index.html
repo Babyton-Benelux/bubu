@@ -811,7 +811,7 @@ const FILMS=[
 ];
 /* filmkeuze: automatisch per leeftijd; een eigen keuze geldt tot het kind een nieuwe leeftijdsgroep bereikt */
 function pickFilm(){const k=KIDS.find(x=>x.id===ACTIVE)||KIDS[0];if(!k){const v=store.get('bt-film',3);return typeof v==='number'&&FILMS[v]?v:3}
-  const b=ageFilm(k),v=store.get('bt-film',null);return v&&typeof v==='object'&&v.b===b&&FILMS[v.f]?v.f:b}
+  return ageFilm(k)} /* altijd volgens leeftijd; 'Iets anders kiezen' geldt alleen voor deze keer */
 const keepFilm=()=>{const k=KIDS.find(x=>x.id===ACTIVE);store.set('bt-film',k?{f:film,b:ageFilm(k)}:film)};
 let film=pickFilm();
 const view=(f,n)=>`<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">${f.svg(n)}</svg>`;
