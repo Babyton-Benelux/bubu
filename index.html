@@ -453,14 +453,25 @@ header{margin-bottom:22px}
 .filmrow .film:active,.filmrow .ytsw:active,#moreFilms:active{transform:translate(2px,3px)!important;box-shadow:0 0 0 #07356B!important}
 #moreFilms{min-height:58px;padding:0 24px;font:800 17px 'Nunito Sans',sans-serif;margin-top:20px;width:min(320px,100%);justify-content:center}
 #v-poetsen>section+section{margin-top:40px!important}
+
+/* startscherm: Bubu vliegt voorbij, letters verschijnen waar hij passeert */
+.st-stage{position:relative;width:100%;height:240px;display:flex;align-items:flex-end;justify-content:center}
+.st-stage .st-word{width:auto;display:flex;gap:2px;font:800 96px/1 'Nunito Sans',sans-serif;color:#fff;padding-bottom:6px}
+.st-stage .st-word span{opacity:0;transform:scale(.3) translateY(20px) rotate(-12deg);animation:stPop .45s cubic-bezier(.3,1.6,.5,1) forwards}
+.st-stage .st-word span:nth-child(1){animation-delay:1.15s}.st-stage .st-word span:nth-child(2){animation-delay:1.4s}
+.st-stage .st-word span:nth-child(3){animation-delay:1.65s}.st-stage .st-word span:nth-child(4){animation-delay:1.9s}
+.st-stage .st-bubu{position:absolute;left:50%;bottom:40px;width:110px;margin-left:-55px;animation:stPass 2.9s linear .4s both}
+@keyframes stPass{0%{transform:translate(-80vw,0) rotate(10deg)}20%{transform:translate(-40vw,-20px) rotate(6deg)}30%{transform:translate(-22vw,0) rotate(4deg)}40%{transform:translate(-7vw,-14px) rotate(3deg)}50%{transform:translate(7vw,0) rotate(3deg)}60%{transform:translate(22vw,-14px) rotate(2deg)}72%{transform:translate(40vw,-90px) rotate(-12deg)}86%{transform:translate(10vw,-125px) rotate(-6deg)}100%{transform:translate(0,-105px) rotate(0)}}
+@keyframes stPop{to{opacity:1;transform:none}}
+.st-lang{animation-delay:3.2s!important}
+@media(prefers-reduced-motion:reduce){.st-stage .st-bubu{animation:none;transform:translateY(-105px)}.st-stage .st-word span{animation:none;opacity:1;transform:none}}
 </style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="star" viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z" fill="currentColor"/></symbol></svg>
 <div class="start" id="start" role="dialog" aria-label="BuBu">
   <img class="st-logo" src="img/logo.png" alt="Babyton Natural Care">
-  <div class="st-fly"><img class="st-bubu" src="img/m-rood.png" alt=""></div>
-  <svg class="st-word" viewBox="0 0 300 110" aria-label="BuBu"><text x="150" y="88" text-anchor="middle">BuBu</text></svg>
+  <div class="st-stage"><div class="st-word" aria-label="BuBu"><span>B</span><span>u</span><span>B</span><span>u</span></div><img class="st-bubu" src="img/m-rood.png" alt=""></div>
   <div class="st-lang" id="stLang"><button data-l="nl">Nederlands</button><button data-l="fr">Français</button></div>
 </div>
 <div class="who" id="who" hidden role="dialog" aria-labelledby="whoT">
@@ -609,7 +620,7 @@ const store={get(k,d){if(PER.includes(k)&&ACTIVE){const v=raw.get(k+'-'+ACTIVE,n
  set(k,v){raw.set(PER.includes(k)&&ACTIVE?k+'-'+ACTIVE:k,v)}};
 const ageM=k=>{const n=new Date();return Math.max(0,(n.getFullYear()-k.y)*12+(n.getMonth()-k.mo))};
 const ageFilm=k=>{const m=ageM(k);return m<12?0:m<24?1:m<36?2:m<48?3:4};
-const SHOP={oral:'https://babyton.be/collections/all',free:'https://babyton.be/collections/all',kids:'https://babyton.be/collections/all',season:'https://babyton.be/collections/all'};
+const SHOP={oral:'https://babyton.be/collections/all',free:'https://www.babyton.be/collections/eerste-tandjes-melkgebit',kids:'https://www.babyton.be/products/tandpasta-fluor-kind-2-aardbei-75g',season:'https://babyton.be/collections/all'};
 let L=store.get('bt-lang','nl');if(!['nl','fr'].includes(L))L='nl';
 
 const T={
@@ -872,7 +883,7 @@ const AGES=[
 let age=store.get('bt-age',1);
 function ages(){
   $('ages').innerHTML=AGES.map((a,i)=>`<button class="chip" aria-pressed="${i===age}" data-i="${i}">${a[L][0]}</button>`).join('');
-  const a=AGES[age][L];$('paste').innerHTML=`<h3>${a[1]}</h3><p>${a[2]}</p><a class="shop" data-p="${AGES[age].p}" href="${SHOP.oral}">${t('seeOral')}</a>`;
+  const a=AGES[age][L];$('paste').innerHTML=`<h3>${a[1]}</h3><p>${a[2]}</p>${AGES[age].p==='kids'?`<a class="shop" data-p="kids" href="${SHOP.kids}">${t('p2l')}</a><br><a class="shop" data-p="free" href="${SHOP.free}">${t('p1l')}</a>`:AGES[age].p==='free'?`<a class="shop" data-p="free" href="${SHOP.free}">${t('p1l')}</a>`:`<a class="shop" data-p="${AGES[age].p}" href="${SHOP.oral}">${t('seeOral')}</a>`}`;
 }
 $('toTeeth').addEventListener('click',()=>{show('tandjes');window.scrollTo(0,0)});
 
@@ -931,8 +942,8 @@ function renderSpit(){$('spit').innerHTML=[['yes',true],['no',false]].map(([k,v]
 $('spit').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;spit=b.dataset.v==='true';store.set('bt-spit',spit);renderSpit();renderAdvice()});
 function renderAdvice(){
   const n=Object.keys(teeth).length;let ph,link='';
-  if(n>=20){ph='p3';link=spit?`<a class="shop" data-p="kids" href="${SHOP.kids}">${t('p2l')}</a>`:`<a class="shop" data-p="free" href="${SHOP.free}">${t('p1l')}</a>`}
-  else if(n>=1&&spit){ph='p2';link=`<a class="shop" data-p="kids" href="${SHOP.kids}">${t('p2l')}</a>`}
+  if(n>=20){ph='p3';link=spit?`<a class="shop" data-p="kids" href="${SHOP.kids}">${t('p2l')}</a><br><a class="shop" data-p="free" href="${SHOP.free}">${t('p1l')}</a>`:`<a class="shop" data-p="free" href="${SHOP.free}">${t('p1l')}</a>`}
+  else if(n>=1&&spit){ph='p2';link=`<a class="shop" data-p="kids" href="${SHOP.kids}">${t('p2l')}</a><br><a class="shop" data-p="free" href="${SHOP.free}">${t('p1l')}</a>`}
   else if(n>=1){ph='p1';link=`<a class="shop" data-p="free" href="${SHOP.free}">${t('p1l')}</a>`}
   else ph='p0';
   const num={p0:1,p1:2,p2:3,p3:4}[ph];
