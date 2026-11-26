@@ -1019,7 +1019,7 @@ function renderSeason(){
   $('sky').innerHTML=`<svg viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${SCENES[wx]()}</svg>`;
   $('uvbar').innerHTML=Array.from({length:10},(_,i)=>`<span class="${i<u?'on':''}"></span>`).join('');
   $('uvtxt').textContent=WXD&&LOC&&!wxFail?t('uvToday',{c:s[1],u}):t('uvTxt',{c:s[1],u:S.uv});
-  $('seasoncard').innerHTML=`<h3>${t('atBabyton',{s:s[0]})}</h3><p>${s[2]}</p><a class="shop" data-p="season" href="${SHOP.season}">${t('seeSeason')}</a>`;
+  $('seasoncard').innerHTML=`<h3>${t('atBabyton',{s:s[0]})}</h3><p>${s[2]}</p><a class="shop" data-p="season" href="${(S.ms.includes(11)||S.ms.includes(8))?'https://www.babyton.be/collections/winter':'https://www.babyton.be/collections/zomer'}">${t('seeSeason')}</a>`;
   const live=!!(LOC&&WXD&&!wxFail&&!wxManual);
   $('wx').innerHTML=`<button aria-pressed="${live}" data-i="home">${HOME_ICON}<span>${t('wxHome')}</span></button>`+WX.map((w,i)=>`<button aria-pressed="${!live&&i===wx}" data-i="${i}">${ICONS[i]}<span>${w[L][0]}</span></button>`).join('');
   $('tiptitle').textContent=WX[wx][L][1];
