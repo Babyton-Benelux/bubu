@@ -491,6 +491,11 @@ header{margin-bottom:22px}
 
 .legend{text-align:center!important;line-height:1.6}
 .legend b{font-weight:800;color:#07356B}
+
+/* ruime kalender en gecentreerde poetsknoppen */
+.cal .day{height:var(--dh,auto)}
+.cal[style*="--dh"] .day{aspect-ratio:auto}
+#v-poetsen>section.pick{justify-content:center!important;padding-top:0!important;padding-bottom:20px}
 </style>
 </head>
 <body>
@@ -741,7 +746,18 @@ document.addEventListener('click',e=>{const a=e.target.closest('a.shop');if(a)tr
 
 /* tabs */
 const TABS=['poetsen','stickers','seizoen','tandjes'];
-function show(n){TABS.forEach(x=>{$('t-'+x).setAttribute('aria-selected',x===n);$('v-'+x).hidden=x!==n});try{history.replaceState(null,'','#'+n)}catch(e){}if(n==='tandjes'){renderAdvice();requestAnimationFrame(spitBelowFold)}}
+function show(n){TABS.forEach(x=>{$('t-'+x).setAttribute('aria-selected',x===n);$('v-'+x).hidden=x!==n});try{history.replaceState(null,'','#'+n)}catch(e){}if(n==='tandjes'){renderAdvice();requestAnimationFrame(spitBelowFold)}requestAnimationFrame(fitFirst)}
+/* eerste scherm vullen: poetsknoppen in het midden, kalender ruim, rest pas na scrollen */
+function fitFirst(){
+  const H=window.innerHeight,top=el=>el.getBoundingClientRect().top+window.scrollY;
+  if(!$('v-poetsen').hidden){const p=document.querySelector('#v-poetsen>section.pick');if(p){p.style.minHeight='';p.style.minHeight=Math.max(300,H-top(p)-8)+'px'}}
+  if(!$('v-stickers').hidden){const c=$('cal');c.style.removeProperty('--dh');
+    const days=c.querySelectorAll('.day'),rows=Math.ceil(days.length/7),dn=c.querySelector('.dn'),dnh=dn?dn.offsetHeight:20;
+    const avail=H-top(c)-14-dnh-5*rows,w=days[0]?days[0].offsetWidth:48;
+    const dh=Math.min(Math.max(w*1.08,avail/rows),w*1.9);c.style.setProperty('--dh',Math.floor(dh)+'px');
+    const st=$('stats');st.style.marginTop='';const gap=H-(top(st)-window.scrollY+window.scrollY);st.style.marginTop=Math.max(12,Math.round(H-top(st)+30))+'px'}
+}
+window.addEventListener('resize',()=>requestAnimationFrame(fitFirst));
 /* tandjes: spuwvraag pas zichtbaar na scrollen */
 function spitBelowFold(){const sec=$('spit').closest('section'),d=$('detail');if(!sec||!d)return;sec.style.marginTop='';const end=d.getBoundingClientRect().bottom+window.scrollY,h=window.innerHeight;sec.style.marginTop=Math.max(44,Math.round(h-end+40))+'px'}
 window.addEventListener('resize',()=>{if(!$('v-tandjes').hidden)spitBelowFold()});
@@ -890,6 +906,7 @@ const MCOL={rood:'#d6283b',blauw:'#1E5FAB',geel:'#c98f00',groen:'#3f9a3c',oranje
 function renderCal(){
   {const k=kidById(ACTIVE);$('mname').style.background=k?MCOL[k.m]:'#1E5FAB';$('calTitleH').innerHTML=k&&k.n?`<span class="kidname" style="color:${MCOL[k.m]}">${esc(k.n)}</span>`:t('calTitle')}
   const first=new Date(vy,vm,1),days=new Date(vy,vm+1,0).getDate(),pad=(first.getDay()+6)%7;
+  requestAnimationFrame(fitFirst);
   $('mname').textContent=first.toLocaleDateString(t('locale'),{month:'long',year:'numeric'});
   let h=t('days').map(d=>`<div class="dn">${d}</div>`).join('')+'<div class="day pad"></div>'.repeat(pad);
   let tot=0,full=0,run=0,best=0;
