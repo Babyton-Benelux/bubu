@@ -336,6 +336,8 @@ body.brushing .peek{display:none}
 #v-poetsen .films{justify-items:stretch;text-align:left}
 #v-poetsen .card{display:grid;justify-items:center;text-align:center}
 #v-poetsen .card p{text-wrap:balance}
+#v-poetsen section h2{transform:none;display:block;width:fit-content;margin:0 auto 12px}
+#v-poetsen section h2::after{left:-6px;right:-6px}
 </style>
 </head>
 <body>
@@ -370,7 +372,7 @@ body.brushing .peek{display:none}
     </div>
   </div>
   <svg class="drip" viewBox="0 0 300 26" preserveAspectRatio="none" aria-hidden="true"><g fill="#9cc4ef"><path d="M30 0 h14 v10 q0 8 -7 8 q-7 0 -7 -8z"/><path d="M62 0 h8 v18 q0 6 -4 6 q-4 0 -4 -6z"/><path d="M210 0 h10 v7 q0 6 -5 6 q-5 0 -5 -6z"/><path d="M262 0 h6 v14 q0 4 -3 4 q-3 0 -3 -4z"/></g></svg>
-  <section><h2 data-i="chooseFilm"></h2><p class="agehint" id="agehint" hidden></p><div class="films" id="films"></div><button class="btn small more" id="moreFilms"></button></section>
+  <section style="margin-top:18px"><p class="agehint" id="agehint" hidden></p><div class="films" id="films"></div><button class="btn small more" id="moreFilms"></button></section>
   <section>
     <h2 data-i="pasteTitle"></h2>
     <div class="card" style="display:grid;gap:8px"><p style="margin:0" data-i="pasteRef"></p><div><button class="btn solid" id="toTeeth" data-i="toTeeth"></button></div></div>
