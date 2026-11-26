@@ -338,6 +338,25 @@ body.brushing .peek{display:none}
 #v-poetsen .card p{text-wrap:balance}
 #v-poetsen section h2{transform:none;display:block;width:fit-content;margin:0 auto 12px}
 #v-poetsen section h2::after{left:-6px;right:-6px}
+
+/* overal gecentreerd onder de panelen */
+.view section{text-align:center}
+.view section h2{transform:none;display:block;width:fit-content;margin:0 auto 12px}
+.view section h2::after{left:-6px;right:-6px}
+.view .chips{justify-content:center}
+.view .card{text-align:center;justify-items:center}
+.view .card.detail,.view .card.advice,#loccard{display:grid;justify-items:center;text-align:center}
+.detail .meta{justify-items:center}
+.detail .field{justify-items:center;width:100%;max-width:320px}
+.detail .ctl,.loc .ctl{justify-content:center}
+.locform{width:100%;max-width:360px}
+#loccard[hidden],.view .card[hidden]{display:none}
+.tips{justify-items:center}
+.tip{flex-direction:column;align-items:center;text-align:center;gap:6px;max-width:440px}
+.stat{text-align:center}
+.legend,.demo{text-align:center;justify-content:center}
+.calhead h3{text-align:left}
+.mailprev{text-align:left}
 </style>
 </head>
 <body>
@@ -502,7 +521,7 @@ nl:{tabBrush:'Poetsen',tabStickers:'Stickers',tabTeeth:'Tandjes',tabSeason:'Weer
  p1t:'De eerste tandjes zijn er: tijd om te poetsen',p1:'Poets twee keer per dag met een zacht babytandenborsteltje. Begin met de fluoridevrije tandpasta met HAP en xylitol, die past zolang je kindje nog niet kan spuwen.',p1l:'Bekijk de fluoridevrije tandpasta',
  p2t:'Je kindje kan spuwen: tijd voor Kids 2+',p2:'Nu je kindje na het poetsen kan uitspuwen, is het moment om over te stappen naar Kids 2+ met 1000 ppm fluoride.',p2l:'Bekijk Kids 2+',
  p3t:'Proficiat, een volledig melkgebit!',p3:'Alle 20 melktandjes zijn er. Blijf twee keer per dag poetsen, zo blijven ze gezond tot de grote tanden komen.',
- tempo:'Elk kind heeft zijn eigen tempo. De leeftijden en volgorde zijn een indicatie, geen norm Volgens Kind en Gezin komt het eerste tandje rond 6 maanden en is het melkgebit rond 2,5 jaar compleet. Bij vragen: tandarts of consultatiebureau.',
+ tempo:'Elk kind heeft zijn eigen tempo. De leeftijden en volgorde zijn een indicatie, geen norm. Volgens Kind en Gezin komt het eerste tandje rond 6 maanden en is het melkgebit rond 2,5 jaar compleet. Bij vragen: tandarts of consultatiebureau.',
  mailTitle:'Stuur mijn tandjeskaart naar mijn mail',mailIntro:'Je krijgt een overzicht van de doorgekomen tandjes met hun datum. Handig als back-up als je van gsm wisselt.',
  mailLabel:'Je e-mailadres',newsOpt:'Ja, ik wil ook de Babyton-nieuwsbrief ontvangen (niet verplicht)',mailBtn:'Stuur mijn tandjeskaart',
  privacy:'We bewaren geen naam of andere gegevens van je kindje. De tandjeskaart staat alleen op deze gsm.',badMail:'Vul een geldig e-mailadres in.',noTeeth:'Vink eerst minstens één tandje aan.',
@@ -542,7 +561,7 @@ fr:{tabBrush:'Brossage',tabStickers:'Stickers',tabTeeth:'Dents',tabSeason:'Mét�
  p1t:'Les premières dents sont là : place au brossage',p1:'Brossez deux fois par jour avec une brosse à dents bébé souple. Commencez avec le dentifrice sans fluor à l’HAP et au xylitol, adapté tant que votre enfant ne sait pas encore cracher.',p1l:'Voir le dentifrice sans fluor',
  p2t:'Votre enfant sait cracher : place à Kids 2+',p2:'Maintenant que votre enfant recrache après le brossage, c’est le moment de passer à Kids 2+ avec 1000 ppm de fluor.',p2l:'Voir Kids 2+',
  p3t:'Félicitations, toutes les dents de lait !',p3:'Les 20 dents de lait sont là. Continuez à brosser deux fois par jour pour les garder en bonne santé jusqu’aux dents définitives.',
- tempo:'Chaque enfant a son propre rythme. Les âges et l’ordre sont indicatifs, pas une norme Selon Kind en Gezin, la première dent sort vers 6 mois et toutes les dents de lait sont là vers 2 ans et demi. Pour toute question : dentiste ou consultation ONE.',
+ tempo:'Chaque enfant a son propre rythme. Les âges et l’ordre sont indicatifs, pas une norme. Selon Kind en Gezin, la première dent sort vers 6 mois et toutes les dents de lait sont là vers 2 ans et demi. Pour toute question : dentiste ou consultation ONE.',
  mailTitle:'Envoyer ma carte des dents par e-mail',mailIntro:'Vous recevez un aperçu des dents sorties avec leur date. Pratique comme sauvegarde si vous changez de téléphone.',
  mailLabel:'Votre adresse e-mail',newsOpt:'Oui, je souhaite aussi recevoir la newsletter Babyton (facultatif)',mailBtn:'Envoyer ma carte des dents',
  privacy:'Nous ne conservons ni le nom ni d’autres données de votre enfant. La carte des dents reste uniquement sur ce téléphone.',badMail:'Indiquez une adresse e-mail valide.',noTeeth:'Cochez d’abord au moins une dent.',
