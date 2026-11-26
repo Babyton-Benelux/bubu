@@ -12,12 +12,12 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="BuBu">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Nunito+Sans:opsz,wght@6..12,400;6..12,700;6..12,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,700;6..12,800&display=swap" rel="stylesheet">
 <style>
 /* VOICE: zacht, rustig en speels: Babyton visual guideline (Benelux, nov 2026)
    IDEA: een badkamerspiegel met stickerkalender, weer en tandjeskaart; de app is het ritueel zelf
    PICTURE: poetsscherm met animatie; Hero in het weer; melkgebit zoals je in het mondje kijkt
-   COLOUR and TYPE: wit + navy #07356B tekst, logoblauw #0054A6, zachte collectietinten; Nunito Sans + Fredericka voor korte speelse titels
+   COLOUR and TYPE: wit + navy #07356B tekst, logoblauw #0054A6, zachte collectietinten; Nunito Sans voor alle tekst (Babyton-huisletter)
    LAYOUT: één kolom met drie tabs: Poetsen, Weer, Tandjes; knoppen als pil met navy rand */
 :root{color-scheme:light;
 --bg:light-dark(#ffffff,#0b1830);--ink:light-dark(#07356B,#eef4ff);--mut:light-dark(rgba(7,53,107,.75),#a9b9d6);
@@ -26,9 +26,9 @@
 --line:light-dark(#dbe4ef,#24395f);--card:light-dark(#ffffff,#102446);--blue:var(--logo);--blue2:var(--lblue)}
 :root[data-theme]{color-scheme:light}
 *{box-sizing:border-box;min-width:0}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 'Nunito Sans',Nunito,system-ui,sans-serif;overflow-x:clip}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 'Nunito Sans',system-ui,sans-serif;overflow-x:clip}
 h1,h2,h3{font-family:'Nunito Sans',sans-serif;font-weight:400;line-height:1.1;margin:0;text-wrap:balance;color:var(--navy)}
-.play{font-family:'Fredericka the Great','Nunito Sans',sans-serif;font-weight:400}
+.play{font-family:'Nunito Sans',sans-serif;font-weight:800;letter-spacing:-.01em}
 .wrap{max-width:720px;margin:0 auto;padding:18px max(4vw,16px) 40px}
 header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap}
 header h1{display:flex;align-items:center;gap:10px;font-size:22px}
@@ -105,7 +105,11 @@ section h2{font-size:23px;margin-bottom:10px}
 .card{border:2px solid var(--line);border-radius:20px;padding:16px 18px;background:var(--card)}
 .card h3{font-size:19px;font-weight:700;margin-bottom:4px}
 .card p{margin:4px 0 0;color:var(--mut)}
-.shop{display:inline-flex;align-items:center;min-height:44px;margin-top:8px;color:var(--navy);font-weight:700;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+.shop{display:inline-flex;align-items:center;justify-content:center;min-height:46px;margin-top:12px;padding:0 22px;color:#07356B;font-weight:700;text-decoration:none;background:#ECF5FE;border:2px solid #07356B;border-radius:44px 36px 46px 34px/40px 46px 34px 44px;box-shadow:2px 3px 0 #07356B;transform:rotate(-.8deg)}
+.shop[data-p=season]{background:#F9F4D1}
+.shop:active{transform:translate(2px,3px);box-shadow:none}
+#seasoncard{text-align:center;display:grid;justify-items:center}
+#seasoncard p{max-width:440px;text-wrap:balance}
 .films{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
 .film{display:flex;gap:12px;align-items:center;text-align:left;border:2px solid var(--line);background:var(--bg);color:var(--ink);border-radius:20px;padding:10px;cursor:pointer;font:inherit}
 .film[aria-pressed=true]{border-color:var(--navy);background:var(--lblue)}
@@ -137,7 +141,7 @@ section h2{font-size:23px;margin-bottom:10px}
 .day img.mon{position:absolute;left:8%;right:8%;bottom:4%;width:84%;height:64%;object-fit:contain}
 .day img.half{opacity:.4;filter:grayscale(.5)}
 .legend{font-size:13px;color:var(--mut);margin-top:8px}
-.win{position:absolute;inset:0;z-index:3;background:#F9F4D1;display:grid;place-items:center;align-content:center;gap:8px;color:#07356B;font:400 26px 'Fredericka the Great','Nunito Sans',sans-serif;text-align:center;padding:12px}
+.win{position:absolute;inset:0;z-index:3;background:#F9F4D1;display:grid;place-items:center;align-content:center;gap:8px;color:#07356B;font:400 26px 'Nunito Sans',sans-serif;text-align:center;padding:12px}
 .win[hidden]{display:none}
 .win small{font:400 15px 'Nunito Sans',sans-serif;max-width:300px}
 .win img{width:170px;max-width:55vw;height:auto;animation:pop .6s ease-out both}
@@ -176,7 +180,7 @@ section h2{font-size:23px;margin-bottom:10px}
 .modal{position:fixed;inset:0;z-index:50;background:rgba(7,53,107,.45);display:grid;place-items:center;padding:16px}
 .modal[hidden]{display:none}
 .sheet{position:relative;background:var(--bg);color:var(--ink);border-radius:24px;padding:20px;width:min(420px,100%);max-height:94vh;overflow:auto;display:grid;gap:10px;animation:pop .4s ease-out both}
-.sheet h3{font:400 26px 'Fredericka the Great','Nunito Sans',sans-serif;padding-right:40px}
+.sheet h3{font:800 25px 'Nunito Sans',sans-serif;padding-right:40px}
 .sheet p{margin:0}
 .sheet img{width:100%;height:auto;border-radius:16px;box-shadow:0 8px 24px rgba(7,53,107,.18)}
 .sheet .x{position:absolute;right:10px;top:10px;width:44px;height:44px;border-radius:50%;border:2px solid var(--navy);background:var(--bg);color:var(--navy);font:700 22px 'Nunito Sans',sans-serif;cursor:pointer}
@@ -191,7 +195,7 @@ details.meten summary{cursor:pointer;font:700 15px 'Nunito Sans',sans-serif;colo
 .uvbar{display:flex;gap:4px;width:min(320px,80vw)}
 .uvbar span{flex:1;height:14px;border-radius:7px;background:rgba(7,53,107,.10)}
 .uvbar span.on{background:#EBBD05}
-.big{font:400 clamp(32px,9vw,46px) 'Fredericka the Great','Nunito Sans',sans-serif;text-align:center;color:#07356B}
+.big{font:800 clamp(30px,8.5vw,42px) 'Nunito Sans',sans-serif;text-align:center;color:#07356B}
 .note{font-size:13px;color:var(--mut);margin:30px auto 0;text-align:center;max-width:420px;text-wrap:balance}
 .a{transform-box:fill-box;transform-origin:center}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -568,7 +572,7 @@ TABS.forEach(x=>$('t-'+x).addEventListener('click',()=>show(x)));
 const coco=(x,y,s,open)=>`<g transform="translate(${x} ${y}) scale(${s})"><ellipse cx="0" cy="62" rx="62" ry="9" fill="rgba(0,0,0,.15)"/><path d="M-58 52 Q-64 -50 0 -66 Q64 -50 58 52 Z" fill="#7fd0ff"/><path d="M-46 40 Q-50 -34 0 -48" fill="none" stroke="#c9ecff" stroke-width="6" stroke-linecap="round" opacity=".7"/><path d="M-38 -54 L-48 -78 L-26 -62Z M38 -54 L48 -78 L26 -62Z" fill="#7fd0ff"/><circle cx="-22" cy="-20" r="15" fill="#fff"/><circle cx="22" cy="-20" r="15" fill="#fff"/><circle cx="-19" cy="-18" r="7" fill="#10223f"/><circle cx="25" cy="-18" r="7" fill="#10223f"/>${open?'':'<path d="M-28 12 Q0 38 28 12 Z" fill="#10223f"/><rect x="-18" y="12" width="14" height="10" rx="2" fill="#fff"/><rect x="4" y="12" width="14" height="10" rx="2" fill="#fff"/>'}</g>`;
 const starP=(x,y,r,fill)=>{let p='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?r*.45:r;p+=(i?'L':'M')+(x+rr*Math.cos(a)).toFixed(1)+' '+(y+rr*Math.sin(a)).toFixed(1)}return `<path d="${p}Z" fill="${fill}"/>`};
 const note=(x,y,s,c)=>`<g transform="translate(${x} ${y}) scale(${s})"><ellipse cx="0" cy="0" rx="13" ry="10" transform="rotate(-20)" fill="${c}"/><rect x="10" y="-52" width="5" height="52" fill="${c}"/><path d="M15 -52 Q34 -44 28 -24" stroke="${c}" stroke-width="5" fill="none"/></g>`;
-const F='font-family="Nunito Sans, Nunito, sans-serif"';const OL='#1b2a4a';
+const F='font-family="Nunito Sans, sans-serif"';const OL='#1b2a4a';
 const calm=(bg,c)=>`<rect width="400" height="300" fill="${bg}"/>${[[40,40],[110,70],[330,50],[260,30],[370,110],[60,120]].map(([x,y],k)=>`<circle cx="${x}" cy="${y}" r="${k%2?3:4.5}" fill="${c}" opacity=".7"/>`).join('')}<path d="M0 250 q100 -16 200 0 t200 0 v50 h-400z" fill="rgba(255,255,255,.14)"/>${MONS.map((m,k)=>`<g style="animation:parade 60s linear ${k*10}s infinite both"><g class="a" style="animation:bob 1.6s ease-in-out infinite"><image href="img/m-${m.f}.png" x="140" y="96" width="120" height="130"/></g><text x="200" y="262" text-anchor="middle" ${F} font-weight="700" font-size="30" fill="#fff">${m.n}</text></g>`).join('')}`;
 const FILMS=[
  {nl:['Muziekdoosje','0–1 jaar · muziek','Altijd is Kortjakje ziek, de monstertjes wandelen rustig voorbij'],fr:['Boîte à musique','0–1 an · musique','Ah ! vous dirai-je, maman, les petits monstres passent tout doucement'],
@@ -889,8 +893,8 @@ async function buildCard(kind,y,m,demo){
   const g=x.createLinearGradient(0,0,0,1350);g.addColorStop(0,'#ECF5FE');g.addColorStop(1,'#EEE9F7');x.fillStyle=g;x.fillRect(0,0,1080,1350);
   const [logo,...mons]=await Promise.all(['img/logo.png',...MONS.map(o=>'img/m-'+o.f+'.png')].map(li));
   fitImg(x,logo,60,56,360,128);
-  x.fillStyle='#07356B';x.font='64px "Fredericka the Great", sans-serif';x.textAlign='right';x.fillText('BuBu',1020,148);fitImg(x,mons[0],720,62,110,110);
-  x.textAlign='center';x.fillStyle='#07356B';x.font='84px "Fredericka the Great", sans-serif';x.fillText(kind==='month'?t('imgMonth'):t('imgTeeth'),540,320);
+  x.fillStyle='#07356B';x.font='800 60px "Nunito Sans", sans-serif';x.textAlign='right';x.fillText('BuBu',1020,148);fitImg(x,mons[0],720,62,110,110);
+  x.textAlign='center';x.fillStyle='#07356B';x.font='800 76px "Nunito Sans", sans-serif';x.fillText(kind==='month'?t('imgMonth'):t('imgTeeth'),540,320);
   if(kind==='month'){
     const first=new Date(y,m,1),n=new Date(y,m+1,0).getDate(),pad=(first.getDay()+6)%7;
     x.font='700 44px "Nunito Sans", sans-serif';x.fillStyle='#1E5FAB';x.fillText(first.toLocaleDateString(t('locale'),{month:'long',year:'numeric'}),540,392);
