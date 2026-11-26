@@ -667,7 +667,7 @@ body.brushing .bubudock{display:none}
 </div></div>
 <p class="note" data-i="note"></p>
 <p class="foot"><button class="linkb" id="privBtn" data-i="privLink"></button> · <button class="linkb" id="cookieBtn" data-i="cookieLink"></button></p>
-<p class="foot" style="opacity:.5;font-size:12px;margin-top:4px">versie 45</p>
+<p class="foot" style="opacity:.5;font-size:12px;margin-top:4px">versie 46</p>
 <div class="cbar" id="cbar" hidden role="region" aria-label="Cookies"><p data-i="cText"></p><div class="ctl"><button class="btn small" id="cNo" data-i="cNo"></button><button class="btn" id="cYes" data-i="cYes"></button></div><button class="linkb" id="cMore" data-i="privLink"></button></div>
 <div class="modal" id="privm" hidden role="dialog" aria-modal="true" aria-labelledby="privT"><div class="sheet priv">
   <button class="x" id="privX" aria-label="Sluiten">&times;</button>
@@ -824,10 +824,10 @@ const cntItem=(k,x,y)=>k<6?`<image href="img/m-${MONS[k].f}.png" x="${x+4}" y="$
 const FILMS=[
  {nl:['Muziekdoosje','0–1 jaar · muziek','Altijd is Kortjakje ziek, de monstertjes wandelen rustig voorbij'],fr:['Boîte à musique','0–1 an · musique','Ah ! vous dirai-je, maman, les petits monstres passent tout doucement'],
   music:{bpm:84,inst:'box',n:[[72,1],[72,1],[79,1],[79,1],[81,1],[81,1],[79,2],[77,1],[77,1],[76,1],[76,1],[74,1],[74,1],[72,2],[79,1],[79,1],[77,1],[77,1],[76,1],[76,1],[74,2],[79,1],[79,1],[77,1],[77,1],[76,1],[76,1],[74,2],[72,1],[72,1],[79,1],[79,1],[81,1],[81,1],[79,2],[77,1],[77,1],[76,1],[76,1],[74,1],[74,1],[72,2]]},svg:()=>calm('#07356B','#ECF5FE')},
- {nl:['Vader Jacob','1–2 jaar · muziek','Op de xylofoon, de monstertjes wandelen voorbij'],fr:['Frère Jacques','1–2 ans · musique','Au xylophone, les petits monstres défilent'],
+ {nl:['Monster Jacob','1–2 jaar · muziek','Op de xylofoon, de monstertjes wandelen voorbij'],fr:['Monstre Jacques','1–2 ans · musique','Au xylophone, les petits monstres défilent'],
   music:{bpm:112,inst:'mallet',n:[[72,1],[74,1],[76,1],[72,1],[72,1],[74,1],[76,1],[72,1],[76,1],[77,1],[79,2],[76,1],[77,1],[79,2],[79,0.5],[81,0.5],[79,0.5],[77,0.5],[76,1],[72,1],[79,0.5],[81,0.5],[79,0.5],[77,0.5],[76,1],[72,1],[72,1],[67,1],[72,2],[72,1],[67,1],[72,2]]},svg:()=>calm('#1E5FAB','#F9F4D1')},
 /* getekend voor peuters: grote vormen, dikke lijnen, felle kleuren, trage herhaling, vertrouwde gezichten */
- {nl:['Bubbelbad met Coco','2–3 jaar · animatie','Coco speelt in bad, bellen zweven rustig omhoog'],fr:['Bain de bulles avec Coco','2–3 ans · animation','Coco joue dans le bain, les bulles montent doucement'],
+ {music:{bpm:96,inst:'box',n:[[79,1],[76,1],[76,2],[77,1],[74,1],[74,2],[72,1],[74,1],[76,1],[77,1],[79,1],[79,1],[79,2],[79,1],[76,1],[76,2],[77,1],[74,1],[74,2],[72,1],[76,1],[79,1],[79,1],[72,4],[74,1],[74,1],[74,1],[74,1],[74,1],[76,1],[77,2],[76,1],[76,1],[76,1],[76,1],[76,1],[77,1],[79,2],[79,1],[76,1],[76,2],[77,1],[74,1],[74,2],[72,1],[76,1],[79,1],[79,1],[72,4]]},nl:['Bubbelbad met Coco','2–3 jaar · muziek','Coco speelt in bad, bellen zweven rustig omhoog'],fr:['Bain de bulles avec Coco','2–3 ans · musique','Coco joue dans le bain, les bulles montent doucement'],
   svg:()=>`<defs><pattern id="tile" width="40" height="40" patternUnits="userSpaceOnUse"><rect width="40" height="40" fill="#bfe6ff"/><rect x="1.5" y="1.5" width="37" height="37" rx="6" fill="#d7f0ff"/></pattern></defs>
    <rect width="400" height="300" fill="url(#tile)"/>
    ${[[70,0,9],[150,2.5,10],[230,5,8.5],[320,1.2,11],[110,6.5,9.5],[280,3.8,10.5]].map(([x,dl,du],i)=>`<g style="animation:rise ${du}s ease-in ${dl}s infinite"><circle cx="${x}" cy="230" r="${[26,20,30,18,22,24][i]}" fill="rgba(255,255,255,.55)" stroke="${OL}" stroke-width="3.5"/><path d="M${x-12} ${222} a12 12 0 0 1 10 -10" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round"/></g>`).join('')}
@@ -836,7 +836,7 @@ const FILMS=[
    ${[60,95,130,165,200,235,270,305,340].map((x,i)=>`<circle cx="${x}" cy="${203-(i%2)*6}" r="${20-(i%3)*3}" fill="#fff" stroke="${OL}" stroke-width="4"/>`).join('')}
    <path d="M40 205 h320 v28 q0 46 -46 46 h-228 q-46 0 -46 -46z" fill="#ffffff" stroke="${OL}" stroke-width="5" stroke-linejoin="round"/>
    <path d="M80 279 v16 M320 279 v16" stroke="${OL}" stroke-width="8" stroke-linecap="round"/>`},
- {nl:['Tel de tandjes','2–4 jaar · tellen','Het borsteltje poetst, Coco telt mee tot tien'],fr:['Compte les dents','2–4 ans · compter','La brosse brosse, Coco compte jusqu’à dix'],count:true,
+ {music:{bpm:108,inst:'mallet',n:[[79,1],[76,1],[79,2],[79,1],[76,1],[79,2],[81,1],[79,1],[77,1],[76,1],[74,1],[76,1],[77,2],[76,1],[77,1],[79,1],[72,1],[72,1],[72,.5],[72,.5],[72,1],[72,.5],[74,.5],[76,.5],[77,.5],[79,2],[79,1],[74,1],[74,1],[77,1],[76,1],[74,1],[72,2],[0,2]]},nl:['Tel de tandjes','2–4 jaar · muziek · tellen','Het borsteltje poetst, Coco telt mee tot tien'],fr:['Compte les dents','2–4 ans · musique · compter','La brosse brosse, Coco compte jusqu’à dix'],count:true,
   svg:n=>`<rect width="400" height="300" fill="#fff6e2"/>
    <path d="M30 70 q170 -60 340 0 q-10 120 -170 130 q-160 -10 -170 -130z" fill="#ff7a93" stroke="${OL}" stroke-width="5" stroke-linejoin="round"/>
    <path d="M60 80 q140 -40 280 0 q-20 90 -140 96 q-120 -6 -140 -96z" fill="#8a1c3a"/>
@@ -847,7 +847,7 @@ const FILMS=[
    <text x="40" y="262" ${F} font-weight="700" font-size="58" fill="#0054A6">${n}</text>
    <text x="100" y="262" ${F} font-weight="600" font-size="30" fill="#c25a00">${t('words')[n-1]}</text>
    ${Array.from({length:n},(_,i)=>`<circle cx="${48+i*24}" cy="285" r="8" fill="#ff8a1f" stroke="${OL}" stroke-width="2.5"/>`).join('')}`},
- {nl:['Tellen met monsters','3–6 jaar · tellen','Monstertjes, een hartje, een borstel, tandpasta en vuurwerk vullen het tienvak'],fr:['Compter avec les monstres','3–6 ans · compter','Monstres, un cœur, une brosse, du dentifrice et un feu d’artifice remplissent la grille de dix'],count:true,
+ {music:{bpm:120,inst:'mallet',n:[[72,1],[72,1],[72,1],[67,1],[69,1],[69,1],[67,2],[76,1],[76,1],[74,1],[74,1],[72,3],[67,1],[72,1],[72,1],[72,1],[67,1],[69,1],[69,1],[67,2],[76,1],[76,1],[74,1],[74,1],[72,3],[67,.5],[67,.5],[72,1],[72,1],[72,1],[67,.5],[67,.5],[72,1],[72,1],[72,2],[72,.5],[72,.5],[72,1],[72,.5],[72,.5],[72,1],[72,.5],[72,.5],[72,.5],[72,.5],[72,1],[72,1],[72,1],[72,1],[72,1],[67,1],[69,1],[69,1],[67,2],[76,1],[76,1],[74,1],[74,1],[72,4]]},nl:['Tellen met monsters','3–6 jaar · muziek · tellen','Monstertjes, een hartje, een borstel, tandpasta en vuurwerk vullen het tienvak'],fr:['Compter avec les monstres','3–6 ans · musique · compter','Monstres, un cœur, une brosse, du dentifrice et un feu d’artifice remplissent la grille de dix'],count:true,
   svg:n=>`<rect width="400" height="300" fill="#e9f6ff"/>
    <rect x="22" y="18" width="356" height="150" rx="22" fill="#ffffff" stroke="${OL}" stroke-width="5"/>
    ${Array.from({length:10},(_,i)=>{const x=34+(i%5)*68,y=28+Math.floor(i/5)*68,mo=MONS[i%6];return `<rect x="${x}" y="${y}" width="60" height="60" rx="14" fill="${i<n?'#fff6e2':'#f2f7fd'}" stroke="#c9dcf3" stroke-width="3"/>${i<n?`<g${i===n-1?' class="a pop"':''}>${cntItem(CNT_ORDER[i],x,y)}</g>`:''}`}).join('')}
@@ -902,10 +902,11 @@ function initAudio(){try{
     try{const a=new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=');a.loop=true;a.volume=0.01;a.setAttribute('playsinline','');a.play().catch(()=>{});window._bubuKeep=a}catch(e){}}
   return true}catch(e){return false}}
 function startMusic(){const tune=FILMS[film].music;if(!tune||sched||useYT()||!initAudio())return;nextT=ac.currentTime+.1;
-  sched=setInterval(()=>{const tn=FILMS[film].music;if(!tn)return;const bt=60/tn.bpm;while(nextT<ac.currentTime+.3){const [m,b]=tn.n[idx%tn.n.length];note2(tn.inst,m,nextT,b*bt);if(tn.inst==='mallet'&&beatAcc%2===0)tone(mf(48+(Math.floor(beatAcc/8)%2?7:0)),nextT,.5,'sine',.14);if(tn.inst==='box'&&beatAcc%4===0)tone(mf(m-24),nextT,bt*3.6,'sine',.1);beatAcc+=b;nextT+=b*bt;idx++}},100)}
+  sched=setInterval(()=>{const tn=FILMS[film].music;if(!tn)return;const bt=60/tn.bpm;while(nextT<ac.currentTime+.3){const [m,b]=tn.n[idx%tn.n.length];note2(tn.inst,m,nextT,b*bt);if(tn.inst==='mallet'&&beatAcc%2===0)tone(mf(48+(Math.floor(beatAcc/8)%2?7:0)),nextT,.5,'sine',.14);if(tn.inst==='box'&&m&&beatAcc%4===0)tone(mf(m-24),nextT,bt*3.6,'sine',.1);beatAcc+=b;nextT+=b*bt;idx++}},100)}
 /* muziekdoos: zachte belklank die uitsterft; xylofoon: korte houten tik */
 let beatAcc=0;
 function note2(inst,m,tm,d){
+  if(!m)return;
   if(inst==='box'){tone(mf(m),tm,1.6,'sine',.32);tone(mf(m+12),tm,.6,'sine',.08);tone(mf(m+19),tm,.25,'sine',.03)}
   else{tone(mf(m),tm,.35,'triangle',.34);tone(mf(m+12),tm,.12,'sine',.1)}
 }
