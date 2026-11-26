@@ -661,7 +661,7 @@ body.brushing .bubudock{display:none}
 </div></div>
 <p class="note" data-i="note"></p>
 <p class="foot"><button class="linkb" id="privBtn" data-i="privLink"></button> · <button class="linkb" id="cookieBtn" data-i="cookieLink"></button></p>
-<p class="foot" style="opacity:.5;font-size:12px;margin-top:4px">versie 39</p>
+<p class="foot" style="opacity:.5;font-size:12px;margin-top:4px">versie 40</p>
 <div class="cbar" id="cbar" hidden role="region" aria-label="Cookies"><p data-i="cText"></p><div class="ctl"><button class="btn small" id="cNo" data-i="cNo"></button><button class="btn" id="cYes" data-i="cYes"></button></div><button class="linkb" id="cMore" data-i="privLink"></button></div>
 <div class="modal" id="privm" hidden role="dialog" aria-modal="true" aria-labelledby="privT"><div class="sheet priv">
   <button class="x" id="privX" aria-label="Sluiten">&times;</button>
@@ -798,6 +798,13 @@ const starP=(x,y,r,fill)=>{let p='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*M
 const note=(x,y,s,c)=>`<g transform="translate(${x} ${y}) scale(${s})"><ellipse cx="0" cy="0" rx="13" ry="10" transform="rotate(-20)" fill="${c}"/><rect x="10" y="-52" width="5" height="52" fill="${c}"/><path d="M15 -52 Q34 -44 28 -24" stroke="${c}" stroke-width="5" fill="none"/></g>`;
 const F='font-family="Nunito Sans, sans-serif"';const OL='#1b2a4a';
 const calm=(bg,c)=>`<rect width="400" height="300" fill="${bg}"/>${[[40,40],[110,70],[330,50],[260,30],[370,110],[60,120]].map(([x,y],k)=>`<circle cx="${x}" cy="${y}" r="${k%2?3:4.5}" fill="${c}" opacity=".7"/>`).join('')}<path d="M0 250 q100 -16 200 0 t200 0 v50 h-400z" fill="rgba(255,255,255,.14)"/>${MONS.map((m,k)=>`<g style="animation:parade 60s linear ${k*10}s infinite both"><g class="a" style="animation:bob 1.6s ease-in-out infinite"><image href="img/m-${m.f}.png" x="140" y="96" width="120" height="130"/></g><text x="200" y="262" text-anchor="middle" ${F} font-weight="700" font-size="30" fill="#fff">${m.n}</text></g>`).join('')}`;
+/* tellen: na de 6 monstertjes een hartje, tandenborstel, tandpasta en vuurwerk */
+const CNT_ICON=[
+ (x,y)=>`<path transform="translate(${x+30} ${y+33})" d="M0 18 C-26 2 -24 -18 -12 -20 C-5 -21 -1 -16 0 -12 C1 -16 5 -21 12 -20 C24 -18 26 2 0 18Z" fill="#e8374f" stroke="#07356B" stroke-width="3" stroke-linejoin="round"/><circle cx="${x+21}" cy="${y+24}" r="3.5" fill="#fff" opacity=".8"/>`,
+ (x,y)=>`<g transform="translate(${x+30} ${y+30}) rotate(-40)"><rect x="-5" y="-4" width="10" height="34" rx="5" fill="#1E5FAB" stroke="#07356B" stroke-width="3"/><rect x="-7" y="-26" width="14" height="24" rx="5" fill="#fff" stroke="#07356B" stroke-width="3"/><path d="M-4 -23v18M0 -23v18M4 -23v18" stroke="#7fd0ff" stroke-width="2.5"/></g>`,
+ (x,y)=>`<g transform="translate(${x+30} ${y+24}) rotate(-25)"><path d="M-10 -20 h20 l3 34 h-26z" fill="#F6DED6" stroke="#07356B" stroke-width="3" stroke-linejoin="round"/><rect x="-6" y="14" width="12" height="9" rx="2" fill="#0054A6" stroke="#07356B" stroke-width="3"/><path d="M-9 -20 h18" stroke="#07356B" stroke-width="4"/><path d="M-5 -6 h10M-6 2 h12" stroke="#e8374f" stroke-width="3" stroke-linecap="round"/><path d="M0 24 c6 4 -4 8 2 12" fill="none" stroke="#7fd0ff" stroke-width="5" stroke-linecap="round"/></g>`,
+ (x,y)=>`<g transform="translate(${x+30} ${y+30})">${Array.from({length:10},(_,k)=>{const a=k*36*Math.PI/180,c=['#EBBD05','#e8374f','#1E5FAB','#3f9a3c','#c42f86'][k%5];return `<path d="M${Math.cos(a)*7} ${Math.sin(a)*7}L${Math.cos(a)*22} ${Math.sin(a)*22}" stroke="${c}" stroke-width="4" stroke-linecap="round"/><circle cx="${Math.cos(a)*25}" cy="${Math.sin(a)*25}" r="2.6" fill="${c}"/>`}).join('')}<circle r="5" fill="#EBBD05" stroke="#07356B" stroke-width="2"/></g>`
+];
 const FILMS=[
  {nl:['Muziekdoosje','0–1 jaar · muziek','Altijd is Kortjakje ziek, de monstertjes wandelen rustig voorbij'],fr:['Boîte à musique','0–1 an · musique','Ah ! vous dirai-je, maman, les petits monstres passent tout doucement'],
   music:{bpm:84,inst:'box',n:[[72,1],[72,1],[79,1],[79,1],[81,1],[81,1],[79,2],[77,1],[77,1],[76,1],[76,1],[74,1],[74,1],[72,2],[79,1],[79,1],[77,1],[77,1],[76,1],[76,1],[74,2],[79,1],[79,1],[77,1],[77,1],[76,1],[76,1],[74,2],[72,1],[72,1],[79,1],[79,1],[81,1],[81,1],[79,2],[77,1],[77,1],[76,1],[76,1],[74,1],[74,1],[72,2]]},svg:()=>calm('#07356B','#ECF5FE')},
@@ -824,10 +831,10 @@ const FILMS=[
    <text x="40" y="262" ${F} font-weight="700" font-size="58" fill="#0054A6">${n}</text>
    <text x="100" y="262" ${F} font-weight="600" font-size="30" fill="#c25a00">${t('words')[n-1]}</text>
    ${Array.from({length:n},(_,i)=>`<circle cx="${48+i*24}" cy="285" r="8" fill="#ff8a1f" stroke="${OL}" stroke-width="2.5"/>`).join('')}`},
- {nl:['Tellen met monsters','3–6 jaar','De monstertjes vullen het tienvak: visueel leren tellen'],fr:['Compter avec les monstres','3–6 ans','Les petits monstres remplissent la grille de dix : compter en images'],count:true,
+ {nl:['Tellen met monsters','3–6 jaar','Monstertjes, een hartje, een borstel, tandpasta en vuurwerk vullen het tienvak'],fr:['Compter avec les monstres','3–6 ans','Monstres, un cœur, une brosse, du dentifrice et un feu d’artifice remplissent la grille de dix'],count:true,
   svg:n=>`<rect width="400" height="300" fill="#e9f6ff"/>
    <rect x="22" y="18" width="356" height="150" rx="22" fill="#ffffff" stroke="${OL}" stroke-width="5"/>
-   ${Array.from({length:10},(_,i)=>{const x=34+(i%5)*68,y=28+Math.floor(i/5)*68,mo=MONS[i%6];return `<rect x="${x}" y="${y}" width="60" height="60" rx="14" fill="${i<n?'#fff6e2':'#f2f7fd'}" stroke="#c9dcf3" stroke-width="3"/>${i<n?`<g${i===n-1?' class="a pop"':''}><image href="img/m-${mo.f}.png" x="${x+4}" y="${y+4}" width="52" height="52"/></g>`:''}`}).join('')}
+   ${Array.from({length:10},(_,i)=>{const x=34+(i%5)*68,y=28+Math.floor(i/5)*68,mo=MONS[i%6];return `<rect x="${x}" y="${y}" width="60" height="60" rx="14" fill="${i<n?'#fff6e2':'#f2f7fd'}" stroke="#c9dcf3" stroke-width="3"/>${i<n?`<g${i===n-1?' class="a pop"':''}>${i<6?`<image href="img/m-${mo.f}.png" x="${x+4}" y="${y+4}" width="52" height="52"/>`:CNT_ICON[i-6](x,y)}</g>`:''}`}).join('')}
    <text x="200" y="250" text-anchor="middle" ${F} font-weight="700" font-size="76" fill="#0054A6" stroke="#fff" stroke-width="3" paint-order="stroke">${n}</text>
    <text x="200" y="288" text-anchor="middle" ${F} font-weight="600" font-size="28" fill="#c25a00">${t('words')[n-1]}</text>`}
 ];
