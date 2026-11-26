@@ -661,7 +661,7 @@ body.brushing .bubudock{display:none}
 </div></div>
 <p class="note" data-i="note"></p>
 <p class="foot"><button class="linkb" id="privBtn" data-i="privLink"></button> · <button class="linkb" id="cookieBtn" data-i="cookieLink"></button></p>
-<p class="foot" style="opacity:.5;font-size:12px;margin-top:4px">versie 40</p>
+<p class="foot" style="opacity:.5;font-size:12px;margin-top:4px">versie 41</p>
 <div class="cbar" id="cbar" hidden role="region" aria-label="Cookies"><p data-i="cText"></p><div class="ctl"><button class="btn small" id="cNo" data-i="cNo"></button><button class="btn" id="cYes" data-i="cYes"></button></div><button class="linkb" id="cMore" data-i="privLink"></button></div>
 <div class="modal" id="privm" hidden role="dialog" aria-modal="true" aria-labelledby="privT"><div class="sheet priv">
   <button class="x" id="privX" aria-label="Sluiten">&times;</button>
@@ -836,14 +836,21 @@ const FILMS=[
    <rect x="22" y="18" width="356" height="150" rx="22" fill="#ffffff" stroke="${OL}" stroke-width="5"/>
    ${Array.from({length:10},(_,i)=>{const x=34+(i%5)*68,y=28+Math.floor(i/5)*68,mo=MONS[i%6];return `<rect x="${x}" y="${y}" width="60" height="60" rx="14" fill="${i<n?'#fff6e2':'#f2f7fd'}" stroke="#c9dcf3" stroke-width="3"/>${i<n?`<g${i===n-1?' class="a pop"':''}>${i<6?`<image href="img/m-${mo.f}.png" x="${x+4}" y="${y+4}" width="52" height="52"/>`:CNT_ICON[i-6](x,y)}</g>`:''}`}).join('')}
    <text x="200" y="250" text-anchor="middle" ${F} font-weight="700" font-size="76" fill="#0054A6" stroke="#fff" stroke-width="3" paint-order="stroke">${n}</text>
-   <text x="200" y="288" text-anchor="middle" ${F} font-weight="600" font-size="28" fill="#c25a00">${t('words')[n-1]}</text>`}
+   <text x="200" y="288" text-anchor="middle" ${F} font-weight="600" font-size="28" fill="#c25a00">${t('words')[n-1]}</text>`,
+  /* staande gsm: tienvak van 2 kolommen x 5 rijen, iets kleiner, alles zichtbaar */
+  svgP:n=>`<rect width="300" height="440" fill="#e9f6ff"/>
+   <rect x="80" y="12" width="140" height="318" rx="20" fill="#ffffff" stroke="${OL}" stroke-width="5"/>
+   ${Array.from({length:10},(_,i)=>{const x=90+(i%2)*62,y=22+Math.floor(i/2)*61,mo=MONS[i%6];return `<rect x="${x}" y="${y}" width="56" height="56" rx="13" fill="${i<n?'#fff6e2':'#f2f7fd'}" stroke="#c9dcf3" stroke-width="3"/>${i<n?`<g${i===n-1?' class="a pop"':''}><g transform="translate(${x-2} ${y-2}) scale(.933)">${i<6?`<image href="img/m-${mo.f}.png" x="4" y="4" width="52" height="52"/>`:CNT_ICON[i-6](0,0)}</g></g>`:''}`}).join('')}
+   <text x="150" y="392" text-anchor="middle" ${F} font-weight="700" font-size="58" fill="#0054A6" stroke="#fff" stroke-width="3" paint-order="stroke">${n}</text>
+   <text x="150" y="426" text-anchor="middle" ${F} font-weight="600" font-size="24" fill="#c25a00">${t('words')[n-1]}</text>`}
 ];
 /* filmkeuze: automatisch per leeftijd; een eigen keuze geldt tot het kind een nieuwe leeftijdsgroep bereikt */
 function pickFilm(){const k=KIDS.find(x=>x.id===ACTIVE)||KIDS[0];if(!k){const v=store.get('bt-film',3);return typeof v==='number'&&FILMS[v]?v:3}
   return ageFilm(k)} /* altijd volgens leeftijd; 'Iets anders kiezen' geldt alleen voor deze keer */
 const keepFilm=()=>{const k=KIDS.find(x=>x.id===ACTIVE);store.set('bt-film',k?{f:film,b:ageFilm(k)}:film)};
 let film=pickFilm();
-const view=(f,n)=>`<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">${f.svg(n)}</svg>`;
+const view=(f,n,p)=>p&&f.svgP?`<svg viewBox="0 0 300 440" preserveAspectRatio="xMidYMid meet" style="background:#e9f6ff">${f.svgP(n)}</svg>`:`<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">${f.svg(n)}</svg>`;
+const portrait=()=>document.body.classList.contains('brushing')&&window.innerHeight>window.innerWidth;
 /* YouTube per leeftijd: vul hier per optie de afspeellijst-ID in (bv. de uploads-lijst van een kanaal: UC… wordt UU…) */
 const YT=['UUtf9cFBJkHVAf2qMqF01xYg','UUBC4RQhCJWhM91DD9tY8Kcw','UUM88mtSE0zRTn5ae4EbYcuw','UUNnEOqN2qcxeSQzBimv7h7Q','UUS7H8U-n5mINVJjJsaRtGHg'];
 const YTN=['Hey Bear Sensory','Bumba NL','Pingu','Shaun the Sheep & Friends','Shaun the Sheep'];
@@ -861,7 +868,7 @@ function drawFilm(force){
   if(useYT()){if(!force)return;const id=YT[film];
     $('film').innerHTML=tick&&id?`<iframe class="yt" src="https://www.youtube-nocookie.com/embed/videoseries?list=${encodeURIComponent(id)}&autoplay=1&rel=0&playsinline=1" title="YouTube" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>`
       :`<div class="ytposter">${ytIcon.replace('width="16" height="16"','width="56" height="56"')}<b>${id?YTN[film]:t('ytMissing')}</b>${id?`<span style="font-size:15px">${t('ytPoster')}</span>`:''}</div>`;shownN=-1;return}
-  const f=FILMS[film],done=TOTAL-left,n=f.count?(left<=0?10:Math.floor(done/6)%10+1):0;if(force||(f.count&&n!==shownN)){$('film').innerHTML=view(f,n);shownN=n}}
+  const f=FILMS[film],done=TOTAL-left,n=f.count?(left<=0?10:Math.floor(done/6)%10+1):0;if(force||(f.count&&n!==shownN)){$('film').innerHTML=view(f,n,portrait());shownN=n}}
 $('moreFilms').addEventListener('click',()=>{showAll=!showAll;films()});
 $('films').addEventListener('click',e=>{const y=e.target.closest('.ytsw');if(y){const i=+y.dataset.y;ytOn={[i]:true};film=i;showAll=false;films();drawFilm(true);if(!tick){left=TOTAL;$('go').click()}return}const b=e.target.closest('.film');if(!b)return;ytOn={};film=+b.dataset.i;keepFilm();showAll=false;films();renderKids();drawFilm(true);if(tick){stopMusic();startMusic()}else{left=TOTAL;$('go').click()}});
 $('stClose').addEventListener('click',()=>$('reset').click());
@@ -906,7 +913,7 @@ function stop(){clearInterval(tick);tick=null;stopMusic();$('scr').classList.add
 $('go').addEventListener('click',()=>{
   if(tick){stop();zoneMsg=t('paused');paint();return}
   if(left<=0){left=TOTAL;drawFilm(true)}
-  zoneMsg=null;$('winm').hidden=true;initAudio();enterFull();
+  zoneMsg=null;$('winm').hidden=true;initAudio();enterFull();if(!useYT())drawFilm(true);
   tick=setInterval(()=>{left--;if(left<=0){stop();chime(true);exitFull();award()}else if((TOTAL-left)%30===0)chime(false);paint()},1000);
   startMusic();$('scr').classList.remove('paused');if(useYT())drawFilm(true);paint();
 });
