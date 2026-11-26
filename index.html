@@ -418,6 +418,18 @@ header{justify-content:center}
 #v-seizoen section{margin-top:40px}
 /* tandjes: ademruimte */
 #v-tandjes>section{margin-top:44px}
+
+/* poetsen: eerst kiezen, scherm opent pas bij klikken */
+body:not(.brushing) #stage,body:not(.brushing) #v-poetsen>.drip{display:none}
+#v-poetsen>section.pick{margin-top:8px}
+.stclose{position:absolute;top:max(12px,env(safe-area-inset-top));right:14px;z-index:3;width:46px;height:46px;border-radius:50%;border:2px solid #07356B;background:#fff;color:#07356B;font:800 28px/1 'Nunito Sans',sans-serif;cursor:pointer;box-shadow:2px 3px 0 #07356B}
+body:not(.brushing) .stclose{display:none}
+.filmrow .film{cursor:pointer}
+/* maand als kleurknop */
+.calhead h3#mname{display:inline-block;color:#fff;padding:6px 18px;border:2px solid #07356B;border-radius:26px 20px 28px 18px/20px 28px 18px 26px;box-shadow:2px 3px 0 #07356B;font-size:18px;transform:rotate(-1.5deg)}
+/* meer ademruimte bovenaan */
+header{margin-bottom:22px}
+.kidbar{margin:0 0 26px}
 </style>
 </head>
 <body>
@@ -454,6 +466,7 @@ header{justify-content:center}
 
 <div class="view" id="v-poetsen">
   <div class="stage" id="stage">
+    <button class="stclose" id="stClose" aria-label="Sluiten">&times;</button>
     <div class="scr paused" id="scr"><div class="zchip" id="zchip"></div><div id="film"></div></div>
     <div class="bar" aria-hidden="true"><span id="fill"></span><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i></div>
     <div class="row"><div class="time" id="time">2:00</div><div class="zone" id="zone"></div></div>
@@ -463,7 +476,7 @@ header{justify-content:center}
     </div>
   </div>
   <svg class="drip" viewBox="0 0 300 26" preserveAspectRatio="none" aria-hidden="true"><g fill="#9cc4ef"><path d="M30 0 h14 v10 q0 8 -7 8 q-7 0 -7 -8z"/><path d="M62 0 h8 v18 q0 6 -4 6 q-4 0 -4 -6z"/><path d="M210 0 h10 v7 q0 6 -5 6 q-5 0 -5 -6z"/><path d="M262 0 h6 v14 q0 4 -3 4 q-3 0 -3 -4z"/></g></svg>
-  <section style="margin-top:18px"><p class="agehint" id="agehint" hidden></p><div class="films" id="films"></div><button class="btn small more" id="moreFilms"></button></section>
+  <section class="pick"><p class="agehint" id="agehint" hidden></p><div class="films" id="films"></div><button class="btn small more" id="moreFilms"></button></section>
   <section>
     <h2 data-i="pasteTitle"></h2>
     <div class="card" style="display:grid;gap:8px"><p style="margin:0;text-align:center;text-wrap:balance" data-i="pasteRef"></p><div><button class="btn solid" id="toTeeth" data-i="toTeeth"></button></div></div>
@@ -735,7 +748,8 @@ function drawFilm(force){
       :`<div class="ytposter">${ytIcon.replace('width="16" height="16"','width="56" height="56"')}<b>${id?YTN[film]:t('ytMissing')}</b>${id?`<span style="font-size:15px">${t('ytPoster')}</span>`:''}</div>`;shownN=-1;return}
   const f=FILMS[film],done=TOTAL-left,n=f.count?(left<=0?10:Math.floor(done/6)%10+1):0;if(force||(f.count&&n!==shownN)){$('film').innerHTML=view(f,n);shownN=n}}
 $('moreFilms').addEventListener('click',()=>{showAll=!showAll;films()});
-$('films').addEventListener('click',e=>{const y=e.target.closest('.ytsw');if(y){const i=+y.dataset.y;ytOn[i]=!ytOn[i];store.set('bt-yt',ytOn);film=i;keepFilm();films();drawFilm(true);if(tick){stopMusic();startMusic()}return}const b=e.target.closest('.film');if(!b)return;film=+b.dataset.i;keepFilm();showAll=false;films();renderKids();drawFilm(true);if(tick){stopMusic();startMusic()}});
+$('films').addEventListener('click',e=>{const y=e.target.closest('.ytsw');if(y){const i=+y.dataset.y;ytOn[i]=!ytOn[i];store.set('bt-yt',ytOn);film=i;keepFilm();films();drawFilm(true);if(tick){stopMusic();startMusic()}return}const b=e.target.closest('.film');if(!b)return;film=+b.dataset.i;keepFilm();showAll=false;films();renderKids();drawFilm(true);if(tick){stopMusic();startMusic()}else{left=TOTAL;$('go').click()}});
+$('stClose').addEventListener('click',()=>$('reset').click());
 
 /* muziek */
 let ac=null,sched=null,nextT=0,idx=0;
@@ -811,7 +825,7 @@ const monFor=d=>monOf(d).f;
 const st=on=>`<svg class="${on?'on':'off'}"><use href="#star"/></svg>`;
 const MCOL={rood:'#d6283b',blauw:'#1E5FAB',geel:'#c98f00',groen:'#3f9a3c',oranje:'#e06a10',roze:'#c42f86'};
 function renderCal(){
-  {const k=kidById(ACTIVE);$('calTitleH').innerHTML=k&&k.n?`${t('calOf')} <span class="kidname" style="color:${MCOL[k.m]}">${esc(k.n)}</span>`:t('calTitle')}
+  {const k=kidById(ACTIVE);$('mname').style.background=k?MCOL[k.m]:'#1E5FAB';$('calTitleH').innerHTML=k&&k.n?`${t('calOf')} <span class="kidname" style="color:${MCOL[k.m]}">${esc(k.n)}</span>`:t('calTitle')}
   const first=new Date(vy,vm,1),days=new Date(vy,vm+1,0).getDate(),pad=(first.getDay()+6)%7;
   $('mname').textContent=first.toLocaleDateString(t('locale'),{month:'long',year:'numeric'});
   let h=t('days').map(d=>`<div class="dn">${d}</div>`).join('')+'<div class="day pad"></div>'.repeat(pad);
