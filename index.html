@@ -661,7 +661,7 @@ body.brushing .bubudock{display:none}
 </div></div>
 <p class="note" data-i="note"></p>
 <p class="foot"><button class="linkb" id="privBtn" data-i="privLink"></button> · <button class="linkb" id="cookieBtn" data-i="cookieLink"></button></p>
-<p class="foot" style="opacity:.5;font-size:12px;margin-top:4px">versie 43</p>
+<p class="foot" style="opacity:.5;font-size:12px;margin-top:4px">versie 44</p>
 <div class="cbar" id="cbar" hidden role="region" aria-label="Cookies"><p data-i="cText"></p><div class="ctl"><button class="btn small" id="cNo" data-i="cNo"></button><button class="btn" id="cYes" data-i="cYes"></button></div><button class="linkb" id="cMore" data-i="privLink"></button></div>
 <div class="modal" id="privm" hidden role="dialog" aria-modal="true" aria-labelledby="privT"><div class="sheet priv">
   <button class="x" id="privX" aria-label="Sluiten">&times;</button>
@@ -821,7 +821,7 @@ const FILMS=[
  {nl:['Vader Jacob','1–2 jaar · muziek','Op de xylofoon, de monstertjes wandelen voorbij'],fr:['Frère Jacques','1–2 ans · musique','Au xylophone, les petits monstres défilent'],
   music:{bpm:112,inst:'mallet',n:[[72,1],[74,1],[76,1],[72,1],[72,1],[74,1],[76,1],[72,1],[76,1],[77,1],[79,2],[76,1],[77,1],[79,2],[79,0.5],[81,0.5],[79,0.5],[77,0.5],[76,1],[72,1],[79,0.5],[81,0.5],[79,0.5],[77,0.5],[76,1],[72,1],[72,1],[67,1],[72,2],[72,1],[67,1],[72,2]]},svg:()=>calm('#1E5FAB','#F9F4D1')},
 /* getekend voor peuters: grote vormen, dikke lijnen, felle kleuren, trage herhaling, vertrouwde gezichten */
- {nl:['Bubbelbad met Coco','2–3 jaar','Coco speelt in bad, bellen zweven rustig omhoog'],fr:['Bain de bulles avec Coco','2–3 ans','Coco joue dans le bain, les bulles montent doucement'],
+ {nl:['Bubbelbad met Coco','2–3 jaar · animatie','Coco speelt in bad, bellen zweven rustig omhoog'],fr:['Bain de bulles avec Coco','2–3 ans · animation','Coco joue dans le bain, les bulles montent doucement'],
   svg:()=>`<defs><pattern id="tile" width="40" height="40" patternUnits="userSpaceOnUse"><rect width="40" height="40" fill="#bfe6ff"/><rect x="1.5" y="1.5" width="37" height="37" rx="6" fill="#d7f0ff"/></pattern></defs>
    <rect width="400" height="300" fill="url(#tile)"/>
    ${[[70,0,9],[150,2.5,10],[230,5,8.5],[320,1.2,11],[110,6.5,9.5],[280,3.8,10.5]].map(([x,dl,du],i)=>`<g style="animation:rise ${du}s ease-in ${dl}s infinite"><circle cx="${x}" cy="230" r="${[26,20,30,18,22,24][i]}" fill="rgba(255,255,255,.55)" stroke="${OL}" stroke-width="3.5"/><path d="M${x-12} ${222} a12 12 0 0 1 10 -10" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round"/></g>`).join('')}
@@ -830,7 +830,7 @@ const FILMS=[
    ${[60,95,130,165,200,235,270,305,340].map((x,i)=>`<circle cx="${x}" cy="${203-(i%2)*6}" r="${20-(i%3)*3}" fill="#fff" stroke="${OL}" stroke-width="4"/>`).join('')}
    <path d="M40 205 h320 v28 q0 46 -46 46 h-228 q-46 0 -46 -46z" fill="#ffffff" stroke="${OL}" stroke-width="5" stroke-linejoin="round"/>
    <path d="M80 279 v16 M320 279 v16" stroke="${OL}" stroke-width="8" stroke-linecap="round"/>`},
- {nl:['Tel de tandjes','2–4 jaar','Het borsteltje poetst, Coco telt mee tot tien'],fr:['Compte les dents','2–4 ans','La brosse brosse, Coco compte jusqu’à dix'],count:true,
+ {nl:['Tel de tandjes','2–4 jaar · tellen','Het borsteltje poetst, Coco telt mee tot tien'],fr:['Compte les dents','2–4 ans · compter','La brosse brosse, Coco compte jusqu’à dix'],count:true,
   svg:n=>`<rect width="400" height="300" fill="#fff6e2"/>
    <path d="M30 70 q170 -60 340 0 q-10 120 -170 130 q-160 -10 -170 -130z" fill="#ff7a93" stroke="${OL}" stroke-width="5" stroke-linejoin="round"/>
    <path d="M60 80 q140 -40 280 0 q-20 90 -140 96 q-120 -6 -140 -96z" fill="#8a1c3a"/>
@@ -841,7 +841,7 @@ const FILMS=[
    <text x="40" y="262" ${F} font-weight="700" font-size="58" fill="#0054A6">${n}</text>
    <text x="100" y="262" ${F} font-weight="600" font-size="30" fill="#c25a00">${t('words')[n-1]}</text>
    ${Array.from({length:n},(_,i)=>`<circle cx="${48+i*24}" cy="285" r="8" fill="#ff8a1f" stroke="${OL}" stroke-width="2.5"/>`).join('')}`},
- {nl:['Tellen met monsters','3–6 jaar','Monstertjes, een hartje, een borstel, tandpasta en vuurwerk vullen het tienvak'],fr:['Compter avec les monstres','3–6 ans','Monstres, un cœur, une brosse, du dentifrice et un feu d’artifice remplissent la grille de dix'],count:true,
+ {nl:['Tellen met monsters','3–6 jaar · tellen','Monstertjes, een hartje, een borstel, tandpasta en vuurwerk vullen het tienvak'],fr:['Compter avec les monstres','3–6 ans · compter','Monstres, un cœur, une brosse, du dentifrice et un feu d’artifice remplissent la grille de dix'],count:true,
   svg:n=>`<rect width="400" height="300" fill="#e9f6ff"/>
    <rect x="22" y="18" width="356" height="150" rx="22" fill="#ffffff" stroke="${OL}" stroke-width="5"/>
    ${Array.from({length:10},(_,i)=>{const x=34+(i%5)*68,y=28+Math.floor(i/5)*68,mo=MONS[i%6];return `<rect x="${x}" y="${y}" width="60" height="60" rx="14" fill="${i<n?'#fff6e2':'#f2f7fd'}" stroke="#c9dcf3" stroke-width="3"/>${i<n?`<g${i===n-1?' class="a pop"':''}>${cntItem(CNT_ORDER[i],x,y)}</g>`:''}`}).join('')}
@@ -869,7 +869,7 @@ const ytIcon='<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"
 let showAll=false;
 function films(){
   const kid=KIDS.length>0;$('moreFilms').hidden=!kid;$('moreFilms').textContent=showAll?t('fewerFilms'):t('moreFilmsT');
-  $('films').innerHTML=FILMS.map((f,i)=>(kid&&!showAll&&i!==film)?'':`<div class="filmrow"><button class="film" aria-pressed="${i===film}" data-i="${i}"><span class="sw">${view(f,3)}</span><span><b>${f[L][0]}</b><small>${f[L][1]} · ${f[L][2]}</small></span></button><button class="ytsw" data-y="${i}"  aria-label="YouTube ${f[L][0]}">${ytIcon}<span class="ytl"><b>${t('ytOff')}</b><small>${f[L][1].split(' · ')[0]}</small></span></button></div>`).join('');
+  $('films').innerHTML=FILMS.map((f,i)=>(kid&&!showAll&&i!==film)?'':`<div class="filmrow"><button class="film" aria-pressed="${i===film}" data-i="${i}"><span class="sw">${view(f,3)}</span><span><b>${f[L][0]}</b><small>${f[L][1]}</small></span></button><button class="ytsw" data-y="${i}"  aria-label="YouTube ${f[L][0]}">${ytIcon}<span class="ytl"><b>${t('ytOff')}</b><small>${f[L][1].split(' · ')[0]}</small></span></button></div>`).join('');
   $('films').querySelectorAll('.sw *').forEach(e=>e.style.animation='none');
 }
 let shownN=-1;
