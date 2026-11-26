@@ -1177,7 +1177,12 @@ function applyLang(){
 applyLang();
 const h=location.hash.slice(1);show(TABS.includes(h)?h:'poetsen');
 /* elke start: animatie en taalkeuze */
-if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(()=>{});
+if('serviceWorker' in navigator&&location.protocol==='https:'){
+  const had=!!navigator.serviceWorker.controller;let reloaded=false;
+  navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});
+  /* nieuwe versie binnen: één keer herladen, nooit midden in het poetsen */
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(had&&!reloaded&&!tick){reloaded=true;location.reload()}});
+}
 }
 </script>
 </body>
