@@ -465,6 +465,13 @@ header{margin-bottom:22px}
 @keyframes stPop{to{opacity:1;transform:none}}
 .st-lang{animation-delay:3.2s!important}
 @media(prefers-reduced-motion:reduce){.st-stage .st-bubu{animation:none;transform:translateY(-105px)}.st-stage .st-word span{animation:none;opacity:1;transform:none}}
+
+/* weerbericht: echt in het midden van het kader */
+.wxlive{display:flex!important;flex-direction:column;align-items:center;justify-content:center;width:100%;box-sizing:border-box;margin-left:auto;margin-right:auto;text-align:center}
+.wxlive[hidden]{display:none!important}
+.wxin{width:100%;text-align:center}
+.wxfacts{width:100%;justify-content:center}
+.kidname{font-size:30px}
 </style>
 </head>
 <body>
@@ -715,7 +722,10 @@ document.addEventListener('click',e=>{const a=e.target.closest('a.shop');if(a)tr
 
 /* tabs */
 const TABS=['poetsen','stickers','seizoen','tandjes'];
-function show(n){TABS.forEach(x=>{$('t-'+x).setAttribute('aria-selected',x===n);$('v-'+x).hidden=x!==n});try{history.replaceState(null,'','#'+n)}catch(e){}if(n==='tandjes')renderAdvice()}
+function show(n){TABS.forEach(x=>{$('t-'+x).setAttribute('aria-selected',x===n);$('v-'+x).hidden=x!==n});try{history.replaceState(null,'','#'+n)}catch(e){}if(n==='tandjes'){renderAdvice();requestAnimationFrame(spitBelowFold)}}
+/* tandjes: spuwvraag pas zichtbaar na scrollen */
+function spitBelowFold(){const sec=$('spit').closest('section'),d=$('detail');if(!sec||!d)return;sec.style.marginTop='';const end=d.getBoundingClientRect().bottom+window.scrollY,h=window.innerHeight;sec.style.marginTop=Math.max(44,Math.round(h-end+40))+'px'}
+window.addEventListener('resize',()=>{if(!$('v-tandjes').hidden)spitBelowFold()});
 TABS.forEach(x=>$('t-'+x).addEventListener('click',()=>show(x)));
 
 /* Coco + filmpjes */
@@ -859,7 +869,7 @@ const monFor=d=>monOf(d).f;
 const st=on=>`<svg class="${on?'on':'off'}"><use href="#star"/></svg>`;
 const MCOL={rood:'#d6283b',blauw:'#1E5FAB',geel:'#c98f00',groen:'#3f9a3c',oranje:'#e06a10',roze:'#c42f86'};
 function renderCal(){
-  {const k=kidById(ACTIVE);$('mname').style.background=k?MCOL[k.m]:'#1E5FAB';$('calTitleH').innerHTML=k&&k.n?`${t('calOf')} <span class="kidname" style="color:${MCOL[k.m]}">${esc(k.n)}</span>`:t('calTitle')}
+  {const k=kidById(ACTIVE);$('mname').style.background=k?MCOL[k.m]:'#1E5FAB';$('calTitleH').innerHTML=k&&k.n?`<span class="kidname" style="color:${MCOL[k.m]}">${esc(k.n)}</span>`:t('calTitle')}
   const first=new Date(vy,vm,1),days=new Date(vy,vm+1,0).getDate(),pad=(first.getDay()+6)%7;
   $('mname').textContent=first.toLocaleDateString(t('locale'),{month:'long',year:'numeric'});
   let h=t('days').map(d=>`<div class="dn">${d}</div>`).join('')+'<div class="day pad"></div>'.repeat(pad);
