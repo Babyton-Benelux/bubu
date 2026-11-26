@@ -70,9 +70,9 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visibl
 #sky,#sky svg{position:absolute;inset:0;width:100%;height:100%}
 .hero{position:absolute;left:50%;bottom:4%;height:66%;width:auto;transform:translateX(-50%);animation:heroJump 3s ease-in-out infinite}
 @keyframes heroJump{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-6px)}}
-.wxb{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;width:100%}
-.wxb button{display:grid;justify-items:center;gap:2px;border:2px solid transparent;background:#fff;border-radius:20px;padding:8px 4px;min-height:84px;cursor:pointer;font:400 13px 'Nunito Sans',sans-serif;color:#07356B}
-.wxb button svg{width:46px;height:46px}
+.wxb{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;width:100%}
+.wxb button{display:grid;justify-items:center;align-content:start;gap:2px;border:2px solid transparent;background:#fff;border-radius:20px;padding:8px 2px;min-height:84px;cursor:pointer;font:400 12px 'Nunito Sans',sans-serif;color:#07356B}
+.wxb button svg{width:40px;height:40px}
 .wxb button[aria-pressed=true]{border-color:#07356B;background:#ECF5FE;font-weight:700}
 @keyframes fall{from{transform:translateY(-30px)}to{transform:translateY(230px)}}
 @keyframes drift{0%,100%{transform:translateX(-14px)}50%{transform:translateX(14px)}}
@@ -297,6 +297,7 @@ section h2{transform:rotate(-1deg)}
 .priv ul{padding-left:18px;margin:0 0 6px}
 .priv .ph{background:#F9F4D1;border-radius:6px;padding:0 4px}
 
+.wxlive[hidden]{display:none}
 .wxlive{width:100%;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px;font-size:14px;background:#fff;border-radius:16px 12px 18px 10px;padding:8px 12px;color:#07356B}
 .wxlive b{font-weight:700}
 .wxlive .linkb{font-size:14px}
@@ -377,7 +378,7 @@ body.brushing .peek{display:none}
     <p class="fine" data-i="tempo"></p>
   </section>
 
-  <section>
+  <section id="mailsec" hidden>
     <h2 data-i="mailTitle"></h2>
     <form class="card" id="mailform" novalidate style="display:grid;gap:8px">
       <p style="margin:0;color:var(--mut)" data-i="mailIntro"></p>
@@ -442,7 +443,6 @@ body.brushing .peek{display:none}
   <button class="btn ig" id="shIg"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/></svg><span data-i="shBtn"></span></button>
   <p class="fine" id="shNote"></p>
 </div></div>
-<details class="meten"><summary data-i="evTitle"></summary><div class="ev" id="evs"></div><p class="fine" data-i="evNote"></p></details>
 <p class="note" data-i="note"></p>
 <p class="foot"><button class="linkb" id="privBtn" data-i="privLink"></button> · <button class="linkb" id="cookieBtn" data-i="cookieLink"></button></p>
 <div class="cbar" id="cbar" hidden role="region" aria-label="Cookies"><p data-i="cText"></p><div class="ctl"><button class="btn small" id="cNo" data-i="cNo"></button><button class="btn" id="cYes" data-i="cYes"></button></div><button class="linkb" id="cMore" data-i="privLink"></button></div>
@@ -488,7 +488,7 @@ nl:{tabBrush:'Poetsen',tabStickers:'Stickers',tabTeeth:'Tandjes',tabSeason:'Weer
  mailLabel:'Je e-mailadres',newsOpt:'Ja, ik wil ook de Babyton-nieuwsbrief ontvangen (niet verplicht)',mailBtn:'Stuur mijn tandjeskaart',
  privacy:'We bewaren geen naam of andere gegevens van je kindje. De tandjeskaart staat alleen op deze gsm.',badMail:'Vul een geldig e-mailadres in.',noTeeth:'Vink eerst minstens één tandje aan.',
  subj:'Jouw tandjeskaart van Babyton',prevHead:'Voorbeeld van de mail',protoSend:'Prototype: er wordt nog niets verstuurd. In de live versie gaan deze gegevens naar Brevo:',
-wxNow:'Vandaag in <b>{p}</b>: {t}°, wind {w} km/u, UV {u}',wxSet:'Toon het echte weer van vandaag',wxOther:'Andere plaats',wxFail:'Het weer van vandaag kon niet geladen worden.',locT:'Waar ben je?',locGeo:'Gebruik mijn locatie',locOr:'Of zoek je gemeente:',locSearch:'Zoek',locHere:'jouw buurt',locNone:'Geen gemeente gevonden.',locDenied:'Je locatie is niet beschikbaar. Zoek je gemeente.',uvToday:'{c} · UV-index vandaag {u}',
+wxHome:'Mijn weer',wxNow:'Vandaag in <b>{p}</b>: {t}°, wind {w} km/u, UV {u}',wxSet:'Toon het echte weer van vandaag',wxOther:'Andere plaats',wxFail:'Het weer van vandaag kon niet geladen worden.',locT:'Waar ben je?',locGeo:'Gebruik mijn locatie',locOr:'Of zoek je gemeente:',locSearch:'Zoek',locHere:'jouw buurt',locNone:'Geen gemeente gevonden.',locDenied:'Je locatie is niet beschikbaar. Zoek je gemeente.',uvToday:'{c} · UV-index vandaag {u}',
   wxQ:'Hoe is het weer vandaag?',seeSeason:'Bekijk seizoensbescherming',atBabyton:'{s} bij Babyton',uvTxt:'{c} · typische UV-index rond {u} in België',
  evTitle:'Metingen (prototype)',evNote:'In de live versie gaan deze events naar je analysetool. Evaluatie na 2 à 3 maanden.',
  privLink:'Privacy',cookieLink:'Cookie-instellingen',cText:'BuBu gebruikt enkel analytische cookies om de app te verbeteren, en alleen als jij dat goed vindt.',cYes:'Akkoord',cNo:'Liever niet',privT:'Privacy bij BuBu',
@@ -506,7 +506,7 @@ wxNow:'Vandaag in <b>{p}</b>: {t}°, wind {w} km/u, UV {u}',wxSet:'Toon het echt
  kmT:'Voor wie poetsen we?',kmI:'Kies per kindje een monstertje en de geboortemaand. BuBu zet dan meteen de juiste muziek of het juiste filmpje klaar.',kmAdd:'+ Nog een kindje',kmOk:'Klaar',kmRm:'Verwijderen',kmBorn:'Geboren in',kmP:'We vragen geen naam. Alleen de maand en het jaar van geboorte, en die blijven op deze gsm.',kidEdit:'Kinderen wijzigen',months:['jan','feb','maa','apr','mei','jun','jul','aug','sep','okt','nov','dec'],mo:'mnd',yr:'jaar',ageHint:'Voor {a} staat {f} klaar. Je kunt altijd iets anders kiezen.',
  shBtn:'Post dit op je Instagram',shMonthT:'Proficiat, een volle kaart!',shMonthM:'{m}: elke dag ochtend én avond gepoetst. Daar mag je trots op zijn!',shTeethT:'Alle 20 melktandjes zijn er!',shTeethM:'Een volledig melkgebit. Deel dit mooie moment.',capMonth:'Volle stickerkaart gehaald met BuBu! @babytonbenelux #BuBu #babyton',capTeeth:'Alle 20 melktandjes! Bijgehouden met BuBu. @babytonbenelux #BuBu #babyton',shCopied:'De tekst met @babytonbenelux is gekopieerd: plak hem in je bericht. Tag ons ook op de foto.',shFallback:'Delen lukt niet vanaf hier. Houd de afbeelding ingedrukt om ze te bewaren en plaats ze op Instagram. Vergeet @babytonbenelux niet!',imgMonth:'Volle stickerkaart!',imgTeeth:'20 melktandjes!',demoPop:'Bekijk de pop-up (demo)',
  ev:{tooth_checked:'Tandje aangevinkt',share_open:'Volle kaart pop-up',share_click:'Klik Instagram',advice_viewed:'Fase-advies bekeken',product_click:'Klik naar product',mail_sent:'Mail verstuurd',newsletter_optin:'Inschrijving nieuwsbrief'},
- note:'Prototype. Stickers verdien je alleen met de volledige 2 minuten poetsen. Producten, links en advies nog te valideren door Babyton. Geen medisch advies.'},
+ note:'BuBu geeft algemene tips, geen medisch advies. Bij twijfel: vraag het je tandarts of huisarts.'},
 fr:{tabBrush:'Brossage',tabStickers:'Stickers',tabTeeth:'Dents',tabSeason:'Météo',restart:'Recommencer',start:'Démarrer',pause:'Pause',resume:'Reprendre',paused:'En pause',
  idle:'Choisissez une musique ou une animation et brossez',brushing:'',zones:['En haut à gauche','En haut à droite','En bas à gauche','En bas à droite'],
  winOk:'Super !',chooseFilm:'Choisissez une musique ou une animation',moreFilmsT:'Choisir autre chose',fewerFilms:'Afficher seulement mon choix',ytOn:'YouTube activé',ytOff:'YouTube',ytPoster:'YouTube démarre avec le minuteur',ytMissing:'Pas encore de chaîne YouTube choisie pour cet âge',ytNote:'Dans cet aperçu, YouTube ne peut pas être lu. Dans la version en ligne, oui.',calTitle:'Calendrier d’autocollants',got:'Tu as gagné {n} !',calLegend:'Monstre en couleur : brossage matin et soir. Monstre pâle : un seul brossage.',days:['lu','ma','me','je','ve','sa','di'],locale:'fr-BE',
@@ -528,7 +528,7 @@ fr:{tabBrush:'Brossage',tabStickers:'Stickers',tabTeeth:'Dents',tabSeason:'Mét�
  mailLabel:'Votre adresse e-mail',newsOpt:'Oui, je souhaite aussi recevoir la newsletter Babyton (facultatif)',mailBtn:'Envoyer ma carte des dents',
  privacy:'Nous ne conservons ni le nom ni d’autres données de votre enfant. La carte des dents reste uniquement sur ce téléphone.',badMail:'Indiquez une adresse e-mail valide.',noTeeth:'Cochez d’abord au moins une dent.',
  subj:'Votre carte des dents Babyton',prevHead:'Aperçu de l’e-mail',protoSend:'Prototype : rien n’est encore envoyé. Dans la version en ligne, ces données vont vers Brevo :',
-wxNow:'Aujourd’hui à <b>{p}</b> : {t}°, vent {w} km/h, UV {u}',wxSet:'Afficher la vraie météo du jour',wxOther:'Autre lieu',wxFail:'La météo du jour n’a pas pu être chargée.',locT:'Où êtes-vous ?',locGeo:'Utiliser ma position',locOr:'Ou cherchez votre commune :',locSearch:'Chercher',locHere:'votre quartier',locNone:'Aucune commune trouvée.',locDenied:'Votre position n’est pas disponible. Cherchez votre commune.',uvToday:'{c} · indice UV aujourd’hui {u}',
+wxHome:'Ma météo',wxNow:'Aujourd’hui à <b>{p}</b> : {t}°, vent {w} km/h, UV {u}',wxSet:'Afficher la vraie météo du jour',wxOther:'Autre lieu',wxFail:'La météo du jour n’a pas pu être chargée.',locT:'Où êtes-vous ?',locGeo:'Utiliser ma position',locOr:'Ou cherchez votre commune :',locSearch:'Chercher',locHere:'votre quartier',locNone:'Aucune commune trouvée.',locDenied:'Votre position n’est pas disponible. Cherchez votre commune.',uvToday:'{c} · indice UV aujourd’hui {u}',
   wxQ:'Quel temps fait-il aujourd’hui ?',seeSeason:'Voir la protection saisonnière',atBabyton:'{s} chez Babyton',uvTxt:'{c} · indice UV typique autour de {u} en Belgique',
  evTitle:'Mesures (prototype)',evNote:'Dans la version en ligne, ces événements vont vers votre outil d’analyse. Évaluation après 2 à 3 mois.',
  privLink:'Confidentialité',cookieLink:'Paramètres des cookies',cText:'BuBu utilise uniquement des cookies analytiques pour améliorer l’app, et seulement si vous êtes d’accord.',cYes:'D’accord',cNo:'Non merci',privT:'Confidentialité chez BuBu',
@@ -546,14 +546,14 @@ wxNow:'Aujourd’hui à <b>{p}</b> : {t}°, vent {w} km/h, UV {u}',wxSet:'Affich
  kmT:'Pour qui brosse-t-on ?',kmI:'Choisissez un petit monstre et le mois de naissance pour chaque enfant. BuBu prépare directement la bonne musique ou la bonne animation.',kmAdd:'+ Un autre enfant',kmOk:'C’est parti',kmRm:'Supprimer',kmBorn:'Né(e) en',kmP:'Nous ne demandons pas de prénom. Seulement le mois et l’année de naissance, qui restent sur ce téléphone.',kidEdit:'Modifier les enfants',months:['jan','fév','mar','avr','mai','juin','juil','août','sep','oct','nov','déc'],mo:'mois',yr:'ans',ageHint:'Pour {a}, {f} est prêt. Vous pouvez toujours choisir autre chose.',
  shBtn:'Publier sur ton Instagram',shMonthT:'Bravo, une carte complète !',shMonthM:'{m} : chaque jour brossé matin et soir. Il y a de quoi être fier !',shTeethT:'Les 20 dents de lait sont là !',shTeethM:'Toutes les dents de lait. Partagez ce beau moment.',capMonth:'Carte d’autocollants complète avec BuBu ! @babytonbenelux #BuBu #babyton',capTeeth:'Les 20 dents de lait ! Suivies avec BuBu. @babytonbenelux #BuBu #babyton',shCopied:'Le texte avec @babytonbenelux est copié : collez-le dans votre publication. Identifiez-nous aussi sur la photo.',shFallback:'Le partage ne fonctionne pas d’ici. Appuyez longuement sur l’image pour l’enregistrer et publiez-la sur Instagram. N’oubliez pas @babytonbenelux !',imgMonth:'Carte complète !',imgTeeth:'20 dents de lait !',demoPop:'Voir la pop-up (démo)',
  ev:{tooth_checked:'Dent cochée',share_open:'Pop-up carte complète',share_click:'Clic Instagram',advice_viewed:'Conseil d’étape vu',product_click:'Clic vers produit',mail_sent:'E-mail envoyé',newsletter_optin:'Inscription newsletter'},
- note:'Prototype. Les autocollants ne s’obtiennent qu’avec 2 minutes complètes de brossage. Produits, liens et conseils à valider par Babyton. Pas un avis médical.'}
+ note:'BuBu donne des conseils généraux, pas un avis médical. En cas de doute : demandez à votre dentiste ou médecin.'}
 };
 const t=(k,v)=>{let s=T[L][k];if(v)for(const x in v)s=s.replace('{'+x+'}',v[x]);return s};
 
 /* metingen */
 let evc=store.get('bt-ev',{});
 function track(name,props){evc[name]=(evc[name]||0)+1;store.set('bt-ev',evc);try{if(consent&&window.gtag)gtag('event',name,{lang:L,...props})}catch(e){}renderEv()}
-function renderEv(){$('evs').innerHTML=Object.keys(T[L].ev).map(k=>`<span>${T[L].ev[k]}</span><b>${evc[k]||0}</b>`).join('')}
+function renderEv(){if(!$('evs'))return;$('evs').innerHTML=Object.keys(T[L].ev).map(k=>`<span>${T[L].ev[k]}</span><b>${evc[k]||0}</b>`).join('')}
 document.addEventListener('click',e=>{const a=e.target.closest('a.shop');if(a)track('product_click',{product:a.dataset.p||''})});
 
 /* tabs */
@@ -622,7 +622,7 @@ const useYT=()=>!!ytOn[film];
 function drawFilm(force){
   if(useYT()){if(!force)return;const id=YT[film];
     $('film').innerHTML=tick&&id?`<iframe class="yt" src="https://www.youtube-nocookie.com/embed/videoseries?list=${encodeURIComponent(id)}&autoplay=1&rel=0&playsinline=1" title="YouTube" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>`
-      :`<div class="ytposter">${ytIcon.replace('width="16" height="16"','width="56" height="56"')}<b>${id?YTN[film]:t('ytMissing')}</b>${id?`<span style="font-size:15px">${t('ytPoster')}</span>`:''}<small>${t('ytNote')}</small></div>`;shownN=-1;return}
+      :`<div class="ytposter">${ytIcon.replace('width="16" height="16"','width="56" height="56"')}<b>${id?YTN[film]:t('ytMissing')}</b>${id?`<span style="font-size:15px">${t('ytPoster')}</span>`:''}</div>`;shownN=-1;return}
   const f=FILMS[film],done=TOTAL-left,n=f.count?(left<=0?10:Math.floor(done/6)%10+1):0;if(force||(f.count&&n!==shownN)){$('film').innerHTML=view(f,n);shownN=n}}
 $('moreFilms').addEventListener('click',()=>{showAll=!showAll;films()});
 $('films').addEventListener('click',e=>{const y=e.target.closest('.ytsw');if(y){const i=+y.dataset.y;ytOn[i]=!ytOn[i];store.set('bt-yt',ytOn);film=i;keepFilm();films();drawFilm(true);if(tick){stopMusic();startMusic()}return}const b=e.target.closest('.film');if(!b)return;film=+b.dataset.i;keepFilm();showAll=false;films();renderKids();drawFilm(true);if(tick){stopMusic();startMusic()}});
@@ -671,7 +671,7 @@ $('winOk').addEventListener('click',()=>{$('winm').hidden=true;left=TOTAL;zoneMs
 const dk=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 const today=new Date();today.setHours(0,0,0,0);
 function seedCal(demo){let c={demo:false,d:{}};if(!demo)return c;c={demo:true,d:{}};for(let i=1;i<today.getDate();i++){const k=dk(new Date(today.getFullYear(),today.getMonth(),i));c.d[k]=(i%7!==3?'o':'')+(i%5!==0&&i!==9?'a':'');if(!c.d[k])delete c.d[k]}return c}
-let cal=store.get('bt-cal',null);if(!cal)cal=seedCal(!KIDS.length||ACTIVE===KIDS[0].id);
+let cal=store.get('bt-cal',null);if(!cal||cal.demo)cal={demo:false,d:{}};
 const save=()=>store.set('bt-cal',cal);
 let vy=today.getFullYear(),vm=today.getMonth();
 function award(){
@@ -703,8 +703,7 @@ function renderCal(){
   const isNow=vy===today.getFullYear()&&vm===today.getMonth(),max=isNow?today.getDate()*2:days*2;
   $('stats').innerHTML=`<div class="stat"><b>${tot}</b><span>${t('of')} ${max}</span></div><div class="stat"><b>${full}</b><span>${t('fullDays')}</span></div><div class="stat"><b>${best}</b><span>${t('streak')}</span></div>`;
   $('next').disabled=isNow;
-  $('demo').innerHTML=cal.demo?`<span>${t('demo')}</span><button class="btn small" id="clr">${t('clear')}</button><button class="btn small" id="popdemo">${t('demoPop')}</button>`:'';if(cal.demo)$('popdemo').addEventListener('click',()=>openShare('month',vy,vm,true));
-  if(cal.demo)$('clr').addEventListener('click',()=>{cal={demo:false,d:{}};save();renderCal()});
+  $('demo').innerHTML='';
 }
 $('prev').addEventListener('click',()=>{vm--;if(vm<0){vm=11;vy--}renderCal()});
 $('next').addEventListener('click',()=>{vm++;if(vm>11){vm=0;vy++}renderCal()});
@@ -822,6 +821,7 @@ const SCENES=[
  ()=>`<rect width="300" height="200" fill="#d6e2f0"/><g style="animation:drift 7s ease-in-out infinite">${cloud(70,48,.9)}${cloud(225,38,.75)}</g>${[60,95,130].map((y,i)=>`<g style="animation:blow ${4+i}s linear ${i*1.3}s infinite"><path d="M0 ${y} q30 -10 60 0 q14 5 22 -4" stroke="#ffffff" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M0 ${y} q30 -10 60 0 q14 5 22 -4" stroke="${OLs}" stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".35"/></g>`).join('')}<g class="a" style="animation:drift 3s ease-in-out infinite">${[[40,150],[255,140]].map(([x,y])=>`<path d="M${x} ${y} l14 -40 l14 40z" fill="#5cbf6a" stroke="${OLs}" stroke-width="3" stroke-linejoin="round"/>`).join('')}</g><path d="M0 182 h300 v18 h-300z" fill="#eef4fb" stroke="${OLs}" stroke-width="3"/>`,
  ()=>`<rect width="300" height="200" fill="#a9b8c9"/>${Array.from({length:14},(_,i)=>`<g style="animation:fall ${1.2+(i%4)*.25}s linear ${(i*.23)%1.4}s infinite"><path d="M${12+i*21} 40 q-6 10 0 14 q6 -4 0 -14z" fill="#4fb3ff" stroke="${OLs}" stroke-width="2"/></g>`).join('')}<g style="animation:drift 8s ease-in-out infinite">${cloud(80,40,.95,'#e9eef4')}${cloud(220,34,.85,'#e9eef4')}</g><path d="M0 184 h300 v16 h-300z" fill="#7d8ea3"/><ellipse cx="70" cy="186" rx="34" ry="6" fill="#4fb3ff" stroke="${OLs}" stroke-width="2.5"/>`,
  ()=>`<rect width="300" height="200" fill="url(#gz)"/><defs><linearGradient id="gz" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fd0ff"/><stop offset="1" stop-color="#e6f7ff"/></linearGradient></defs>${sunG(245,48,24,UVv())}<g style="animation:wave 4s ease-in-out infinite"><path d="M-30 150 q25 -14 50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 v60 h-360z" fill="#2f8fe0" stroke="${OLs}" stroke-width="3"/></g><path d="M0 176 q150 -16 300 0 v24 h-300z" fill="#ffd98a" stroke="${OLs}" stroke-width="3"/><g transform="translate(40 150)"><path d="M0 26 l14 -40 l14 40" fill="none" stroke="${OLs}" stroke-width="3"/><path d="M-14 -14 q28 -26 56 0z" fill="#ff8a1f" stroke="${OLs}" stroke-width="3" stroke-linejoin="round"/></g>`];
+const HOME_ICON=`<svg viewBox="0 0 48 48"><path d="M8 24 L24 10 L40 24" fill="none" stroke="#1b2a4a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 22 V40 H36 V22" fill="#F9F4D1" stroke="#1b2a4a" stroke-width="2.5" stroke-linejoin="round"/><rect x="20" y="28" width="8" height="12" rx="1.5" fill="#f39c3a" stroke="#1b2a4a" stroke-width="2"/><circle cx="36" cy="11" r="5" fill="#f7e300" stroke="#1b2a4a" stroke-width="2"/></svg>`;
 const ICONS=[
  `<svg viewBox="0 0 48 48"><g stroke="#ffd400" stroke-width="4" stroke-linecap="round">${Array.from({length:8},(_,i)=>{const a=i*Math.PI/4;return `<line x1="${24+14*Math.cos(a)}" y1="${24+14*Math.sin(a)}" x2="${24+21*Math.cos(a)}" y2="${24+21*Math.sin(a)}"/>`}).join('')}</g><circle cx="24" cy="24" r="10" fill="#f7e300" stroke="#1b2a4a" stroke-width="2.5"/></svg>`,
  `<svg viewBox="0 0 48 48"><path d="M10 26 a7 7 0 0 1 2 -13 a10 10 0 0 1 19 -2 a8 8 0 0 1 9 11 a5 5 0 0 1 -2 4z" fill="#fff" stroke="#1b2a4a" stroke-width="2.5" stroke-linejoin="round"/><path d="M6 34 q14 -5 26 0 q6 3 10 -2 M10 42 q10 -4 20 0" stroke="#7fb8e8" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>`,
@@ -845,8 +845,8 @@ function renderLive(){
   let h;
   if(LOC&&WXD&&!wxFail)h=`<span>${t('wxNow',{p:LOC.name,t:WXD.temp,w:WXD.wind,u:WXD.uv})}</span><button class="linkb" id="wxOther">${t('wxOther')}</button>`;
   else if(LOC&&wxFail)h=`<span>${t('wxFail')}</span><button class="linkb" id="wxOther">${t('wxOther')}</button>`;
-  else h=`<button class="linkb" id="wxOther">${t('wxSet')}</button>`;
-  $('wxlive').innerHTML=h;$('wxOther').onclick=()=>{$('loccard').hidden=false;$('locErr').textContent='';$('locRes').innerHTML='';$('loccard').scrollIntoView({behavior:'smooth',block:'center'})};
+  else h='';
+  $('wxlive').innerHTML=h;$('wxlive').hidden=!h;if($('wxOther'))$('wxOther').onclick=()=>{$('loccard').hidden=false;$('locErr').textContent='';$('locRes').innerHTML='';$('loccard').scrollIntoView({behavior:'smooth',block:'center'})};
 }
 function setLoc(lat,lon,name){LOC={lat:Math.round(lat*100)/100,lon:Math.round(lon*100)/100,name};raw.set('bt-loc',LOC);$('loccard').hidden=true;wxManual=false;fetchWx(true)}
 $('locGeo').addEventListener('click',()=>{if(!navigator.geolocation){$('locErr').textContent=t('locDenied');return}
@@ -863,12 +863,13 @@ function renderSeason(){
   $('uvbar').innerHTML=Array.from({length:10},(_,i)=>`<span class="${i<u?'on':''}"></span>`).join('');
   $('uvtxt').textContent=WXD&&LOC&&!wxFail?t('uvToday',{c:s[1],u}):t('uvTxt',{c:s[1],u:S.uv});
   $('seasoncard').innerHTML=`<h3>${t('atBabyton',{s:s[0]})}</h3><p>${s[2]}</p><a class="shop" data-p="season" href="${SHOP.season}">${t('seeSeason')}</a>`;
-  $('wx').innerHTML=WX.map((w,i)=>`<button aria-pressed="${i===wx}" data-i="${i}">${ICONS[i]}<span>${w[L][0]}</span></button>`).join('');
+  const live=!!(LOC&&WXD&&!wxFail&&!wxManual);
+  $('wx').innerHTML=`<button aria-pressed="${live}" data-i="home">${HOME_ICON}<span>${t('wxHome')}</span></button>`+WX.map((w,i)=>`<button aria-pressed="${!live&&i===wx}" data-i="${i}">${ICONS[i]}<span>${w[L][0]}</span></button>`).join('');
   $('tiptitle').textContent=WX[wx][L][1];
   $('tips').innerHTML=WX[wx][L][2].map((x,i)=>`<div class="tip"><i>${i+1}</i><div>${x}</div></div>`).join('');
   renderLive();
 }
-$('wx').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;wx=+b.dataset.i;wxManual=true;store.set('bt-wx',wx);renderSeason()});
+$('wx').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.i==='home'){if(LOC){wxManual=false;fetchWx(false);applyLive()}else{$('loccard').hidden=false;$('locErr').textContent='';$('locRes').innerHTML='';$('loccard').scrollIntoView({behavior:'smooth',block:'center'})}return}wx=+b.dataset.i;wxManual=true;store.set('bt-wx',wx);renderSeason()});
 if(LOC&&WXD&&!wxManual)wx=sceneFor(WXD);
 fetchWx(false);
 
@@ -934,7 +935,7 @@ $('kids').addEventListener('click',e=>{if(e.target.id==='kidedit'){openKids();re
 function switchKid(id){
   if(tick){stop();left=TOTAL}
   ACTIVE=id;raw.set('bt-active',id);
-  cal=store.get('bt-cal',null);if(!cal)cal=seedCal(id===KIDS[0].id);
+  cal=store.get('bt-cal',null);if(!cal||cal.demo)cal={demo:false,d:{}};
   teeth=store.get('bt-teeth',{});spit=store.get('bt-spit',null);selT=null;lastPhase=null;
   film=pickFilm();
   vy=today.getFullYear();vm=today.getMonth();$('winm').hidden=true;zoneMsg=null;
@@ -985,6 +986,9 @@ function peek(){
 (function loop(){setTimeout(()=>{peek();loop()},14000+Math.random()*12000)})();
 setTimeout(peek,6000);
 
+/* mail via Brevo: vul het adres van de koppeling in; leeg = sectie verborgen */
+const MAIL_ENDPOINT='';
+if(MAIL_ENDPOINT)$('mailsec').hidden=false;
 /* cookies en privacy */
 const GA_ID='';/* vul hier het Google Analytics-ID in (G-XXXXXXX); leeg = nooit laden */
 let consent=raw.get('bt-consent',null);
