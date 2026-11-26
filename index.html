@@ -357,10 +357,83 @@ body.brushing .peek{display:none}
 .legend,.demo{text-align:center;justify-content:center}
 .calhead h3{text-align:left}
 .mailprev{text-align:left}
+
+/* startscherm */
+.start{position:fixed;inset:0;z-index:120;background:#0054A6;color:#fff;display:grid;place-items:center;align-content:center;gap:10px;padding:24px;text-align:center;overflow:hidden}
+.start[hidden],.who[hidden]{display:none}
+.st-logo{width:min(220px,58vw);height:auto;animation:stFade .6s ease-out both}
+.st-fly{height:150px;display:grid;place-items:center}
+.st-bubu{width:130px;height:auto;animation:stFly 1.6s cubic-bezier(.25,.8,.3,1) .3s both,stFlap .22s ease-in-out 1.9s 6 alternate}
+.st-word{width:min(280px,72vw);height:auto;overflow:visible}
+.st-word text{font:800 96px 'Nunito Sans',sans-serif;fill:#fff;fill-opacity:0;stroke:#fff;stroke-width:2.5;stroke-dasharray:520;stroke-dashoffset:520;animation:stWrite 1.4s ease-in-out 1.4s forwards,stFill .5s ease-out 2.6s forwards}
+.st-lang{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;opacity:0;animation:stFade .5s ease-out 2.9s forwards}
+.st-lang button{min-height:52px;min-width:140px;padding:0 22px;border-radius:44px 36px 46px 34px/40px 46px 34px 44px;border:2px solid #fff;background:#fff;color:#07356B;font:800 18px 'Nunito Sans',sans-serif;cursor:pointer;box-shadow:2px 3px 0 #002f63}
+.st-lang button:nth-child(2){background:transparent;color:#fff;transform:rotate(1.5deg)}
+.st-lang button:first-child{transform:rotate(-1.5deg)}
+@keyframes stFly{0%{transform:translate(-75vw,40px) rotate(-18deg)}55%{transform:translate(8vw,-30px) rotate(8deg)}80%{transform:translate(-3vw,6px) rotate(-4deg)}100%{transform:none}}
+@keyframes stFlap{from{transform:scaleY(1) translateY(0)}to{transform:scaleY(.9) translateY(-6px)}}
+@keyframes stWrite{to{stroke-dashoffset:0}}
+@keyframes stFill{to{fill-opacity:1;stroke-width:0}}
+@keyframes stFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.st-bubu,.st-word text,.st-lang,.st-logo{animation:none!important;opacity:1}.st-word text{fill-opacity:1;stroke-dashoffset:0}}
+/* wie poetst er */
+.who{position:fixed;inset:0;z-index:110;background:#fff;display:grid;align-content:center;justify-items:center;gap:18px;padding:24px;text-align:center;overflow:auto}
+.who-logo{height:48px;width:auto}
+.who h2{font:800 28px 'Nunito Sans',sans-serif;color:#07356B;margin:0}
+.who-list{display:grid;gap:14px;width:min(340px,100%)}
+.who-kid{display:flex;align-items:center;gap:14px;border:2px solid #07356B;background:#ECF5FE;border-radius:28px 20px 30px 18px/22px 30px 18px 28px;padding:10px 18px;min-height:78px;cursor:pointer;box-shadow:3px 4px 0 #07356B;color:#07356B;text-align:left}
+.who-kid:nth-child(2){background:#F9F4D1;transform:rotate(1.2deg)}.who-kid:nth-child(3){background:#F6DED6;transform:rotate(-1deg)}.who-kid:first-child{transform:rotate(-1.2deg)}
+.who-kid img{width:56px;height:56px;object-fit:contain}
+.who-kid b{display:block;font:800 22px 'Nunito Sans',sans-serif}
+.who-kid small{font-size:14px;color:rgba(7,53,107,.75)}
+#kidsm{z-index:130}
+/* kindbalk in de app */
+header{justify-content:center}
+.kidbar{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 14px;position:relative;z-index:1}
+.kidbar .kid{transform:rotate(-1.5deg)}
+.kidbar .other{min-height:44px;padding:0 16px;font-size:14px}
+/* poetsen: keuze smaller en gecentreerd */
+.filmrow{flex-direction:column;align-items:stretch;gap:8px;max-width:330px;margin:0 auto}
+.filmrow .film{transform:none!important}
+.ytsw{width:auto;display:flex;justify-content:center;gap:8px;min-height:44px;font-size:13px;padding:0 12px;border-radius:30px 22px 28px 24px}
+.ytsw svg{width:18px;height:18px}
+.filmrow .ytsw{display:flex!important;align-items:center;justify-content:center;height:auto!important;min-height:46px;flex:0 0 auto;width:100%;font-size:14px;color:var(--navy);border-color:var(--navy)}
+.films{grid-template-columns:1fr;gap:18px}
+#v-poetsen>section{margin-top:44px}
+#v-poetsen>section+section{margin-top:56px;margin-bottom:24px}
+/* stickerkalender met naam in kleur */
+.kidname{font-weight:800}
+/* weer van vandaag */
+.wxlive{display:grid!important;justify-items:center;gap:8px;background:#fff;padding:12px 14px 14px;text-align:center}
+.wxlive[hidden]{display:none!important}
+.wxin{font:400 15px 'Nunito Sans',sans-serif;color:rgba(7,53,107,.8)}
+.wxin b{display:block;font:800 22px 'Nunito Sans',sans-serif;color:#07356B}
+.wxfacts{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.wxfacts span{background:#F9F4D1;border:1.5px solid #07356B;border-radius:20px 14px 22px 12px;padding:4px 12px;font:700 15px 'Nunito Sans',sans-serif;color:#07356B}
+.wxfacts span:nth-child(2){background:#ECF5FE;transform:rotate(1deg)}.wxfacts span:nth-child(3){background:#F6DED6;transform:rotate(-1deg)}
+.wxlive .btn{min-height:40px;padding:0 16px;font-size:14px;margin-top:2px}
+#v-seizoen .stage.sun{gap:16px}
+.tips{gap:20px}
+#seasoncard{margin-top:44px!important}
+#v-seizoen section{margin-top:40px}
+/* tandjes: ademruimte */
+#v-tandjes>section{margin-top:44px}
 </style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="star" viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z" fill="currentColor"/></symbol></svg>
+<div class="start" id="start" role="dialog" aria-label="BuBu">
+  <img class="st-logo" src="img/logo.png" alt="Babyton Natural Care">
+  <div class="st-fly"><img class="st-bubu" src="img/m-rood.png" alt=""></div>
+  <svg class="st-word" viewBox="0 0 300 110" aria-label="BuBu"><text x="150" y="88" text-anchor="middle">BuBu</text></svg>
+  <div class="st-lang" id="stLang"><button data-l="nl">Nederlands</button><button data-l="fr">Français</button></div>
+</div>
+<div class="who" id="who" hidden role="dialog" aria-labelledby="whoT">
+  <img class="who-logo" src="img/logo.png" alt="Babyton Natural Care">
+  <h2 id="whoT"></h2>
+  <div class="who-list" id="whoList"></div>
+  <button class="btn ghost" id="whoEdit"></button>
+</div>
 <div class="wrap">
 <svg class="doodles" viewBox="0 0 400 150" preserveAspectRatio="none" aria-hidden="true">
  <path d="M372 8 q-8 14 4 22 q12 8 0 22 q-10 12 4 22" fill="none" stroke="#F6DED6" stroke-width="6" stroke-linecap="round"/>
@@ -370,9 +443,8 @@ body.brushing .peek{display:none}
 </svg>
 <header>
   <h1><img class="logo" src="img/logo.png" alt="Babyton Natural Care"><span class="appname play"><img src="img/m-rood.png" alt="">BuBu</span></h1>
-  <div class="lang" id="lang"><button data-l="nl">NL</button><button data-l="fr">FR</button></div>
 </header>
-<div class="kids" id="kids"></div>
+<div class="kidbar" id="kids"></div>
 <div class="tabs" role="tablist">
   <button role="tab" id="t-poetsen" data-i="tabBrush"></button>
   <button role="tab" id="t-stickers" data-i="tabStickers"></button>
@@ -432,7 +504,7 @@ body.brushing .peek{display:none}
 
 <div class="view" id="v-stickers" hidden>
   <section style="margin-top:8px">
-    <h2 data-i="calTitle"></h2>
+    <h2 id="calTitleH"></h2>
     <div class="calhead"><h3 id="mname"></h3><div class="nav"><button id="prev">&lsaquo;</button><button id="next">&rsaquo;</button></div></div>
     <div class="cal" id="cal"></div>
     <div class="stats" id="stats"></div>
@@ -541,7 +613,7 @@ wxHome:'Mijn weer',wxNow:'Vandaag in <b>{p}</b>: {t}°, wind {w} km/u, UV {u}',w
 <h4>Hosting</h4><p>De app staat bij GitHub Pages. Zoals elke website registreert de server technische gegevens zoals je IP-adres om de app veilig te laten werken.</p>
 <h4>Je rechten</h4><p>Je mag je gegevens inkijken, laten verbeteren of wissen, en je toestemming intrekken. Mail naar hello@babyton.be. Ben je niet tevreden, dan kun je klacht indienen bij de Gegevensbeschermingsautoriteit (gegevensbeschermingsautoriteit.be).</p>
 <p class="fine">Laatst bijgewerkt: november 2026</p>`,
- kmT:'Voor wie poetsen we?',kmI:'Kies per kindje een monstertje en de geboortemaand. BuBu zet dan meteen de juiste muziek of het juiste filmpje klaar.',kmAdd:'+ Nog een kindje',kmOk:'Klaar',kmRm:'Verwijderen',kmBorn:'Geboren in',kmP:'De naam en de geboortemaand blijven alleen op deze gsm.',kmName:'Naam of bijnaam',kidEdit:'Kinderen wijzigen',months:['jan','feb','maa','apr','mei','jun','jul','aug','sep','okt','nov','dec'],mo:'mnd',yr:'jaar',ageHint:'Voor {a} staat {f} klaar. Je kunt altijd iets anders kiezen.',
+ kmT:'Voor wie poetsen we?',kmI:'Kies per kindje een monstertje en de geboortemaand. BuBu zet dan meteen de juiste muziek of het juiste filmpje klaar.',kmAdd:'+ Nog een kindje',kmOk:'Klaar',kmRm:'Verwijderen',kmBorn:'Geboren in',kmP:'De naam en de geboortemaand blijven alleen op deze gsm.',kmName:'Naam of bijnaam',kidEdit:'Kinderen wijzigen',whoT:'Wie gaat er poetsen?',whoEdit:'Kindje toevoegen of wijzigen',otherKid:'Ander kind',calOf:'Stickerkalender van',shMonthT2:'De stickerkaart van {m}',shMonthM2:'{n} stickers verdiend. Knap gepoetst!',capMonth2:'Mijn stickerkaart van deze maand, bijgehouden met BuBu! @babytonbenelux #BuBu #babyton',imgMonth2:'Mijn stickerkaart',wxIn:'Vandaag in',wxWind:'wind {w} km/u',wxUv:'UV {u}',months:['jan','feb','maa','apr','mei','jun','jul','aug','sep','okt','nov','dec'],mo:'mnd',yr:'jaar',ageHint:'Voor {a} staat {f} klaar. Je kunt altijd iets anders kiezen.',
  shBtn:'Post dit op je Instagram',shMonthT:'Proficiat, een volle kaart!',shMonthM:'{m}: elke dag ochtend én avond gepoetst. Daar mag je trots op zijn!',shTeethT:'Alle 20 melktandjes zijn er!',shTeethM:'Een volledig melkgebit. Deel dit mooie moment.',capMonth:'Volle stickerkaart gehaald met BuBu! @babytonbenelux #BuBu #babyton',capTeeth:'Alle 20 melktandjes! Bijgehouden met BuBu. @babytonbenelux #BuBu #babyton',shCopied:'De tekst met @babytonbenelux is gekopieerd: plak hem in je bericht. Tag ons ook op de foto.',shFallback:'Delen lukt niet vanaf hier. Houd de afbeelding ingedrukt om ze te bewaren en plaats ze op Instagram. Vergeet @babytonbenelux niet!',imgMonth:'Volle stickerkaart!',imgTeeth:'20 melktandjes!',demoPop:'Bekijk de pop-up (demo)',
  ev:{tooth_checked:'Tandje aangevinkt',share_open:'Volle kaart pop-up',share_click:'Klik Instagram',advice_viewed:'Fase-advies bekeken',product_click:'Klik naar product',mail_sent:'Mail verstuurd',newsletter_optin:'Inschrijving nieuwsbrief'},
  note:'BuBu geeft algemene tips, geen medisch advies. Bij twijfel: vraag het je tandarts of huisarts.'},
@@ -581,7 +653,7 @@ wxHome:'Ma météo',wxNow:'Aujourd’hui à <b>{p}</b> : {t}°, vent {w} km/h, U
 <h4>Hébergement</h4><p>L’app est hébergée par GitHub Pages. Comme pour tout site web, le serveur enregistre des données techniques comme votre adresse IP pour fonctionner en toute sécurité.</p>
 <h4>Vos droits</h4><p>Vous pouvez consulter, corriger ou supprimer vos données et retirer votre consentement. Écrivez à hello@babyton.be. En cas d’insatisfaction, vous pouvez porter plainte auprès de l’Autorité de protection des données (autoriteprotectiondonnees.be).</p>
 <p class="fine">Dernière mise à jour : novembre 2026</p>`,
- kmT:'Pour qui brosse-t-on ?',kmI:'Choisissez un petit monstre et le mois de naissance pour chaque enfant. BuBu prépare directement la bonne musique ou la bonne animation.',kmAdd:'+ Un autre enfant',kmOk:'C’est parti',kmRm:'Supprimer',kmBorn:'Né(e) en',kmP:'Le prénom et le mois de naissance restent uniquement sur ce téléphone.',kmName:'Prénom ou surnom',kidEdit:'Modifier les enfants',months:['jan','fév','mar','avr','mai','juin','juil','août','sep','oct','nov','déc'],mo:'mois',yr:'ans',ageHint:'Pour {a}, {f} est prêt. Vous pouvez toujours choisir autre chose.',
+ kmT:'Pour qui brosse-t-on ?',kmI:'Choisissez un petit monstre et le mois de naissance pour chaque enfant. BuBu prépare directement la bonne musique ou la bonne animation.',kmAdd:'+ Un autre enfant',kmOk:'C’est parti',kmRm:'Supprimer',kmBorn:'Né(e) en',kmP:'Le prénom et le mois de naissance restent uniquement sur ce téléphone.',kmName:'Prénom ou surnom',kidEdit:'Modifier les enfants',whoT:'Qui va se brosser les dents ?',whoEdit:'Ajouter ou modifier un enfant',otherKid:'Autre enfant',calOf:'Calendrier de',shMonthT2:'La carte d’autocollants de {m}',shMonthM2:'{n} autocollants gagnés. Bravo pour le brossage !',capMonth2:'Ma carte d’autocollants du mois, suivie avec BuBu ! @babytonbenelux #BuBu #babyton',imgMonth2:'Ma carte d’autocollants',wxIn:'Aujourd’hui à',wxWind:'vent {w} km/h',wxUv:'UV {u}',months:['jan','fév','mar','avr','mai','juin','juil','août','sep','oct','nov','déc'],mo:'mois',yr:'ans',ageHint:'Pour {a}, {f} est prêt. Vous pouvez toujours choisir autre chose.',
  shBtn:'Publier sur ton Instagram',shMonthT:'Bravo, une carte complète !',shMonthM:'{m} : chaque jour brossé matin et soir. Il y a de quoi être fier !',shTeethT:'Les 20 dents de lait sont là !',shTeethM:'Toutes les dents de lait. Partagez ce beau moment.',capMonth:'Carte d’autocollants complète avec BuBu ! @babytonbenelux #BuBu #babyton',capTeeth:'Les 20 dents de lait ! Suivies avec BuBu. @babytonbenelux #BuBu #babyton',shCopied:'Le texte avec @babytonbenelux est copié : collez-le dans votre publication. Identifiez-nous aussi sur la photo.',shFallback:'Le partage ne fonctionne pas d’ici. Appuyez longuement sur l’image pour l’enregistrer et publiez-la sur Instagram. N’oubliez pas @babytonbenelux !',imgMonth:'Carte complète !',imgTeeth:'20 dents de lait !',demoPop:'Voir la pop-up (démo)',
  ev:{tooth_checked:'Dent cochée',share_open:'Pop-up carte complète',share_click:'Clic Instagram',advice_viewed:'Conseil d’étape vu',product_click:'Clic vers produit',mail_sent:'E-mail envoyé',newsletter_optin:'Inscription newsletter'},
  note:'BuBu donne des conseils généraux, pas un avis médical. En cas de doute : demandez à votre dentiste ou médecin.'}
@@ -669,17 +741,24 @@ $('films').addEventListener('click',e=>{const y=e.target.closest('.ytsw');if(y){
 let ac=null,sched=null,nextT=0,idx=0;
 const mf=m=>440*2**((m-69)/12);
 function tone(f,tm,d,type,vol){const o=ac.createOscillator(),g=ac.createGain();o.type=type;o.frequency.value=f;g.gain.setValueAtTime(0,tm);g.gain.linearRampToValueAtTime(vol,tm+.03);g.gain.exponentialRampToValueAtTime(.001,tm+d);o.connect(g);g.connect(ac.destination);o.start(tm);o.stop(tm+d+.05)}
-function initAudio(){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();ac.resume();return true}catch(e){return false}}
+let unlocked=false;
+function initAudio(){try{
+  try{if(navigator.audioSession)navigator.audioSession.type='playback'}catch(e){}
+  ac=ac||new (window.AudioContext||window.webkitAudioContext)();ac.resume();
+  if(!unlocked){unlocked=true;const b=ac.createBuffer(1,1,22050),src=ac.createBufferSource();src.buffer=b;src.connect(ac.destination);src.start(0);
+    /* iPhone: een stil audio-element zet het geluid op 'afspelen', ook als de stille modus aanstaat */
+    try{const a=new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=');a.loop=true;a.volume=0.01;a.setAttribute('playsinline','');a.play().catch(()=>{});window._bubuKeep=a}catch(e){}}
+  return true}catch(e){return false}}
 function startMusic(){const tune=FILMS[film].music;if(!tune||sched||useYT()||!initAudio())return;nextT=ac.currentTime+.1;
-  sched=setInterval(()=>{const tn=FILMS[film].music;if(!tn)return;const bt=60/tn.bpm;while(nextT<ac.currentTime+.3){const [m,b]=tn.n[idx%tn.n.length];note2(tn.inst,m,nextT,b*bt);if(tn.inst==='mallet'&&beatAcc%2===0)tone(mf(48+(Math.floor(beatAcc/8)%2?7:0)),nextT,.5,'sine',.07);if(tn.inst==='box'&&beatAcc%4===0)tone(mf(m-24),nextT,bt*3.6,'sine',.05);beatAcc+=b;nextT+=b*bt;idx++}},100)}
+  sched=setInterval(()=>{const tn=FILMS[film].music;if(!tn)return;const bt=60/tn.bpm;while(nextT<ac.currentTime+.3){const [m,b]=tn.n[idx%tn.n.length];note2(tn.inst,m,nextT,b*bt);if(tn.inst==='mallet'&&beatAcc%2===0)tone(mf(48+(Math.floor(beatAcc/8)%2?7:0)),nextT,.5,'sine',.14);if(tn.inst==='box'&&beatAcc%4===0)tone(mf(m-24),nextT,bt*3.6,'sine',.1);beatAcc+=b;nextT+=b*bt;idx++}},100)}
 /* muziekdoos: zachte belklank die uitsterft; xylofoon: korte houten tik */
 let beatAcc=0;
 function note2(inst,m,tm,d){
-  if(inst==='box'){tone(mf(m),tm,1.6,'sine',.14);tone(mf(m+12),tm,.6,'sine',.035);tone(mf(m+19),tm,.25,'sine',.015)}
-  else{tone(mf(m),tm,.35,'triangle',.16);tone(mf(m+12),tm,.12,'sine',.05)}
+  if(inst==='box'){tone(mf(m),tm,1.6,'sine',.32);tone(mf(m+12),tm,.6,'sine',.08);tone(mf(m+19),tm,.25,'sine',.03)}
+  else{tone(mf(m),tm,.35,'triangle',.34);tone(mf(m+12),tm,.12,'sine',.1)}
 }
 function stopMusic(){clearInterval(sched);sched=null}
-function chime(final){if(!ac)return;const tm=ac.currentTime;(final?[72,76,79,84,88]:[88,91]).forEach((m,i)=>{tone(mf(m),tm+i*.14,1.2,'sine',.11);tone(mf(m+12),tm+i*.14,.4,'sine',.03)})}
+function chime(final){if(!ac)return;const tm=ac.currentTime;(final?[72,76,79,84,88]:[88,91]).forEach((m,i)=>{tone(mf(m),tm+i*.14,1.2,'sine',.22);tone(mf(m+12),tm+i*.14,.4,'sine',.06)})}
 
 /* timer */
 const TOTAL=120;let left=TOTAL,tick=null,zoneMsg=null;
@@ -717,7 +796,7 @@ function award(){
   const mo=monOf(today);$('winimg').src='img/m-'+mo.f+'.png';$('winimg').alt=mo.n;$('winq').textContent=mo[L];$('winm').hidden=false;
   if(cur.includes(slot)){zoneMsg=t('had',{s:nm});$('wintxt').textContent=t('got',{n:mo.n});$('winsub').textContent=zoneMsg;return}
   cal.d[k]=cur+slot;save();vy=today.getFullYear();vm=today.getMonth();renderCal();
-  const mk=k.slice(0,7);cal.shared=cal.shared||{};if(monthFull(today.getFullYear(),today.getMonth())&&!cal.shared[mk]){cal.shared[mk]=1;save();setTimeout(()=>openShare('month',today.getFullYear(),today.getMonth()),1800)}
+  const mk=k.slice(0,7);cal.shared=cal.shared||{};const last=new Date(today.getFullYear(),today.getMonth()+1,0).getDate()===today.getDate();if(last&&slot==='a'&&!cal.shared[mk]){cal.shared[mk]=1;save();setTimeout(()=>openShare('month',today.getFullYear(),today.getMonth()),1800)}
   zoneMsg=t('done',{s:L==='nl'?(slot==='o'?t('Morning'):t('Evening')):nm});$('wintxt').textContent=t('got',{n:mo.n});$('winsub').textContent=zoneMsg;
 }
 const MONS=[
@@ -730,7 +809,9 @@ const MONS=[
 const monOf=d=>MONS[Math.floor((d-new Date(d.getFullYear(),0,0))/864e5)%6];
 const monFor=d=>monOf(d).f;
 const st=on=>`<svg class="${on?'on':'off'}"><use href="#star"/></svg>`;
+const MCOL={rood:'#d6283b',blauw:'#1E5FAB',geel:'#c98f00',groen:'#3f9a3c',oranje:'#e06a10',roze:'#c42f86'};
 function renderCal(){
+  {const k=kidById(ACTIVE);$('calTitleH').innerHTML=k&&k.n?`${t('calOf')} <span class="kidname" style="color:${MCOL[k.m]}">${esc(k.n)}</span>`:t('calTitle')}
   const first=new Date(vy,vm,1),days=new Date(vy,vm+1,0).getDate(),pad=(first.getDay()+6)%7;
   $('mname').textContent=first.toLocaleDateString(t('locale'),{month:'long',year:'numeric'});
   let h=t('days').map(d=>`<div class="dn">${d}</div>`).join('')+'<div class="day pad"></div>'.repeat(pad);
@@ -882,8 +963,8 @@ async function fetchWx(force){
 function applyLive(){if(!wxManual&&WXD)wx=sceneFor(WXD);renderSeason()}
 function renderLive(){
   let h;
-  if(LOC&&WXD&&!wxFail)h=`<span>${t('wxNow',{p:LOC.name,t:WXD.temp,w:WXD.wind,u:WXD.uv})}</span><button class="linkb" id="wxOther">${t('wxOther')}</button>`;
-  else if(LOC&&wxFail)h=`<span>${t('wxFail')}</span><button class="linkb" id="wxOther">${t('wxOther')}</button>`;
+  if(LOC&&WXD&&!wxFail)h=`<div class="wxin">${t('wxIn')}<b>${esc(LOC.name)}</b></div><div class="wxfacts"><span>${WXD.temp}°</span><span>${t('wxWind',{w:WXD.wind})}</span><span>${t('wxUv',{u:WXD.uv})}</span></div><button class="btn small" id="wxOther">${t('wxOther')}</button>`;
+  else if(LOC&&wxFail)h=`<div class="wxin">${t('wxFail')}</div><button class="btn small" id="wxOther">${t('wxOther')}</button>`;
   else h='';
   $('wxlive').innerHTML=h;$('wxlive').hidden=!h;if($('wxOther'))$('wxOther').onclick=()=>{$('loccard').hidden=false;$('locErr').textContent='';$('locRes').innerHTML='';$('loccard').scrollIntoView({behavior:'smooth',block:'center'})};
 }
@@ -912,12 +993,19 @@ $('wx').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)re
 if(LOC&&WXD&&!wxManual)wx=sceneFor(WXD);
 fetchWx(false);
 
+/* maandkaart: altijd op het einde van de maand, vol of niet */
+function monthCount(y,m){let n=0;const d=new Date(y,m+1,0).getDate();for(let i=1;i<=d;i++){const v=cal.d[dk(new Date(y,m,i))]||'';n+=v.includes('o')+v.includes('a')}return n}
+function checkMonthCard(){
+  if(!KIDS.length||!$('share').hidden)return;
+  const p=new Date(today.getFullYear(),today.getMonth()-1,1),pk=dk(p).slice(0,7);cal.shared=cal.shared||{};
+  if(!cal.shared[pk]&&monthCount(p.getFullYear(),p.getMonth())>0){cal.shared[pk]=1;save();openShare('month',p.getFullYear(),p.getMonth())}
+}
 /* volle kaart: pop-up + Instagram-beeld */
 function monthFull(y,m){const n=new Date(y,m+1,0).getDate();for(let i=1;i<=n;i++){const v=cal.d[dk(new Date(y,m,i))]||'';if(!(v.includes('o')&&v.includes('a')))return false}return true}
 const li=src=>new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.onerror=()=>r(null);i.src=src});
 function rr(x,X,Y,W,H,R){x.beginPath();x.moveTo(X+R,Y);x.arcTo(X+W,Y,X+W,Y+H,R);x.arcTo(X+W,Y+H,X,Y+H,R);x.arcTo(X,Y+H,X,Y,R);x.arcTo(X,Y,X+W,Y,R);x.closePath()}
 function fitImg(x,im,X,Y,W,H){if(!im)return;const s=Math.min(W/im.width,H/im.height),w=im.width*s,h=im.height*s;x.drawImage(im,X+(W-w)/2,Y+(H-h)/2,w,h)}
-let shareCanvas=null,shareKind='month';
+let shareCanvas=null,shareKind='month',shareFull=true;
 async function buildCard(kind,y,m,demo){
   try{await document.fonts.ready}catch(e){}
   const c=document.createElement('canvas');c.width=1080;c.height=1350;const x=c.getContext('2d');
@@ -925,7 +1013,7 @@ async function buildCard(kind,y,m,demo){
   const [logo,...mons]=await Promise.all(['img/logo.png',...MONS.map(o=>'img/m-'+o.f+'.png')].map(li));
   fitImg(x,logo,60,56,360,128);
   x.fillStyle='#07356B';x.font='800 60px "Nunito Sans", sans-serif';x.textAlign='right';x.fillText('BuBu',1020,148);fitImg(x,mons[0],720,62,110,110);
-  x.textAlign='center';x.fillStyle='#07356B';x.font='800 76px "Nunito Sans", sans-serif';x.fillText(kind==='month'?t('imgMonth'):t('imgTeeth'),540,320);
+  x.textAlign='center';x.fillStyle='#07356B';x.font='800 76px "Nunito Sans", sans-serif';x.fillText(kind==='month'?(monthFull(y,m)?t('imgMonth'):t('imgMonth2')):t('imgTeeth'),540,320);
   if(kind==='month'){
     const first=new Date(y,m,1),n=new Date(y,m+1,0).getDate(),pad=(first.getDay()+6)%7;
     x.font='700 44px "Nunito Sans", sans-serif';x.fillStyle='#1E5FAB';x.fillText(first.toLocaleDateString(t('locale'),{month:'long',year:'numeric'}),540,392);
@@ -944,9 +1032,10 @@ async function buildCard(kind,y,m,demo){
 }
 async function openShare(kind,y,m,demo){
   shareKind=kind;shareCanvas=await buildCard(kind,y,m,demo);
-  $('shTitle').textContent=kind==='month'?t('shMonthT'):t('shTeethT');
+  const full=kind==='month'&&!demo&&monthFull(y,m);shareFull=full||kind!=='month';
+  $('shTitle').textContent=kind==='month'?(full?t('shMonthT'):t('shMonthT2',{m:new Date(y,m,1).toLocaleDateString(t('locale'),{month:'long'})})):t('shTeethT');
   const mn=kind==='month'?new Date(y,m,1).toLocaleDateString(t('locale'),{month:'long'}):'';
-  $('shMsg').textContent=kind==='month'?t('shMonthM',{m:mn.charAt(0).toUpperCase()+mn.slice(1)}):t('shTeethM');
+  $('shMsg').textContent=kind==='month'?(full?t('shMonthM',{m:mn.charAt(0).toUpperCase()+mn.slice(1)}):t('shMonthM2',{n:monthCount(y,m)})):t('shTeethM');
   $('shImg').src=shareCanvas.toDataURL('image/png');$('shImg').alt=$('shTitle').textContent;$('shNote').textContent='';
   $('share').hidden=false;$('shx').focus();track('share_open',{kind});
 }
@@ -955,7 +1044,7 @@ $('share').addEventListener('click',e=>{if(e.target.id==='share')$('share').hidd
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('share').hidden=true;$('privm').hidden=true}});
 $('shIg').addEventListener('click',async()=>{
   track('share_click',{kind:shareKind});
-  const cap=shareKind==='month'?t('capMonth'):t('capTeeth');let copied=false;
+  const cap=shareKind==='month'?(shareFull?t('capMonth'):t('capMonth2')):t('capTeeth');let copied=false;
   try{await navigator.clipboard.writeText(cap);copied=true}catch(e){}
   try{const blob=await new Promise(r=>shareCanvas.toBlob(r,'image/png'));const file=new File([blob],'bubu-babyton.png',{type:'image/png'});
     if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],text:cap});$('shNote').textContent=copied?t('shCopied'):'';return}}catch(e){}
@@ -968,11 +1057,27 @@ const kidById=id=>KIDS.find(k=>k.id===id);
 const esc=x=>String(x||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const kidLabel=k=>k.n?esc(k.n):ageTxt(k);
 function renderKids(){
-  if(!KIDS.length){$('kids').innerHTML='';return}
-  $('kids').innerHTML=KIDS.map(k=>`<button class="kid" data-k="${k.id}" aria-pressed="${k.id===ACTIVE}"><img src="img/m-${k.m}.png" alt=""><span class="kn">${kidLabel(k)}</span>${k.n?`<small>${ageTxt(k)}</small>`:''}</button>`).join('')+`<button class="kidedit" id="kidedit" aria-label="${t('kidEdit')}" title="${t('kidEdit')}"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 20l4-1 11-11-3-3L5 16z" fill="#F9F4D1" stroke="#07356B" stroke-width="2" stroke-linejoin="round"/><path d="M14 6l3 3" stroke="#07356B" stroke-width="2"/></svg></button>`;
-  const k=kidById(ACTIVE);$('agehint').textContent=k?t('ageHint',{a:k.n?`${k.n} (${ageTxt(k)})`:ageTxt(k),f:FILMS[film][L][0]}):'';
+  const k=kidById(ACTIVE);
+  $('kids').innerHTML=k?`<span class="kid" aria-current="true"><img src="img/m-${k.m}.png" alt=""><span class="kn">${kidLabel(k)}</span>${k.n?`<small>${ageTxt(k)}</small>`:''}</span><button class="btn small other" id="otherKid">${t('otherKid')}</button>`:'';
+  if($('otherKid'))$('otherKid').onclick=openWho;
+  $('agehint').textContent='';
 }
-$('kids').addEventListener('click',e=>{if(e.target.id==='kidedit'){openKids();return}const b=e.target.closest('.kid');if(!b||b.dataset.k===ACTIVE)return;switchKid(b.dataset.k)});
+/* start → taal → wie poetst → app */
+function openWho(){
+  if(tick){stop();exitFull()}
+  $('whoT').textContent=t('whoT');$('whoEdit').textContent=t('whoEdit');
+  $('whoList').innerHTML=KIDS.map(k=>`<button class="who-kid" data-k="${k.id}"><img src="img/m-${k.m}.png" alt=""><span><b>${k.n?esc(k.n):ageTxt(k)}</b>${k.n?`<small>${ageTxt(k)}</small>`:''}</span></button>`).join('');
+  $('who').hidden=false;
+}
+function enterApp(){
+  $('who').hidden=true;$('start').hidden=true;window.scrollTo(0,0);
+  if(raw.get('bt-consent',null)===null)setTimeout(()=>{$('cbar').hidden=false},700);
+  setTimeout(checkMonthCard,900);
+}
+$('whoList').addEventListener('click',e=>{const b=e.target.closest('.who-kid');if(!b)return;switchKid(b.dataset.k);enterApp()});
+$('whoEdit').addEventListener('click',openKids);
+$('stLang').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;L=b.dataset.l;raw.set('bt-lang',L);applyLang();$('start').hidden=true;
+  if(!KIDS.length){openWho();openKids()}else openWho()});
 function switchKid(id){
   if(tick){stop();left=TOTAL}
   ACTIVE=id;raw.set('bt-active',id);
@@ -1003,8 +1108,8 @@ $('kmOk').addEventListener('click',()=>{
   const firstTime=!KIDS.length;
   /* leeftijd gewijzigd: oude filmkeuze laten vallen zodat de nieuwe leeftijd telt */
   KIDS=draft;raw.set('bt-kids',KIDS);$('kidsm').hidden=true;
-  if(raw.get('bt-consent',null)===null)setTimeout(()=>{$('cbar').hidden=false},600);
   switchKid(kidById(ACTIVE)?ACTIVE:KIDS[0].id);
+  if(firstTime)enterApp();else openWho();
 });
 
 /* piepende schaduwmonstertjes */
@@ -1012,7 +1117,7 @@ const EYES={rood:[[43.9,42.9,6.5,11.7],[56,42.7,6.5,11.7]],blauw:[[40.2,37.2,9.3
 const AR={rood:300/244,blauw:232/300,geel:295/300,groen:300/252,oranje:239/300,roze:237/300};
 let peekBusy=false;
 function peek(){
-  if(peekBusy||document.hidden||!$('share').hidden||!$('kidsm').hidden||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  if(peekBusy||document.hidden||!$('share').hidden||!$('kidsm').hidden||!$('start').hidden||!$('who').hidden||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   peekBusy=true;
   const m=MONS[Math.floor(Math.random()*MONS.length)].f,side=Math.random()<.5?'left':'right',top=Math.round(innerHeight*(.32+Math.random()*.45));
   const src=`img/m-${m}.png`,mask=EYES[m].map(([x,y,rx,ry])=>`radial-gradient(ellipse ${rx*1.15}% ${ry*1.15}% at ${x}% ${y}%,#000 92%,transparent 100%)`).join(',');
@@ -1043,22 +1148,21 @@ function openPriv(){$('privT').textContent=t('privT');$('privBody').innerHTML=t(
 $('privBtn').addEventListener('click',openPriv);$('cMore').addEventListener('click',openPriv);
 $('privX').addEventListener('click',()=>{$('privm').hidden=true});
 $('privm').addEventListener('click',e=>{if(e.target.id==='privm')$('privm').hidden=true});
-if(consent===null&&KIDS.length)$('cbar').hidden=false;else if(consent)loadGA();
+if(consent)loadGA();
 
 /* taal */
 let renderKidsSoon=false;
 function applyLang(){
   document.documentElement.lang=L;
   document.querySelectorAll('[data-i]').forEach(el=>{const k=el.dataset.i;if(T[L][k]!==undefined&&typeof T[L][k]==='string')el.textContent=T[L][k]});
-  $('lang').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===L));
+  document.querySelectorAll('#stLang button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===L));
   $('prev').setAttribute('aria-label',L==='nl'?'Vorige maand':'Mois précédent');$('next').setAttribute('aria-label',L==='nl'?'Volgende maand':'Mois suivant');
   films();renderCal();renderSeason();renderKids();renderSpit();renderTeeth();renderEv();drawFilm(true);paint();
 }
-$('lang').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;L=b.dataset.l;store.set('bt-lang',L);$('mailprev').innerHTML='';applyLang()});
 
 applyLang();
 const h=location.hash.slice(1);show(TABS.includes(h)?h:'poetsen');
-if(!KIDS.length)openKids();
+/* elke start: animatie en taalkeuze */
 if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(()=>{});
 }
 </script>
