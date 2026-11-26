@@ -4,6 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>BuBu</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="img/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="BuBu">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Nunito+Sans:opsz,wght@6..12,400;6..12,700;6..12,800&display=swap" rel="stylesheet">
 <style>
@@ -286,6 +292,16 @@ section h2{transform:rotate(-1deg)}
 .priv p,.priv li{font-size:14px;margin:0 0 6px}
 .priv ul{padding-left:18px;margin:0 0 6px}
 .priv .ph{background:#F9F4D1;border-radius:6px;padding:0 4px}
+
+.wxlive{width:100%;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px;font-size:14px;background:#fff;border-radius:16px 12px 18px 10px;padding:8px 12px;color:#07356B}
+.wxlive b{font-weight:700}
+.wxlive .linkb{font-size:14px}
+.loc{display:grid;gap:10px;margin-top:16px}
+.loc[hidden]{display:none}
+.locform{display:flex;gap:8px}
+.locform input{flex:1;font:16px 'Nunito Sans',sans-serif;min-height:46px;border-radius:14px;border:2px solid var(--line);background:var(--bg);color:var(--ink);padding:0 12px}
+.locres{display:grid;gap:6px}
+.locres button{text-align:left;border:2px solid var(--line);background:var(--bg);color:var(--ink);border-radius:14px;min-height:44px;padding:6px 12px;font:400 15px 'Nunito Sans',sans-serif;cursor:pointer}
 </style>
 </head>
 <body>
@@ -369,12 +385,20 @@ section h2{transform:rotate(-1deg)}
 <div class="view or" id="v-seizoen" hidden>
   <div class="stage sun">
     <div class="scene" id="scene"><div id="sky"></div><img class="hero" src="img/hero.png" alt="Hero"></div>
+    <div class="wxlive" id="wxlive"></div>
     <div class="wxb" id="wx" role="group"></div>
     <div class="big" id="season"></div>
     <div class="uvbar" id="uvbar" aria-hidden="true"></div>
     <div class="zone" id="uvtxt" style="font-size:16px;text-align:center"></div>
   </div>
   <svg class="drip" viewBox="0 0 300 26" preserveAspectRatio="none" aria-hidden="true"><g fill="#EBBD05" transform="scale(-1,1) translate(-300,0)"><path d="M30 0 h14 v10 q0 8 -7 8 q-7 0 -7 -8z"/><path d="M62 0 h8 v18 q0 6 -4 6 q-4 0 -4 -6z"/><path d="M210 0 h10 v7 q0 6 -5 6 q-5 0 -5 -6z"/><path d="M262 0 h6 v14 q0 4 -3 4 q-3 0 -3 -4z"/></g></svg>
+  <div class="card loc" id="loccard" hidden>
+    <h3 data-i="locT"></h3>
+    <div><button class="btn" id="locGeo" data-i="locGeo"></button></div>
+    <p class="fine" data-i="locOr"></p>
+    <form id="locForm" class="locform"><input type="search" id="locQ" autocomplete="address-level2" aria-label="Gemeente"><button class="btn small" data-i="locSearch"></button></form>
+    <div id="locRes" class="locres"></div><p class="err" id="locErr"></p>
+  </div>
   <section><h2 id="tiptitle"></h2><div class="tips" id="tips"></div><div class="card" id="seasoncard" style="margin-top:14px"></div></section>
 </div>
 
@@ -437,7 +461,8 @@ nl:{tabBrush:'Poetsen',tabTeeth:'Tandjes',tabSeason:'Weer',restart:'Opnieuw',sta
  mailLabel:'Je e-mailadres',newsOpt:'Ja, ik wil ook de Babyton-nieuwsbrief ontvangen (niet verplicht)',mailBtn:'Stuur mijn tandjeskaart',
  privacy:'We bewaren geen naam of andere gegevens van je kindje. De tandjeskaart staat alleen op deze gsm.',badMail:'Vul een geldig e-mailadres in.',noTeeth:'Vink eerst minstens één tandje aan.',
  subj:'Jouw tandjeskaart van Babyton',prevHead:'Voorbeeld van de mail',protoSend:'Prototype: er wordt nog niets verstuurd. In de live versie gaan deze gegevens naar Brevo:',
- wxQ:'Hoe is het weer vandaag?',seeSeason:'Bekijk seizoensbescherming',atBabyton:'{s} bij Babyton',uvTxt:'{c} · typische UV-index rond {u} in België',
+wxNow:'Vandaag in <b>{p}</b>: {t}°, wind {w} km/u, UV {u}',wxSet:'Toon het echte weer van vandaag',wxOther:'Andere plaats',wxFail:'Het weer van vandaag kon niet geladen worden.',locT:'Waar ben je?',locGeo:'Gebruik mijn locatie',locOr:'Of zoek je gemeente:',locSearch:'Zoek',locHere:'jouw buurt',locNone:'Geen gemeente gevonden.',locDenied:'Je locatie is niet beschikbaar. Zoek je gemeente.',uvToday:'{c} · UV-index vandaag {u}',
+  wxQ:'Hoe is het weer vandaag?',seeSeason:'Bekijk seizoensbescherming',atBabyton:'{s} bij Babyton',uvTxt:'{c} · typische UV-index rond {u} in België',
  evTitle:'Metingen (prototype)',evNote:'In de live versie gaan deze events naar je analysetool. Evaluatie na 2 à 3 maanden.',
  privLink:'Privacy',cookieLink:'Cookie-instellingen',cText:'BuBu gebruikt enkel analytische cookies om de app te verbeteren, en alleen als jij dat goed vindt.',cYes:'Akkoord',cNo:'Liever niet',privT:'Privacy bij BuBu',
  privHTML:`<p>BuBu is een app van Babyton Benelux. We houden het eenvoudig: zo weinig mogelijk gegevens, en wat over je kindje gaat, blijft op je gsm.</p>
@@ -476,7 +501,8 @@ fr:{tabBrush:'Brossage',tabTeeth:'Dents',tabSeason:'Météo',restart:'Recommence
  mailLabel:'Votre adresse e-mail',newsOpt:'Oui, je souhaite aussi recevoir la newsletter Babyton (facultatif)',mailBtn:'Envoyer ma carte des dents',
  privacy:'Nous ne conservons ni le nom ni d’autres données de votre enfant. La carte des dents reste uniquement sur ce téléphone.',badMail:'Indiquez une adresse e-mail valide.',noTeeth:'Cochez d’abord au moins une dent.',
  subj:'Votre carte des dents Babyton',prevHead:'Aperçu de l’e-mail',protoSend:'Prototype : rien n’est encore envoyé. Dans la version en ligne, ces données vont vers Brevo :',
- wxQ:'Quel temps fait-il aujourd’hui ?',seeSeason:'Voir la protection saisonnière',atBabyton:'{s} chez Babyton',uvTxt:'{c} · indice UV typique autour de {u} en Belgique',
+wxNow:'Aujourd’hui à <b>{p}</b> : {t}°, vent {w} km/h, UV {u}',wxSet:'Afficher la vraie météo du jour',wxOther:'Autre lieu',wxFail:'La météo du jour n’a pas pu être chargée.',locT:'Où êtes-vous ?',locGeo:'Utiliser ma position',locOr:'Ou cherchez votre commune :',locSearch:'Chercher',locHere:'votre quartier',locNone:'Aucune commune trouvée.',locDenied:'Votre position n’est pas disponible. Cherchez votre commune.',uvToday:'{c} · indice UV aujourd’hui {u}',
+  wxQ:'Quel temps fait-il aujourd’hui ?',seeSeason:'Voir la protection saisonnière',atBabyton:'{s} chez Babyton',uvTxt:'{c} · indice UV typique autour de {u} en Belgique',
  evTitle:'Mesures (prototype)',evNote:'Dans la version en ligne, ces événements vont vers votre outil d’analyse. Évaluation après 2 à 3 mois.',
  privLink:'Confidentialité',cookieLink:'Paramètres des cookies',cText:'BuBu utilise uniquement des cookies analytiques pour améliorer l’app, et seulement si vous êtes d’accord.',cYes:'D’accord',cNo:'Non merci',privT:'Confidentialité chez BuBu',
  privHTML:`<p>BuBu est une app de Babyton Benelux. Nous faisons simple : le moins de données possible, et ce qui concerne votre enfant reste sur votre téléphone.</p>
@@ -759,26 +785,59 @@ const OLs='#1b2a4a';
 const sunG=(x,y,r,uv)=>`<g class="a" style="animation:spin 30s linear infinite">${Array.from({length:12},(_,i)=>{const a=i*Math.PI/6,r1=r+8,r2=r+14+uv*1.5;return `<line x1="${x+r1*Math.cos(a)}" y1="${y+r1*Math.sin(a)}" x2="${x+r2*Math.cos(a)}" y2="${y+r2*Math.sin(a)}" stroke="#ffd400" stroke-width="7" stroke-linecap="round"/>`}).join('')}</g><circle cx="${x}" cy="${y}" r="${r}" fill="#f7e300" stroke="${OLs}" stroke-width="4"/><path d="M${x-r*.6} ${y-r*.35} a${r*.7} ${r*.7} 0 0 1 ${r*.7} -${r*.4}" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" opacity=".7"/><circle cx="${x-r*.35}" cy="${y-2}" r="3.5" fill="${OLs}"/><circle cx="${x+r*.35}" cy="${y-2}" r="3.5" fill="${OLs}"/><path d="M${x-r*.35} ${y+r*.3} q${r*.35} ${r*.3} ${r*.7} 0" stroke="${OLs}" stroke-width="3.5" fill="none" stroke-linecap="round"/>`;
 const cloud=(x,y,s,c)=>`<g transform="translate(${x} ${y}) scale(${s})"><path d="M-40 18 a20 20 0 0 1 4 -38 a28 28 0 0 1 52 -6 a22 22 0 0 1 26 30 a14 14 0 0 1 -6 14z" fill="${c||'#fff'}" stroke="${OLs}" stroke-width="${4/s}" stroke-linejoin="round"/></g>`;
 const SCENES=[
- ()=>`<rect width="300" height="200" fill="url(#gs)"/><defs><linearGradient id="gs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fd3ff"/><stop offset="1" stop-color="#fff2c4"/></linearGradient></defs>${sunG(62,52,28,S.uv)}<g style="animation:drift 9s ease-in-out infinite">${cloud(235,45,.7)}</g><path d="M0 178 q75 -18 150 0 t150 0 v22 h-300z" fill="#9be08a" stroke="${OLs}" stroke-width="3"/>`,
+ ()=>`<rect width="300" height="200" fill="url(#gs)"/><defs><linearGradient id="gs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fd3ff"/><stop offset="1" stop-color="#fff2c4"/></linearGradient></defs>${sunG(62,52,28,UVv())}<g style="animation:drift 9s ease-in-out infinite">${cloud(235,45,.7)}</g><path d="M0 178 q75 -18 150 0 t150 0 v22 h-300z" fill="#9be08a" stroke="${OLs}" stroke-width="3"/>`,
  ()=>`<rect width="300" height="200" fill="#d6e2f0"/><g style="animation:drift 7s ease-in-out infinite">${cloud(70,48,.9)}${cloud(225,38,.75)}</g>${[60,95,130].map((y,i)=>`<g style="animation:blow ${4+i}s linear ${i*1.3}s infinite"><path d="M0 ${y} q30 -10 60 0 q14 5 22 -4" stroke="#ffffff" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M0 ${y} q30 -10 60 0 q14 5 22 -4" stroke="${OLs}" stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".35"/></g>`).join('')}<g class="a" style="animation:drift 3s ease-in-out infinite">${[[40,150],[255,140]].map(([x,y])=>`<path d="M${x} ${y} l14 -40 l14 40z" fill="#5cbf6a" stroke="${OLs}" stroke-width="3" stroke-linejoin="round"/>`).join('')}</g><path d="M0 182 h300 v18 h-300z" fill="#eef4fb" stroke="${OLs}" stroke-width="3"/>`,
  ()=>`<rect width="300" height="200" fill="#a9b8c9"/>${Array.from({length:14},(_,i)=>`<g style="animation:fall ${1.2+(i%4)*.25}s linear ${(i*.23)%1.4}s infinite"><path d="M${12+i*21} 40 q-6 10 0 14 q6 -4 0 -14z" fill="#4fb3ff" stroke="${OLs}" stroke-width="2"/></g>`).join('')}<g style="animation:drift 8s ease-in-out infinite">${cloud(80,40,.95,'#e9eef4')}${cloud(220,34,.85,'#e9eef4')}</g><path d="M0 184 h300 v16 h-300z" fill="#7d8ea3"/><ellipse cx="70" cy="186" rx="34" ry="6" fill="#4fb3ff" stroke="${OLs}" stroke-width="2.5"/>`,
- ()=>`<rect width="300" height="200" fill="url(#gz)"/><defs><linearGradient id="gz" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fd0ff"/><stop offset="1" stop-color="#e6f7ff"/></linearGradient></defs>${sunG(245,48,24,S.uv)}<g style="animation:wave 4s ease-in-out infinite"><path d="M-30 150 q25 -14 50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 v60 h-360z" fill="#2f8fe0" stroke="${OLs}" stroke-width="3"/></g><path d="M0 176 q150 -16 300 0 v24 h-300z" fill="#ffd98a" stroke="${OLs}" stroke-width="3"/><g transform="translate(40 150)"><path d="M0 26 l14 -40 l14 40" fill="none" stroke="${OLs}" stroke-width="3"/><path d="M-14 -14 q28 -26 56 0z" fill="#ff8a1f" stroke="${OLs}" stroke-width="3" stroke-linejoin="round"/></g>`];
+ ()=>`<rect width="300" height="200" fill="url(#gz)"/><defs><linearGradient id="gz" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fd0ff"/><stop offset="1" stop-color="#e6f7ff"/></linearGradient></defs>${sunG(245,48,24,UVv())}<g style="animation:wave 4s ease-in-out infinite"><path d="M-30 150 q25 -14 50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 v60 h-360z" fill="#2f8fe0" stroke="${OLs}" stroke-width="3"/></g><path d="M0 176 q150 -16 300 0 v24 h-300z" fill="#ffd98a" stroke="${OLs}" stroke-width="3"/><g transform="translate(40 150)"><path d="M0 26 l14 -40 l14 40" fill="none" stroke="${OLs}" stroke-width="3"/><path d="M-14 -14 q28 -26 56 0z" fill="#ff8a1f" stroke="${OLs}" stroke-width="3" stroke-linejoin="round"/></g>`];
 const ICONS=[
  `<svg viewBox="0 0 48 48"><g stroke="#ffd400" stroke-width="4" stroke-linecap="round">${Array.from({length:8},(_,i)=>{const a=i*Math.PI/4;return `<line x1="${24+14*Math.cos(a)}" y1="${24+14*Math.sin(a)}" x2="${24+21*Math.cos(a)}" y2="${24+21*Math.sin(a)}"/>`}).join('')}</g><circle cx="24" cy="24" r="10" fill="#f7e300" stroke="#1b2a4a" stroke-width="2.5"/></svg>`,
  `<svg viewBox="0 0 48 48"><path d="M10 26 a7 7 0 0 1 2 -13 a10 10 0 0 1 19 -2 a8 8 0 0 1 9 11 a5 5 0 0 1 -2 4z" fill="#fff" stroke="#1b2a4a" stroke-width="2.5" stroke-linejoin="round"/><path d="M6 34 q14 -5 26 0 q6 3 10 -2 M10 42 q10 -4 20 0" stroke="#7fb8e8" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>`,
  `<svg viewBox="0 0 48 48"><path d="M10 24 a7 7 0 0 1 2 -13 a10 10 0 0 1 19 -2 a8 8 0 0 1 9 11 a5 5 0 0 1 -2 4z" fill="#e9eef4" stroke="#1b2a4a" stroke-width="2.5" stroke-linejoin="round"/>${[14,24,34].map(x=>`<path d="M${x} 31 q-3 6 0 8 q3 -2 0 -8z" fill="#4fb3ff" stroke="#1b2a4a" stroke-width="1.5"/>`).join('')}</svg>`,
  `<svg viewBox="0 0 48 48"><circle cx="34" cy="14" r="7" fill="#f7e300" stroke="#1b2a4a" stroke-width="2.5"/><path d="M2 30 q6 -6 12 0 t12 0 t12 0 t12 0 v16 h-48z" fill="#2f8fe0" stroke="#1b2a4a" stroke-width="2.5"/></svg>`];
+/* live weer via Open-Meteo: locatie of gemeente blijft op het toestel, positie afgerond */
+let LOC=raw.get('bt-loc',null),WXD=raw.get('bt-wxd',null),wxManual=false,wxFail=false;
+const UVv=()=>WXD?Math.max(0,Math.min(10,WXD.uv)):S.uv;
+function sceneFor(d){const c=d.code;if((c>=51&&c<=67)||(c>=80&&c<=82)||c>=95)return 2;if((c>=71&&c<=77)||d.temp<10||d.wind>=30)return 1;if(c<=2)return 0;return d.temp>=15?0:1}
+async function fetchWx(force){
+  if(!LOC)return;
+  if(!force&&WXD&&Date.now()-WXD.t<30*60e3&&WXD.lat===LOC.lat&&WXD.lon===LOC.lon){applyLive();return}
+  try{const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${LOC.lat}&longitude=${LOC.lon}&current=temperature_2m,weather_code,wind_speed_10m&daily=uv_index_max&timezone=auto&forecast_days=1`);
+    if(!r.ok)throw 0;const j=await r.json();
+    WXD={t:Date.now(),lat:LOC.lat,lon:LOC.lon,temp:Math.round(j.current.temperature_2m),code:j.current.weather_code,wind:Math.round(j.current.wind_speed_10m),uv:Math.round(j.daily.uv_index_max[0]||0)};
+    raw.set('bt-wxd',WXD);wxFail=false;applyLive();
+  }catch(e){wxFail=true;renderLive()}
+}
+function applyLive(){if(!wxManual&&WXD)wx=sceneFor(WXD);renderSeason()}
+function renderLive(){
+  let h;
+  if(LOC&&WXD&&!wxFail)h=`<span>${t('wxNow',{p:LOC.name,t:WXD.temp,w:WXD.wind,u:WXD.uv})}</span><button class="linkb" id="wxOther">${t('wxOther')}</button>`;
+  else if(LOC&&wxFail)h=`<span>${t('wxFail')}</span><button class="linkb" id="wxOther">${t('wxOther')}</button>`;
+  else h=`<button class="linkb" id="wxOther">${t('wxSet')}</button>`;
+  $('wxlive').innerHTML=h;$('wxOther').onclick=()=>{$('loccard').hidden=false;$('locErr').textContent='';$('locRes').innerHTML='';$('loccard').scrollIntoView({behavior:'smooth',block:'center'})};
+}
+function setLoc(lat,lon,name){LOC={lat:Math.round(lat*100)/100,lon:Math.round(lon*100)/100,name};raw.set('bt-loc',LOC);$('loccard').hidden=true;wxManual=false;fetchWx(true)}
+$('locGeo').addEventListener('click',()=>{if(!navigator.geolocation){$('locErr').textContent=t('locDenied');return}
+  navigator.geolocation.getCurrentPosition(p=>setLoc(p.coords.latitude,p.coords.longitude,t('locHere')),()=>{$('locErr').textContent=t('locDenied')},{maximumAge:36e5,timeout:10000})});
+$('locForm').addEventListener('submit',async e=>{e.preventDefault();const q=$('locQ').value.trim();if(q.length<2)return;$('locErr').textContent='';
+  try{const r=await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=6&language=${L}&format=json`);const j=await r.json();const res=(j.results||[]);
+    if(!res.length){$('locRes').innerHTML='';$('locErr').textContent=t('locNone');return}
+    $('locRes').innerHTML=res.map((o,i)=>`<button data-k="${i}">${o.name}${o.admin1?', '+o.admin1:''}${o.country_code?' ('+o.country_code+')':''}</button>`).join('');
+    $('locRes').onclick=ev=>{const b=ev.target.closest('button');if(!b)return;const o=res[+b.dataset.k];setLoc(o.latitude,o.longitude,o.name)};
+  }catch(err){$('locErr').textContent=t('wxFail')}});
 function renderSeason(){
-  const s=S[L];$('season').textContent=s[0];
+  const s=S[L],u=UVv();$('season').textContent=s[0];
   $('sky').innerHTML=`<svg viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${SCENES[wx]()}</svg>`;
-  $('uvbar').innerHTML=Array.from({length:10},(_,i)=>`<span class="${i<S.uv?'on':''}"></span>`).join('');
-  $('uvtxt').textContent=t('uvTxt',{c:s[1],u:S.uv});
+  $('uvbar').innerHTML=Array.from({length:10},(_,i)=>`<span class="${i<u?'on':''}"></span>`).join('');
+  $('uvtxt').textContent=WXD&&LOC&&!wxFail?t('uvToday',{c:s[1],u}):t('uvTxt',{c:s[1],u:S.uv});
   $('seasoncard').innerHTML=`<h3>${t('atBabyton',{s:s[0]})}</h3><p>${s[2]}</p><a class="shop" data-p="season" href="${SHOP.season}">${t('seeSeason')}</a>`;
   $('wx').innerHTML=WX.map((w,i)=>`<button aria-pressed="${i===wx}" data-i="${i}">${ICONS[i]}<span>${w[L][0]}</span></button>`).join('');
   $('tiptitle').textContent=WX[wx][L][1];
   $('tips').innerHTML=WX[wx][L][2].map((x,i)=>`<div class="tip"><i>${i+1}</i><div>${x}</div></div>`).join('');
+  renderLive();
 }
-$('wx').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;wx=+b.dataset.i;store.set('bt-wx',wx);renderSeason()});
+$('wx').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;wx=+b.dataset.i;wxManual=true;store.set('bt-wx',wx);renderSeason()});
+if(LOC&&WXD&&!wxManual)wx=sceneFor(WXD);
+fetchWx(false);
 
 /* volle kaart: pop-up + Instagram-beeld */
 function monthFull(y,m){const n=new Date(y,m+1,0).getDate();for(let i=1;i<=n;i++){const v=cal.d[dk(new Date(y,m,i))]||'';if(!(v.includes('o')&&v.includes('a')))return false}return true}
@@ -919,6 +978,7 @@ $('lang').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)
 applyLang();
 const h=location.hash.slice(1);show(TABS.includes(h)?h:'poetsen');
 if(!KIDS.length)openKids();
+if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(()=>{});
 }
 </script>
 </body>
