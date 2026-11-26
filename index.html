@@ -53,7 +53,8 @@ header h1{display:flex;align-items:center;gap:10px;font-size:22px}
 .kmdate{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .kmdate select{font:16px 'Nunito Sans',sans-serif;min-height:44px;border-radius:14px;border:2px solid var(--line);background:var(--bg);color:var(--ink);padding:0 10px}
 .kmrm{margin-left:auto;border:0;background:none;color:var(--mut);text-decoration:underline;min-height:44px;cursor:pointer;font:400 14px 'Nunito Sans',sans-serif}
-.more{margin-top:8px;font-size:15px}
+.more{display:inline-flex;align-items:center;gap:6px;margin-top:12px;background:#ECF5FE!important;transform:rotate(-1.5deg)}
+.more::before{content:'';width:26px;height:26px;background:url(img/m-geel.png) center/contain no-repeat}
 .agehint{font-size:14px;color:var(--mut);margin:0 0 10px}
 .tabs{display:flex;background:var(--grey);border-radius:41px;padding:4px;margin-bottom:16px;gap:4px}
 .tabs button{flex:1;padding:0 4px!important;border:2px solid transparent;background:none;font:400 16px 'Nunito Sans',sans-serif;color:var(--mut);min-height:44px;padding:0 10px;border-radius:41px;cursor:pointer}
@@ -189,7 +190,7 @@ details.meten summary{cursor:pointer;font:700 15px 'Nunito Sans',sans-serif;colo
 .uvbar span{flex:1;height:14px;border-radius:7px;background:rgba(7,53,107,.10)}
 .uvbar span.on{background:#EBBD05}
 .big{font:400 clamp(32px,9vw,46px) 'Fredericka the Great','Nunito Sans',sans-serif;text-align:center;color:#07356B}
-.note{font-size:13px;color:var(--mut);margin-top:26px}
+.note{font-size:13px;color:var(--mut);margin:30px auto 0;text-align:center;max-width:420px;text-wrap:balance}
 .a{transform-box:fill-box;transform-origin:center}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-10px) rotate(2deg)}}
@@ -285,7 +286,7 @@ section h2{transform:rotate(-1deg)}
 @keyframes blink{50%{transform:scaleY(.1)}}
 @media(prefers-reduced-motion:reduce){.peek{display:none}}
 
-.foot{font-size:13px;color:var(--mut);margin-top:10px}
+.foot{font-size:13px;color:var(--mut);margin-top:6px;text-align:center}
 .linkb{border:0;background:none;padding:0;min-height:36px;color:var(--navy);text-decoration:underline;font:400 13px 'Nunito Sans',sans-serif;cursor:pointer}
 .cbar{position:fixed;left:12px;right:12px;bottom:12px;z-index:60;max-width:520px;margin:0 auto;background:var(--bg);color:var(--ink);border:2px solid #07356B;border-radius:22px 16px 24px 14px;box-shadow:3px 4px 0 #07356B;padding:12px 14px;display:grid;gap:8px}
 .cbar[hidden]{display:none}
@@ -353,7 +354,7 @@ body.brushing .peek{display:none}
     </div>
   </div>
   <svg class="drip" viewBox="0 0 300 26" preserveAspectRatio="none" aria-hidden="true"><g fill="#9cc4ef"><path d="M30 0 h14 v10 q0 8 -7 8 q-7 0 -7 -8z"/><path d="M62 0 h8 v18 q0 6 -4 6 q-4 0 -4 -6z"/><path d="M210 0 h10 v7 q0 6 -5 6 q-5 0 -5 -6z"/><path d="M262 0 h6 v14 q0 4 -3 4 q-3 0 -3 -4z"/></g></svg>
-  <section><h2 data-i="chooseFilm"></h2><p class="agehint" id="agehint"></p><div class="films" id="films"></div><button class="linkb more" id="moreFilms"></button></section>
+  <section><h2 data-i="chooseFilm"></h2><p class="agehint" id="agehint"></p><div class="films" id="films"></div><button class="btn small more" id="moreFilms"></button></section>
   <section>
     <h2 data-i="pasteTitle"></h2>
     <div class="card" style="display:grid;gap:8px"><p style="margin:0" data-i="pasteRef"></p><div><button class="btn solid" id="toTeeth" data-i="toTeeth"></button></div></div>
