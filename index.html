@@ -495,7 +495,7 @@ header{margin-bottom:22px}
 /* ruime kalender en gecentreerde poetsknoppen */
 .cal .day{height:var(--dh,auto)}
 .cal[style*="--dh"] .day{aspect-ratio:auto}
-#v-poetsen>section.pick{justify-content:center!important;padding-top:0!important;padding-bottom:20px}
+#v-poetsen>section.pick{justify-content:center!important;padding-top:0!important;padding-bottom:100px;box-sizing:border-box}
 
 /* 3 poetsknoppen even groot */
 .filmrow .film,.filmrow .ytsw,#moreFilms{height:80px!important;min-height:80px!important;box-sizing:border-box}
@@ -513,6 +513,13 @@ header .logo{height:52px;width:auto}
 body{padding-bottom:84px}
 body.brushing .bubudock{display:none}
 @media(prefers-reduced-motion:reduce){.bubudock img{animation:none}}
+
+/* tekst op de poetsknoppen centraal */
+.filmrow .film{justify-content:center;text-align:center!important}
+.filmrow .film>span:last-child{flex:1;text-align:center}
+.filmrow .film b,.filmrow .film small{text-align:center}
+.ytl{text-align:center!important;justify-items:center}
+#moreFilms{justify-content:center;text-align:center}
 </style>
 </head>
 <body>
@@ -767,13 +774,13 @@ const TABS=['poetsen','stickers','seizoen','tandjes'];
 function show(n){TABS.forEach(x=>{$('t-'+x).setAttribute('aria-selected',x===n);$('v-'+x).hidden=x!==n});try{history.replaceState(null,'','#'+n)}catch(e){}if(n==='tandjes'){renderAdvice();requestAnimationFrame(spitBelowFold)}requestAnimationFrame(fitFirst)}
 /* eerste scherm vullen: poetsknoppen in het midden, kalender ruim, rest pas na scrollen */
 function fitFirst(){
-  const H=window.innerHeight-78,top=el=>el.getBoundingClientRect().top+window.scrollY;
-  if(!$('v-poetsen').hidden){const p=document.querySelector('#v-poetsen>section.pick');if(p){p.style.minHeight='';p.style.minHeight=Math.max(300,H-top(p)-8)+'px'}}
+  const FH=window.innerHeight,H=FH-78,top=el=>el.getBoundingClientRect().top+window.scrollY;
+  if(!$('v-poetsen').hidden){const p=document.querySelector('#v-poetsen>section.pick');if(p){p.style.minHeight='';p.style.minHeight=Math.max(300,FH-top(p)+20)+'px'}}
   if(!$('v-stickers').hidden){const c=$('cal');c.style.removeProperty('--dh');
     const days=c.querySelectorAll('.day'),rows=Math.ceil(days.length/7),dn=c.querySelector('.dn'),dnh=dn?dn.offsetHeight:20;
     const avail=H-top(c)-14-dnh-5*rows,w=days[0]?days[0].offsetWidth:48;
     const dh=Math.min(Math.max(w*1.08,avail/rows),w*1.9);c.style.setProperty('--dh',Math.floor(dh)+'px');
-    const st=$('stats');st.style.marginTop='';const gap=H-(top(st)-window.scrollY+window.scrollY);st.style.marginTop=Math.max(12,Math.round(H-top(st)+30))+'px'}
+    const st=$('stats');st.style.marginTop='';const gap=H-(top(st)-window.scrollY+window.scrollY);st.style.marginTop=Math.max(12,Math.round(FH-top(st)+30))+'px'}
 }
 window.addEventListener('resize',()=>requestAnimationFrame(fitFirst));
 /* tandjes: spuwvraag pas zichtbaar na scrollen */
