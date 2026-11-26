@@ -45,9 +45,10 @@ header h1{display:flex;align-items:center;gap:10px;font-size:22px}
 .kidedit{border:0;background:none;color:var(--mut);text-decoration:underline;font:400 14px 'Nunito Sans',sans-serif;min-height:44px;cursor:pointer}
 .kmlist{display:grid;gap:12px}
 .kmrow{border:2px solid var(--line);border-radius:20px;padding:12px;display:grid;gap:10px}
-.kmav{display:flex;gap:4px;flex-wrap:wrap}
-.kmav button{width:48px;height:48px;border-radius:14px;border:2px solid transparent;background:var(--grey);padding:3px;cursor:pointer}
-.kmav button[aria-pressed=true]{border-color:var(--navy);background:var(--lblue)}
+.kmav{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;padding:4px 2px}
+.kmav button{aspect-ratio:1;width:100%;border-radius:16px 12px 18px 10px;border:2px solid transparent;background:var(--grey);padding:4px;cursor:pointer;transition:transform .15s}
+.kmav button:nth-child(odd){transform:rotate(-4deg)}.kmav button:nth-child(even){transform:rotate(3deg)}
+.kmav button[aria-pressed=true]{border-color:var(--navy);background:var(--lblue);box-shadow:2px 3px 0 #07356B;transform:scale(1.14) rotate(-2deg);z-index:1}
 .kmav img{width:100%;height:100%;object-fit:contain}
 .kmdate{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .kmdate select{font:16px 'Nunito Sans',sans-serif;min-height:44px;border-radius:14px;border:2px solid var(--line);background:var(--bg);color:var(--ink);padding:0 10px}
@@ -922,7 +923,7 @@ const YEARS=(()=>{const y=new Date().getFullYear();return Array.from({length:8},
 function openKids(){draft=KIDS.length?KIDS.map(k=>({...k})):[newKid()];renderKm();$('kidsm').hidden=false}
 function newKid(){const used=draft.map(d=>d.m),free=MONS.map(m=>m.f).find(f=>!used.includes(f))||'rood',n=new Date();return {id:'k'+Date.now().toString(36)+Math.floor(Math.random()*99),m:free,y:n.getFullYear()-1,mo:n.getMonth()}}
 function renderKm(){
-  $('kmT').textContent=t('kmT');$('kmI').textContent=t('kmI');$('kmAdd').textContent=t('kmAdd');$('kmOk').textContent=t('kmOk');$('kmP').textContent=t('kmP');
+  $('kmT').textContent=t('kmT');$('kmI').textContent='';$('kmI').hidden=true;$('kmAdd').textContent=t('kmAdd');$('kmOk').textContent=t('kmOk');$('kmP').textContent=t('kmP');
   $('kmAdd').hidden=draft.length>=3;
   $('kmList').innerHTML=draft.map((k,i)=>`<div class="kmrow" data-r="${i}">
     <div class="kmav" role="group">${MONS.map(m=>`<button data-av="${m.f}" aria-pressed="${k.m===m.f}" aria-label="${m.n}"><img src="img/m-${m.f}.png" alt=""></button>`).join('')}</div>
@@ -936,6 +937,7 @@ $('kmOk').addEventListener('click',()=>{
   const firstTime=!KIDS.length;
   /* leeftijd gewijzigd: oude filmkeuze laten vallen zodat de nieuwe leeftijd telt */
   KIDS=draft;raw.set('bt-kids',KIDS);$('kidsm').hidden=true;
+  if(raw.get('bt-consent',null)===null)setTimeout(()=>{$('cbar').hidden=false},600);
   switchKid(kidById(ACTIVE)?ACTIVE:KIDS[0].id);
 });
 
@@ -972,7 +974,7 @@ function openPriv(){$('privT').textContent=t('privT');$('privBody').innerHTML=t(
 $('privBtn').addEventListener('click',openPriv);$('cMore').addEventListener('click',openPriv);
 $('privX').addEventListener('click',()=>{$('privm').hidden=true});
 $('privm').addEventListener('click',e=>{if(e.target.id==='privm')$('privm').hidden=true});
-if(consent===null)$('cbar').hidden=false;else if(consent)loadGA();
+if(consent===null&&KIDS.length)$('cbar').hidden=false;else if(consent)loadGA();
 
 /* taal */
 let renderKidsSoon=false;
