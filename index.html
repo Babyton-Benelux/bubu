@@ -437,6 +437,22 @@ header{margin-bottom:22px}
 /* weerbericht centraal */
 .wxlive,.wxlive>*{text-align:center;justify-self:center}
 #uvtxt{display:block;width:100%;text-align:center!important;text-wrap:balance;margin:0 auto}
+
+/* poetsen: 3 dikke knoppen in dezelfde stijl, tandpasta pas na scrollen */
+#v-poetsen>section.pick{min-height:calc(100svh - 230px);display:flex;flex-direction:column;justify-content:flex-start;padding-top:18px;align-items:center;gap:0;margin-top:0}
+#v-poetsen>section.pick h2{margin:0 0 16px}
+#v-poetsen>section.pick .films{width:100%}
+.filmrow{gap:16px!important;max-width:320px}
+.filmrow .film,.filmrow .ytsw,#moreFilms{border:3px solid #07356B!important;box-shadow:3px 5px 0 #07356B!important;border-radius:44px 36px 46px 34px/40px 46px 34px 44px!important;color:#07356B}
+.filmrow .film{background:#F9F4D1!important;padding:10px 18px 10px 10px;min-height:76px;transform:rotate(-1deg)!important}
+.filmrow .film b{font-size:19px;font-weight:800}
+.filmrow .film small{color:rgba(7,53,107,.75)}
+.filmrow .film .sw{width:56px;height:56px;border-radius:50%}
+.filmrow .ytsw{background:#F6DED6!important;min-height:58px!important;font:800 17px 'Nunito Sans',sans-serif!important;transform:rotate(.8deg)}
+.filmrow .ytsw svg{width:24px;height:24px}
+.filmrow .film:active,.filmrow .ytsw:active,#moreFilms:active{transform:translate(2px,3px)!important;box-shadow:0 0 0 #07356B!important}
+#moreFilms{min-height:58px;padding:0 24px;font:800 17px 'Nunito Sans',sans-serif;margin-top:20px;width:min(320px,100%);justify-content:center}
+#v-poetsen>section+section{margin-top:40px!important}
 </style>
 </head>
 <body>
@@ -483,7 +499,7 @@ header{margin-bottom:22px}
     </div>
   </div>
   <svg class="drip" viewBox="0 0 300 26" preserveAspectRatio="none" aria-hidden="true"><g fill="#9cc4ef"><path d="M30 0 h14 v10 q0 8 -7 8 q-7 0 -7 -8z"/><path d="M62 0 h8 v18 q0 6 -4 6 q-4 0 -4 -6z"/><path d="M210 0 h10 v7 q0 6 -5 6 q-5 0 -5 -6z"/><path d="M262 0 h6 v14 q0 4 -3 4 q-3 0 -3 -4z"/></g></svg>
-  <section class="pick"><p class="agehint" id="agehint" hidden></p><div class="films" id="films"></div><button class="btn small more" id="moreFilms"></button></section>
+  <section class="pick"><h2 data-i="timerT"></h2><p class="agehint" id="agehint" hidden></p><div class="films" id="films"></div><button class="btn small more" id="moreFilms"></button></section>
   <section>
     <h2 data-i="pasteTitle"></h2>
     <div class="card" style="display:grid;gap:8px"><p style="margin:0;text-align:center;text-wrap:balance" data-i="pasteRef"></p><div><button class="btn solid" id="toTeeth" data-i="toTeeth"></button></div></div>
@@ -602,7 +618,7 @@ nl:{tabBrush:'Poetsen',tabStickers:'Stickers',tabTeeth:'Tandjes',tabSeason:'Weer
  winOk:'Super!',chooseFilm:'Kies muziek of een filmpje',moreFilmsT:'Iets anders kiezen',fewerFilms:'Toon alleen mijn keuze',ytOn:'YouTube aan',ytOff:'YouTube',ytPoster:'YouTube start samen met de timer',ytMissing:'Nog geen YouTube-kanaal gekozen voor deze leeftijd',ytNote:'In deze preview kan YouTube niet spelen. In de live versie op je eigen domein wel.',calTitle:'Stickerkalender',got:'Je hebt {n} verdiend!',calLegend:'Kleurrijk monster: ochtend én avond gepoetst. Bleek monster: één keer gepoetst.',days:['ma','di','wo','do','vr','za','zo'],locale:'nl-BE',
  of:'stickers van',fullDays:'volle dagen (2×)',streak:'langste reeks dagen',demo:'Voorbeeldstickers voor de demo. Echte stickers komen alleen na 2 minuten poetsen.',clear:'Demo wissen',
  done:'Super! {s}sticker verdiend.',had:'Goed gepoetst! De {s}sticker had je vandaag al.',morning:'ochtend',evening:'avond',Morning:'Ochtend',Evening:'Avond',
- pasteTitle:'Welke tandpasta past?',pasteRef:'Dat hangt af van de tandjes die er al zijn en of je kindje al kan spuwen. Vul de tandjeskaart in, dan krijg je het juiste advies.',toTeeth:'Naar de tandjeskaart',seeOral:'Bekijk mondverzorging',
+ pasteTitle:'Welke tandpasta past?',timerT:'Poetstimer',pasteRef:'Dat hangt af van de tandjes die er al zijn en of je kindje al kan spuwen. Vul de tandjeskaart in, dan krijg je het juiste advies.',toTeeth:'Naar de tandjeskaart',seeOral:'Bekijk mondverzorging',
  musicOnly:'Alleen muziek',mirror:'Leg de gsm weg en kijk samen in de spiegel',words:['een','twee','drie','vier','vijf','zes','zeven','acht','negen','tien'],
  viewHint:'Zoals jij in het mondje kijkt',sideRight:'← rechts van je kindje',sideLeft:'links van je kindje →',upper:'Boven',lower:'Onder',of20:'van 20 tandjes',
  tnames:['centrale snijtand','laterale snijtand','hoektand','eerste kies','tweede kies'],sideR:'rechts',sideL:'links',jawU:'boven',jawL:'onder',
@@ -642,7 +658,7 @@ fr:{tabBrush:'Brossage',tabStickers:'Stickers',tabTeeth:'Dents',tabSeason:'Mét�
  winOk:'Super !',chooseFilm:'Choisissez une musique ou une animation',moreFilmsT:'Choisir autre chose',fewerFilms:'Afficher seulement mon choix',ytOn:'YouTube activé',ytOff:'YouTube',ytPoster:'YouTube démarre avec le minuteur',ytMissing:'Pas encore de chaîne YouTube choisie pour cet âge',ytNote:'Dans cet aperçu, YouTube ne peut pas être lu. Dans la version en ligne, oui.',calTitle:'Calendrier d’autocollants',got:'Tu as gagné {n} !',calLegend:'Monstre en couleur : brossage matin et soir. Monstre pâle : un seul brossage.',days:['lu','ma','me','je','ve','sa','di'],locale:'fr-BE',
  of:'autocollants sur',fullDays:'jours complets (2×)',streak:'plus longue série (jours)',demo:'Autocollants d’exemple pour la démo. Les vrais ne s’obtiennent qu’après 2 minutes de brossage.',clear:'Effacer la démo',
  done:'Bravo ! Autocollant du {s} gagné.',had:'Bien brossé ! L’autocollant du {s} est déjà gagné aujourd’hui.',morning:'matin',evening:'soir',Morning:'matin',Evening:'soir',
- pasteTitle:'Quel dentifrice choisir ?',pasteRef:'Cela dépend des dents déjà sorties et du fait que votre enfant sache cracher ou non. Remplissez la carte des dents pour recevoir le bon conseil.',toTeeth:'Vers la carte des dents',seeOral:'Voir l’hygiène bucco-dentaire',
+ pasteTitle:'Quel dentifrice choisir ?',timerT:'Minuteur de brossage',pasteRef:'Cela dépend des dents déjà sorties et du fait que votre enfant sache cracher ou non. Remplissez la carte des dents pour recevoir le bon conseil.',toTeeth:'Vers la carte des dents',seeOral:'Voir l’hygiène bucco-dentaire',
  musicOnly:'Musique uniquement',mirror:'Posez le téléphone et regardez ensemble dans le miroir',words:['un','deux','trois','quatre','cinq','six','sept','huit','neuf','dix'],
  viewHint:'Comme vous regardez dans sa bouche',sideRight:'← droite de votre enfant',sideLeft:'gauche de votre enfant →',upper:'Haut',lower:'Bas',of20:'dents sur 20',
  tnames:['incisive centrale','incisive latérale','canine','première molaire','deuxième molaire'],sideR:'droite',sideL:'gauche',jawU:'du haut',jawL:'du bas',
