@@ -496,6 +496,13 @@ header{margin-bottom:22px}
 .cal .day{height:var(--dh,auto)}
 .cal[style*="--dh"] .day{aspect-ratio:auto}
 #v-poetsen>section.pick{justify-content:center!important;padding-top:0!important;padding-bottom:20px}
+
+/* 3 poetsknoppen even groot */
+.filmrow .film,.filmrow .ytsw,#moreFilms{height:80px!important;min-height:80px!important;box-sizing:border-box}
+.ytl{display:grid;text-align:left;line-height:1.15}
+.ytl b{font:800 18px 'Nunito Sans',sans-serif}
+.ytl small{font:600 13px 'Nunito Sans',sans-serif;color:rgba(7,53,107,.75)}
+#moreFilms{font-size:18px!important}
 </style>
 </head>
 <body>
@@ -816,7 +823,7 @@ const ytIcon='<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"
 let showAll=false;
 function films(){
   const kid=KIDS.length>0;$('moreFilms').hidden=!kid;$('moreFilms').textContent=showAll?t('fewerFilms'):t('moreFilmsT');
-  $('films').innerHTML=FILMS.map((f,i)=>(kid&&!showAll&&i!==film)?'':`<div class="filmrow"><button class="film" aria-pressed="${i===film}" data-i="${i}"><span class="sw">${view(f,3)}</span><span><b>${f[L][0]}</b><small>${f[L][1]} · ${f[L][2]}</small></span></button><button class="ytsw" data-y="${i}" aria-pressed="${!!ytOn[i]}" aria-label="YouTube ${f[L][0]}">${ytIcon}<span>${ytOn[i]?t('ytOn'):t('ytOff')}</span></button></div>`).join('');
+  $('films').innerHTML=FILMS.map((f,i)=>(kid&&!showAll&&i!==film)?'':`<div class="filmrow"><button class="film" aria-pressed="${i===film}" data-i="${i}"><span class="sw">${view(f,3)}</span><span><b>${f[L][0]}</b><small>${f[L][1]} · ${f[L][2]}</small></span></button><button class="ytsw" data-y="${i}" aria-pressed="${!!ytOn[i]}" aria-label="YouTube ${f[L][0]}">${ytIcon}<span class="ytl"><b>${ytOn[i]?t('ytOn'):t('ytOff')}</b><small>${f[L][1].split(' · ')[0]}</small></span></button></div>`).join('');
   $('films').querySelectorAll('.sw *').forEach(e=>e.style.animation='none');
 }
 let shownN=-1;
