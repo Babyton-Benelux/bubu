@@ -529,6 +529,16 @@ body.brushing .bubudock{display:none}
 #kidsm .ctl,#kidsm .row,#kidsm .km-born{justify-content:center}
 #kidsm p{text-align:center}
 #kidsm .kmdate{justify-content:center;flex-wrap:wrap}
+
+/* elke menukeuze een eigen achtergrondkleur (anders dan de knoppen) */
+html,body{transition:background-color .35s}
+html[data-tab=poetsen],body[data-tab=poetsen]{background:#E6EDE1}
+html[data-tab=stickers],body[data-tab=stickers]{background:#EEE9F7}
+html[data-tab=seizoen],body[data-tab=seizoen]{background:#ECF5FE}
+html[data-tab=tandjes],body[data-tab=tandjes]{background:#F9F4D1}
+body[data-tab] .tabs{background:rgba(255,255,255,.7)}
+body[data-tab=stickers] .day{background:#fff}
+body[data-tab=tandjes] .mouth{background:#EEE9F7}
 </style>
 </head>
 <body>
@@ -667,7 +677,7 @@ body.brushing .bubudock{display:none}
 </div></div>
 <p class="note" data-i="note"></p>
 <p class="foot"><button class="linkb" id="privBtn" data-i="privLink"></button> · <button class="linkb" id="cookieBtn" data-i="cookieLink"></button></p>
-<p class="foot" style="opacity:.5;font-size:12px;margin-top:4px">versie 46</p>
+<p class="foot" style="opacity:.5;font-size:12px;margin-top:4px">versie 47</p>
 <div class="cbar" id="cbar" hidden role="region" aria-label="Cookies"><p data-i="cText"></p><div class="ctl"><button class="btn small" id="cNo" data-i="cNo"></button><button class="btn" id="cYes" data-i="cYes"></button></div><button class="linkb" id="cMore" data-i="privLink"></button></div>
 <div class="modal" id="privm" hidden role="dialog" aria-modal="true" aria-labelledby="privT"><div class="sheet priv">
   <button class="x" id="privX" aria-label="Sluiten">&times;</button>
@@ -781,7 +791,7 @@ document.addEventListener('click',e=>{const a=e.target.closest('a.shop');if(a)tr
 
 /* tabs */
 const TABS=['poetsen','stickers','seizoen','tandjes'];
-function show(n){TABS.forEach(x=>{$('t-'+x).setAttribute('aria-selected',x===n);$('v-'+x).hidden=x!==n});try{history.replaceState(null,'','#'+n)}catch(e){}if(n==='tandjes'){renderAdvice();requestAnimationFrame(spitBelowFold)}requestAnimationFrame(fitFirst)}
+function show(n){document.body.dataset.tab=n;document.documentElement.dataset.tab=n;TABS.forEach(x=>{$('t-'+x).setAttribute('aria-selected',x===n);$('v-'+x).hidden=x!==n});try{history.replaceState(null,'','#'+n)}catch(e){}if(n==='tandjes'){renderAdvice();requestAnimationFrame(spitBelowFold)}requestAnimationFrame(fitFirst)}
 /* eerste scherm vullen: poetsknoppen in het midden, kalender ruim, rest pas na scrollen */
 function fitFirst(){
   const FH=window.innerHeight,H=FH-78,top=el=>el.getBoundingClientRect().top+window.scrollY;
