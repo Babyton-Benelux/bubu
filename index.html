@@ -42,7 +42,7 @@ header h1{display:flex;align-items:center;gap:10px;font-size:22px}
 .kid{display:flex;align-items:center;gap:6px;border:2px solid var(--line);background:var(--bg);color:var(--ink);border-radius:41px;min-height:48px;padding:4px 14px 4px 6px;font:400 15px 'Nunito Sans',sans-serif;cursor:pointer}
 .kid img{width:36px;height:36px;object-fit:contain}
 .kid[aria-pressed=true]{border-color:var(--navy);background:var(--lblue);font-weight:700}
-.kidedit{border:0;background:none;color:var(--mut);text-decoration:underline;font:400 14px 'Nunito Sans',sans-serif;min-height:44px;cursor:pointer}
+.kidedit{width:44px;height:44px;border-radius:50%;border:2px solid var(--line);background:var(--bg);display:grid;place-items:center;cursor:pointer;transform:rotate(6deg)}
 .kmlist{display:grid;gap:12px}
 .kmrow{border:2px solid var(--line);border-radius:20px;padding:12px;display:grid;gap:10px}
 .kmav{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;padding:4px 2px}
@@ -52,6 +52,8 @@ header h1{display:flex;align-items:center;gap:10px;font-size:22px}
 .kmav img{width:100%;height:100%;object-fit:contain}
 .kmdate{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .kmdate select{font:16px 'Nunito Sans',sans-serif;min-height:44px;border-radius:14px;border:2px solid var(--line);background:var(--bg);color:var(--ink);padding:0 10px}
+.kmname{font:16px 'Nunito Sans',sans-serif;min-height:46px;border-radius:14px;border:2px solid var(--line);background:var(--bg);color:var(--ink);padding:0 12px;width:100%}
+.kid .kn{font-weight:inherit}.kid small{font-size:12px;color:var(--mut);margin-left:2px}
 .kmrm{margin-left:auto;border:0;background:none;color:var(--mut);text-decoration:underline;min-height:44px;cursor:pointer;font:400 14px 'Nunito Sans',sans-serif}
 .more{display:inline-flex;align-items:center;gap:6px;margin-top:12px;background:#ECF5FE!important;transform:rotate(-1.5deg)}
 .more::before{content:'';width:26px;height:26px;background:url(img/m-geel.png) center/contain no-repeat}
@@ -495,7 +497,7 @@ wxHome:'Mijn weer',wxNow:'Vandaag in <b>{p}</b>: {t}°, wind {w} km/u, UV {u}',w
  privLink:'Privacy',cookieLink:'Cookie-instellingen',cText:'BuBu gebruikt enkel analytische cookies om de app te verbeteren, en alleen als jij dat goed vindt.',cYes:'Akkoord',cNo:'Liever niet',privT:'Privacy bij BuBu',
  privHTML:`<p>BuBu is een app van Babyton Benelux. We houden het eenvoudig: zo weinig mogelijk gegevens, en wat over je kindje gaat, blijft op je gsm.</p>
 <h4>Wie is verantwoordelijk?</h4><p>Malin Agency Comm.V (Babyton Benelux), Lepelemstraat 32, <span class="ph">[postcode en gemeente]</span>, ondernemingsnummer <span class="ph">[BE 0…]</span>. Vragen: hello@babyton.be</p>
-<h4>Wat blijft alleen op je gsm?</h4><ul><li>Per kindje: het gekozen monstertje en de geboortemaand en het geboortejaar. We vragen geen naam.</li><li>De stickerkalender, de tandjeskaart met datums, het antwoord op "kan spuwen" en je keuzes in de app.</li></ul><p>Die gegevens worden niet naar ons of naar anderen verstuurd. Wis je de app of je browsergegevens, dan zijn ze weg.</p>
+<h4>Wat blijft alleen op je gsm?</h4><ul><li>Per kindje: de naam of bijnaam die je invult, het gekozen monstertje en de geboortemaand en het geboortejaar.</li><li>De stickerkalender, de tandjeskaart met datums, het antwoord op "kan spuwen" en je keuzes in de app.</li></ul><p>Die gegevens worden niet naar ons of naar anderen verstuurd. Wis je de app of je browsergegevens, dan zijn ze weg.</p>
 <h4>Weer</h4><p>Geef je je locatie of gemeente op, dan vragen we het weer van vandaag op bij een externe weerdienst (Open-Meteo). We sturen daarvoor alleen een afgeronde positie mee en bewaren die niet.</p>
 <h4>E-mail (tandjeskaart en nieuwsbrief)</h4><p>Vraag je je tandjeskaart per mail, dan gebruiken we je e-mailadres om die te versturen via onze mailpartner Brevo. Met een apart vinkje kun je je ook inschrijven voor de nieuwsbrief. Dat is niet verplicht. Je kunt je altijd uitschrijven via de link onderaan elke mail. Je adres bewaren we tot je je uitschrijft of ons vraagt het te wissen.</p>
 <h4>YouTube</h4><p>Zet je zelf YouTube aan, dan speelt de video via YouTube (Google) in de privacyvriendelijke modus. YouTube kan dan gegevens verwerken volgens zijn eigen privacybeleid.</p>
@@ -504,7 +506,7 @@ wxHome:'Mijn weer',wxNow:'Vandaag in <b>{p}</b>: {t}°, wind {w} km/u, UV {u}',w
 <h4>Hosting</h4><p>De app staat bij GitHub Pages. Zoals elke website registreert de server technische gegevens zoals je IP-adres om de app veilig te laten werken.</p>
 <h4>Je rechten</h4><p>Je mag je gegevens inkijken, laten verbeteren of wissen, en je toestemming intrekken. Mail naar hello@babyton.be. Ben je niet tevreden, dan kun je klacht indienen bij de Gegevensbeschermingsautoriteit (gegevensbeschermingsautoriteit.be).</p>
 <p class="fine">Laatst bijgewerkt: november 2026</p>`,
- kmT:'Voor wie poetsen we?',kmI:'Kies per kindje een monstertje en de geboortemaand. BuBu zet dan meteen de juiste muziek of het juiste filmpje klaar.',kmAdd:'+ Nog een kindje',kmOk:'Klaar',kmRm:'Verwijderen',kmBorn:'Geboren in',kmP:'We vragen geen naam. Alleen de maand en het jaar van geboorte, en die blijven op deze gsm.',kidEdit:'Kinderen wijzigen',months:['jan','feb','maa','apr','mei','jun','jul','aug','sep','okt','nov','dec'],mo:'mnd',yr:'jaar',ageHint:'Voor {a} staat {f} klaar. Je kunt altijd iets anders kiezen.',
+ kmT:'Voor wie poetsen we?',kmI:'Kies per kindje een monstertje en de geboortemaand. BuBu zet dan meteen de juiste muziek of het juiste filmpje klaar.',kmAdd:'+ Nog een kindje',kmOk:'Klaar',kmRm:'Verwijderen',kmBorn:'Geboren in',kmP:'De naam en de geboortemaand blijven alleen op deze gsm.',kmName:'Naam of bijnaam',kidEdit:'Kinderen wijzigen',months:['jan','feb','maa','apr','mei','jun','jul','aug','sep','okt','nov','dec'],mo:'mnd',yr:'jaar',ageHint:'Voor {a} staat {f} klaar. Je kunt altijd iets anders kiezen.',
  shBtn:'Post dit op je Instagram',shMonthT:'Proficiat, een volle kaart!',shMonthM:'{m}: elke dag ochtend én avond gepoetst. Daar mag je trots op zijn!',shTeethT:'Alle 20 melktandjes zijn er!',shTeethM:'Een volledig melkgebit. Deel dit mooie moment.',capMonth:'Volle stickerkaart gehaald met BuBu! @babytonbenelux #BuBu #babyton',capTeeth:'Alle 20 melktandjes! Bijgehouden met BuBu. @babytonbenelux #BuBu #babyton',shCopied:'De tekst met @babytonbenelux is gekopieerd: plak hem in je bericht. Tag ons ook op de foto.',shFallback:'Delen lukt niet vanaf hier. Houd de afbeelding ingedrukt om ze te bewaren en plaats ze op Instagram. Vergeet @babytonbenelux niet!',imgMonth:'Volle stickerkaart!',imgTeeth:'20 melktandjes!',demoPop:'Bekijk de pop-up (demo)',
  ev:{tooth_checked:'Tandje aangevinkt',share_open:'Volle kaart pop-up',share_click:'Klik Instagram',advice_viewed:'Fase-advies bekeken',product_click:'Klik naar product',mail_sent:'Mail verstuurd',newsletter_optin:'Inschrijving nieuwsbrief'},
  note:'BuBu geeft algemene tips, geen medisch advies. Bij twijfel: vraag het je tandarts of huisarts.'},
@@ -535,7 +537,7 @@ wxHome:'Ma météo',wxNow:'Aujourd’hui à <b>{p}</b> : {t}°, vent {w} km/h, U
  privLink:'Confidentialité',cookieLink:'Paramètres des cookies',cText:'BuBu utilise uniquement des cookies analytiques pour améliorer l’app, et seulement si vous êtes d’accord.',cYes:'D’accord',cNo:'Non merci',privT:'Confidentialité chez BuBu',
  privHTML:`<p>BuBu est une app de Babyton Benelux. Nous faisons simple : le moins de données possible, et ce qui concerne votre enfant reste sur votre téléphone.</p>
 <h4>Qui est responsable ?</h4><p>Malin Agency Comm.V (Babyton Benelux), Lepelemstraat 32, <span class="ph">[code postal et commune]</span>, numéro d’entreprise <span class="ph">[BE 0…]</span>. Questions : hello@babyton.be</p>
-<h4>Ce qui reste uniquement sur votre téléphone</h4><ul><li>Par enfant : le petit monstre choisi et le mois et l’année de naissance. Nous ne demandons pas de prénom.</li><li>Le calendrier d’autocollants, la carte des dents avec les dates, la réponse à « sait cracher » et vos choix dans l’app.</li></ul><p>Ces données ne sont envoyées ni à nous ni à des tiers. Si vous supprimez l’app ou les données de votre navigateur, elles disparaissent.</p>
+<h4>Ce qui reste uniquement sur votre téléphone</h4><ul><li>Par enfant : le prénom ou surnom que vous indiquez, le petit monstre choisi et le mois et l’année de naissance.</li><li>Le calendrier d’autocollants, la carte des dents avec les dates, la réponse à « sait cracher » et vos choix dans l’app.</li></ul><p>Ces données ne sont envoyées ni à nous ni à des tiers. Si vous supprimez l’app ou les données de votre navigateur, elles disparaissent.</p>
 <h4>Météo</h4><p>Si vous indiquez votre position ou votre commune, nous demandons la météo du jour à un service météo externe (Open-Meteo). Nous n’envoyons qu’une position arrondie et ne la conservons pas.</p>
 <h4>E-mail (carte des dents et newsletter)</h4><p>Si vous demandez votre carte des dents par e-mail, nous utilisons votre adresse pour l’envoyer via notre partenaire e-mail Brevo. Une case séparée vous permet de vous inscrire à la newsletter. Ce n’est pas obligatoire. Vous pouvez vous désinscrire à tout moment via le lien en bas de chaque e-mail. Nous conservons votre adresse jusqu’à votre désinscription ou votre demande de suppression.</p>
 <h4>YouTube</h4><p>Si vous activez YouTube vous-même, la vidéo est lue via YouTube (Google) en mode de confidentialité renforcée. YouTube peut alors traiter des données selon sa propre politique de confidentialité.</p>
@@ -544,7 +546,7 @@ wxHome:'Ma météo',wxNow:'Aujourd’hui à <b>{p}</b> : {t}°, vent {w} km/h, U
 <h4>Hébergement</h4><p>L’app est hébergée par GitHub Pages. Comme pour tout site web, le serveur enregistre des données techniques comme votre adresse IP pour fonctionner en toute sécurité.</p>
 <h4>Vos droits</h4><p>Vous pouvez consulter, corriger ou supprimer vos données et retirer votre consentement. Écrivez à hello@babyton.be. En cas d’insatisfaction, vous pouvez porter plainte auprès de l’Autorité de protection des données (autoriteprotectiondonnees.be).</p>
 <p class="fine">Dernière mise à jour : novembre 2026</p>`,
- kmT:'Pour qui brosse-t-on ?',kmI:'Choisissez un petit monstre et le mois de naissance pour chaque enfant. BuBu prépare directement la bonne musique ou la bonne animation.',kmAdd:'+ Un autre enfant',kmOk:'C’est parti',kmRm:'Supprimer',kmBorn:'Né(e) en',kmP:'Nous ne demandons pas de prénom. Seulement le mois et l’année de naissance, qui restent sur ce téléphone.',kidEdit:'Modifier les enfants',months:['jan','fév','mar','avr','mai','juin','juil','août','sep','oct','nov','déc'],mo:'mois',yr:'ans',ageHint:'Pour {a}, {f} est prêt. Vous pouvez toujours choisir autre chose.',
+ kmT:'Pour qui brosse-t-on ?',kmI:'Choisissez un petit monstre et le mois de naissance pour chaque enfant. BuBu prépare directement la bonne musique ou la bonne animation.',kmAdd:'+ Un autre enfant',kmOk:'C’est parti',kmRm:'Supprimer',kmBorn:'Né(e) en',kmP:'Le prénom et le mois de naissance restent uniquement sur ce téléphone.',kmName:'Prénom ou surnom',kidEdit:'Modifier les enfants',months:['jan','fév','mar','avr','mai','juin','juil','août','sep','oct','nov','déc'],mo:'mois',yr:'ans',ageHint:'Pour {a}, {f} est prêt. Vous pouvez toujours choisir autre chose.',
  shBtn:'Publier sur ton Instagram',shMonthT:'Bravo, une carte complète !',shMonthM:'{m} : chaque jour brossé matin et soir. Il y a de quoi être fier !',shTeethT:'Les 20 dents de lait sont là !',shTeethM:'Toutes les dents de lait. Partagez ce beau moment.',capMonth:'Carte d’autocollants complète avec BuBu ! @babytonbenelux #BuBu #babyton',capTeeth:'Les 20 dents de lait ! Suivies avec BuBu. @babytonbenelux #BuBu #babyton',shCopied:'Le texte avec @babytonbenelux est copié : collez-le dans votre publication. Identifiez-nous aussi sur la photo.',shFallback:'Le partage ne fonctionne pas d’ici. Appuyez longuement sur l’image pour l’enregistrer et publiez-la sur Instagram. N’oubliez pas @babytonbenelux !',imgMonth:'Carte complète !',imgTeeth:'20 dents de lait !',demoPop:'Voir la pop-up (démo)',
  ev:{tooth_checked:'Dent cochée',share_open:'Pop-up carte complète',share_click:'Clic Instagram',advice_viewed:'Conseil d’étape vu',product_click:'Clic vers produit',mail_sent:'E-mail envoyé',newsletter_optin:'Inscription newsletter'},
  note:'BuBu donne des conseils généraux, pas un avis médical. En cas de doute : demandez à votre dentiste ou médecin.'}
@@ -928,10 +930,12 @@ $('shIg').addEventListener('click',async()=>{
 /* kinderen */
 const ageTxt=k=>{const m=ageM(k);return m<24?`${m} ${t('mo')}`:`${Math.floor(m/12)} ${t('yr')}`};
 const kidById=id=>KIDS.find(k=>k.id===id);
+const esc=x=>String(x||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const kidLabel=k=>k.n?esc(k.n):ageTxt(k);
 function renderKids(){
   if(!KIDS.length){$('kids').innerHTML='';return}
-  $('kids').innerHTML=KIDS.map(k=>`<button class="kid" data-k="${k.id}" aria-pressed="${k.id===ACTIVE}"><img src="img/m-${k.m}.png" alt="">${ageTxt(k)}</button>`).join('')+`<button class="kidedit" id="kidedit">${t('kidEdit')}</button>`;
-  const k=kidById(ACTIVE);$('agehint').textContent=k?t('ageHint',{a:ageTxt(k),f:FILMS[film][L][0]}):'';
+  $('kids').innerHTML=KIDS.map(k=>`<button class="kid" data-k="${k.id}" aria-pressed="${k.id===ACTIVE}"><img src="img/m-${k.m}.png" alt=""><span class="kn">${kidLabel(k)}</span>${k.n?`<small>${ageTxt(k)}</small>`:''}</button>`).join('')+`<button class="kidedit" id="kidedit" aria-label="${t('kidEdit')}" title="${t('kidEdit')}"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 20l4-1 11-11-3-3L5 16z" fill="#F9F4D1" stroke="#07356B" stroke-width="2" stroke-linejoin="round"/><path d="M14 6l3 3" stroke="#07356B" stroke-width="2"/></svg></button>`;
+  const k=kidById(ACTIVE);$('agehint').textContent=k?t('ageHint',{a:k.n?`${k.n} (${ageTxt(k)})`:ageTxt(k),f:FILMS[film][L][0]}):'';
 }
 $('kids').addEventListener('click',e=>{if(e.target.id==='kidedit'){openKids();return}const b=e.target.closest('.kid');if(!b||b.dataset.k===ACTIVE)return;switchKid(b.dataset.k)});
 function switchKid(id){
@@ -952,11 +956,13 @@ function renderKm(){
   $('kmAdd').hidden=draft.length>=3;
   $('kmList').innerHTML=draft.map((k,i)=>`<div class="kmrow" data-r="${i}">
     <div class="kmav" role="group">${MONS.map(m=>`<button data-av="${m.f}" aria-pressed="${k.m===m.f}" aria-label="${m.n}"><img src="img/m-${m.f}.png" alt=""></button>`).join('')}</div>
+    <input class="kmname" data-f="n" type="text" maxlength="20" autocomplete="off" placeholder="${t('kmName')}" aria-label="${t('kmName')}" value="${esc(k.n)}">
     <div class="kmdate"><span>${t('kmBorn')}</span><select data-f="mo" aria-label="maand">${t('months').map((mn,j)=>`<option value="${j}"${j===k.mo?' selected':''}>${mn}</option>`).join('')}</select><select data-f="y" aria-label="jaar">${YEARS.map(y=>`<option${y===k.y?' selected':''}>${y}</option>`).join('')}</select>
     ${draft.length>1?`<button class="kmrm" data-rm="${i}">${t('kmRm')}</button>`:''}</div></div>`).join('');
 }
 $('kmList').addEventListener('click',e=>{const r=e.target.closest('.kmrow');if(!r)return;const i=+r.dataset.r;const av=e.target.closest('[data-av]');if(av){draft[i].m=av.dataset.av;renderKm();return}if(e.target.dataset.rm!==undefined){draft.splice(i,1);renderKm()}});
-$('kmList').addEventListener('change',e=>{const r=e.target.closest('.kmrow');if(!r)return;draft[+r.dataset.r][e.target.dataset.f]=+e.target.value});
+$('kmList').addEventListener('change',e=>{const r=e.target.closest('.kmrow');if(!r||e.target.dataset.f==='n')return;draft[+r.dataset.r][e.target.dataset.f]=+e.target.value});
+$('kmList').addEventListener('input',e=>{const r=e.target.closest('.kmrow');if(!r||e.target.dataset.f!=='n')return;draft[+r.dataset.r].n=e.target.value.trim().slice(0,20)});
 $('kmAdd').addEventListener('click',()=>{if(draft.length<3){draft.push(newKid());renderKm()}});
 $('kmOk').addEventListener('click',()=>{
   const firstTime=!KIDS.length;
