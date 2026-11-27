@@ -703,7 +703,7 @@ body[data-tab=tandjes] .kidbar .kid{background:var(--lilac)}
 </div></div>
 <p class="note" data-i="note"></p>
 <p class="foot"><button class="linkb" id="privBtn" data-i="privLink"></button> · <button class="linkb" id="cookieBtn" data-i="cookieLink"></button></p>
-<p class="foot" style="opacity:.5;font-size:12px;margin-top:4px">versie 53</p>
+<p class="foot" style="opacity:.5;font-size:12px;margin-top:4px">versie 54</p>
 <div class="cbar" id="cbar" hidden role="region" aria-label="Cookies"><p data-i="cText"></p><div class="ctl"><button class="btn small" id="cNo" data-i="cNo"></button><button class="btn" id="cYes" data-i="cYes"></button></div><button class="linkb" id="cMore" data-i="privLink"></button></div>
 <div class="modal" id="privm" hidden role="dialog" aria-modal="true" aria-labelledby="privT"><div class="sheet priv">
   <button class="x" id="privX" aria-label="Sluiten">&times;</button>
@@ -1343,7 +1343,7 @@ setTimeout(peek,6000);
 const MAIL_ENDPOINT='';
 if(MAIL_ENDPOINT)$('mailsec').hidden=false;
 /* cookies en privacy */
-const GA_ID='G-VB72XF0FMQ';/* vul hier het Google Analytics-ID in (G-XXXXXXX); leeg = nooit laden */
+const GA_ID='G-4657P9LVN4';/* vul hier het Google Analytics-ID in (G-XXXXXXX); leeg = nooit laden */
 let consent=raw.get('bt-consent',null);
 function loadGA(){if(!GA_ID||window.gtagLoaded)return;window.gtagLoaded=true;window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config',GA_ID,{anonymize_ip:true,app_name:'BuBu',content_group:'BuBu app'});const sc=document.createElement('script');sc.async=true;sc.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID;document.head.appendChild(sc)}
 function setConsent(v){consent=v;raw.set('bt-consent',v);$('cbar').hidden=true;if(v)loadGA()}
