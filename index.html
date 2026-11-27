@@ -703,7 +703,7 @@ body[data-tab=tandjes] .kidbar .kid{background:var(--lilac)}
 </div></div>
 <p class="note" data-i="note"></p>
 <p class="foot"><button class="linkb" id="privBtn" data-i="privLink"></button> · <button class="linkb" id="cookieBtn" data-i="cookieLink"></button></p>
-<p class="foot" style="opacity:.5;font-size:12px;margin-top:4px">versie 52</p>
+<p class="foot" style="opacity:.5;font-size:12px;margin-top:4px">versie 53</p>
 <div class="cbar" id="cbar" hidden role="region" aria-label="Cookies"><p data-i="cText"></p><div class="ctl"><button class="btn small" id="cNo" data-i="cNo"></button><button class="btn" id="cYes" data-i="cYes"></button></div><button class="linkb" id="cMore" data-i="privLink"></button></div>
 <div class="modal" id="privm" hidden role="dialog" aria-modal="true" aria-labelledby="privT"><div class="sheet priv">
   <button class="x" id="privX" aria-label="Sluiten">&times;</button>
@@ -980,7 +980,7 @@ function exitFull(){document.body.classList.remove('brushing');try{if(document.f
 function stop(){clearInterval(tick);tick=null;stopMusic();$('scr').classList.add('paused');if(useYT())drawFilm(true)}
 $('go').addEventListener('click',()=>{
   if(tick){stop();zoneMsg=t('paused');paint();return}
-  if(left<=0)left=TOTAL;if(left===TOTAL)shuffleCnt();
+  if(left<=0)left=TOTAL;if(left===TOTAL){shuffleCnt();track('brush_start',{film:FILMS[film].nl[0],youtube:useYT()})}
   zoneMsg=null;$('winm').hidden=true;initAudio();enterFull();if(!useYT())drawFilm(true);
   tick=setInterval(()=>{left--;if(left<=0){stop();chime(true);exitFull();award()}else if((TOTAL-left)%30===0)chime(false);paint()},1000);
   startMusic();$('scr').classList.remove('paused');if(useYT())drawFilm(true);paint();
@@ -995,7 +995,7 @@ function seedCal(demo){let c={demo:false,d:{}};if(!demo)return c;c={demo:true,d:
 let cal=store.get('bt-cal',null);if(!cal||cal.demo)cal={demo:false,d:{}};
 const save=()=>store.set('bt-cal',cal);
 let vy=today.getFullYear(),vm=today.getMonth();
-function award(){
+function award(){track('brush_done',{film:FILMS[film].nl[0],youtube:useYT()});
   const k=dk(today),slot=new Date().getHours()<14?'o':'a',cur=cal.d[k]||'',nm=slot==='o'?t('morning'):t('evening');
   const mo=monOf(today);$('winimg').src='img/m-'+mo.f+'.png';$('winimg').alt=mo.n;$('winq').textContent=mo[L];$('winm').hidden=false;
   if(cur.includes(slot)){zoneMsg=t('had',{s:nm});$('wintxt').textContent=t('got',{n:mo.n});$('winsub').textContent=zoneMsg;return}
@@ -1343,9 +1343,9 @@ setTimeout(peek,6000);
 const MAIL_ENDPOINT='';
 if(MAIL_ENDPOINT)$('mailsec').hidden=false;
 /* cookies en privacy */
-const GA_ID='';/* vul hier het Google Analytics-ID in (G-XXXXXXX); leeg = nooit laden */
+const GA_ID='G-VB72XF0FMQ';/* vul hier het Google Analytics-ID in (G-XXXXXXX); leeg = nooit laden */
 let consent=raw.get('bt-consent',null);
-function loadGA(){if(!GA_ID||window.gtagLoaded)return;window.gtagLoaded=true;window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config',GA_ID,{anonymize_ip:true});const sc=document.createElement('script');sc.async=true;sc.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID;document.head.appendChild(sc)}
+function loadGA(){if(!GA_ID||window.gtagLoaded)return;window.gtagLoaded=true;window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config',GA_ID,{anonymize_ip:true,app_name:'BuBu',content_group:'BuBu app'});const sc=document.createElement('script');sc.async=true;sc.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID;document.head.appendChild(sc)}
 function setConsent(v){consent=v;raw.set('bt-consent',v);$('cbar').hidden=true;if(v)loadGA()}
 $('cYes').addEventListener('click',()=>setConsent(true));$('cNo').addEventListener('click',()=>setConsent(false));
 $('cookieBtn').addEventListener('click',()=>{$('cbar').hidden=false});
